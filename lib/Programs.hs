@@ -15,24 +15,25 @@ ircClient      = terminalWith "-name ircClient -e weechat"
 
 -- util
 dmenu         = "source ~/.zshenv; dmenu_run -i -nb '#000000' -nf '#ffffff' -sb '#ffffff' -sf '#000000' -fn 'Roboto-14:normal'"
+dropboxToggle = "if (pgrep dropbox); then dropbox stop; sleep 5; killall dropbox; else dropbox start; fi"
 ejectTray     = "eject"
 insertTray    = "eject -t"
 lockScreen    = "xscreensaver-command -lock"
 powerTop      = terminalWith "-name powertop -e sudo powertop"
+putAwayMouse  = "xdotool mousemove 1680 1280"
 scrotWin      = "sleep 0.2; scrot -s -e \'mv $f ~/Pictures/screenshots/not-yet-archived/\'"
 scrotFull     = "scrot -e \'mv $f ~/Pictures/screenshots/not-yet-archived/\'"
 xKill         = "xkill"
-dropboxToggle = "if (pgrep dropbox); then dropbox stop; sleep 5; killall dropbox; else dropbox start; fi"
 
 
 -- sound
 inToggle    = "amixer sset 'Capture' toggle"
--- outUp       = "amixer sset 'Master' 3%+"
--- outDown     = "amixer sset 'Master' 3%-"
--- outToggle   = "/home/david/Share/bin/user_interface/toggle_mute.rb"
-outUp       = "~/Share/git/hasu/Volume/volume +"
-outDown     = "~/Share/git/hasu/Volume/volume -"
-outToggle   = "~/Share/git/hasu/Volume/volume %"
+outUp       = "~/Share/bin/sound/change_volume.sh +3%"
+outDown     = "~/Share/bin/sound/change_volume.sh -3%"
+outToggle   = "~/Share/bin/sound/change_volume.sh %"
+-- outUp       = "~/Share/git/hasu/Volume/volume +"
+-- outDown     = "~/Share/git/hasu/Volume/volume -"
+-- outToggle   = "~/Share/git/hasu/Volume/volume %"
 pavuControl = "pavucontrol"
 equalizer   = "pulseaudio-equalizer-gtk"
 applause    = "mplayer -endpos 3 ~/Music/effects/applause.mp3"
@@ -42,15 +43,15 @@ applause    = "mplayer -endpos 3 ~/Music/effects/applause.mp3"
 mocNext       = "mocp -f"
 mocPrev       = "mocp -r"
 mocPlay       = "mocp -G"
-spotifyCtl    = ("/home/david/Share/bin/user_interface/spotify_control.sh " ++)
--- next          = "if (pgrep mocp); then mocp -f; else /home/david/Share/bin/spotify_control next; fi"
--- prev          = "if (pgrep mocp); then mocp -r; else /home/david/Share/bin/spotify_control previous; fi"
--- pause         = "if (pgrep mocp); then mocp -f; else /home/david/Share/bin/spotify_control playpause; fi"
+spotifyCtl    = ("~/Share/bin/user_interface/spotifyctl.sh " ++)
+-- next          = "if (pgrep mocp); then mocp -f; else ~/Share/bin/spotify_control next; fi"
+-- prev          = "if (pgrep mocp); then mocp -r; else ~/Share/bin/spotify_control previous; fi"
+-- pause         = "if (pgrep mocp); then mocp -f; else ~/Share/bin/spotify_control playpause; fi"
 youtubeViewer = terminalWith "-name youtube-viewer -e youtube-viewer"
 
 
 -- other
-toggleTrayer  = "/home/david/Share/bin/user_interface/toggle_trayer.sh"
+toggleTrayer  = "~/Share/bin/user_interface/toggle_trayer.sh"
 
 
 -- TODO: make list and map over it in startuphook!
@@ -58,10 +59,10 @@ toggleTrayer  = "/home/david/Share/bin/user_interface/toggle_trayer.sh"
 conky             = "conky"
 dropbox           = "dropbox start"
 dunst             = "dunst -print >> ~/.dunst.log"
-htop              = terminalWith "-e htop -u david"
+htop              = terminalWith "-e htop -u $USER"
 -- kbLayout          = "setxkbmap -layout \"us, de\" -option \"grp:caps_toggle\""
 mousePointer      = "xsetroot -cursor_name left_ptr"
-myBackground      = "/home/david/Share/bin/bg-set"
+myBackground      = "~/Share/bin/bg-set"
 noBell            = "xset -b"
 offlineimap       = terminalWith "-name offlineimap -e offlineimap"
 pulseaudio        = "start-pulseaudio-x11"

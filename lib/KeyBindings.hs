@@ -40,14 +40,15 @@ keys' host conf = M.fromList $
 
     -- util
     , ((appMask, xK_space                                        ), spawn dmenu)
+    , ((appMask, xK_d                                            ), spawn dropboxToggle)
     , ((appMask, xK_Delete                                       ), spawn ejectTray)
     , ((appMask, xK_Insert                                       ), spawn insertTray)
     , ((appMask, xK_l                                            ), spawn lockScreen)
     , ((appMask, xK_b                                            ), spawn powerTop)
+    , ((winMask, xK_a                                            ), spawn putAwayMouse)
     , ((appMask, xK_Print                                        ), spawn scrotWin)
     , ((0, xK_Print                                              ), spawn scrotFull)
     , ((appMask, xK_k                                            ), spawn xKill)
-    , ((appMask, xK_d                                            ), spawn dropboxToggle)
 
 
     -- sound
