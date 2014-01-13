@@ -43,7 +43,7 @@ startupHook' host = do
     spawnOnce offlineimap
     spawnOnce mailClient
     spawnOnce browser
-    spawnOnce musicPlayer
+    -- spawnOnce musicPlayer
     spawnOnceSleep 5 htop
 
     -- start host specific things
