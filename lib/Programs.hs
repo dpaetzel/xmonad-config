@@ -29,7 +29,7 @@ dropboxToggle = "if (pgrep dropbox); then dropbox stop; sleep 5; killall dropbox
 inToggle    = "amixer sset 'Capture' toggle"
 -- outUp       = "amixer sset 'Master' 3%+"
 -- outDown     = "amixer sset 'Master' 3%-"
--- outToggle   = "/home/david/Share/bin/user_interface/toggle_mute.rb"
+-- outToggle   = "~/Share/bin/user_interface/toggle_mute.rb"
 outUp       = "~/Share/git/hasu/Volume/volume +"
 outDown     = "~/Share/git/hasu/Volume/volume -"
 outToggle   = "~/Share/git/hasu/Volume/volume %"
@@ -42,15 +42,15 @@ applause    = "mplayer -endpos 3 ~/Music/effects/applause.mp3"
 mocNext       = "mocp -f"
 mocPrev       = "mocp -r"
 mocPlay       = "mocp -G"
-spotifyCtl    = ("/home/david/Share/bin/user_interface/spotify_control.sh " ++)
--- next          = "if (pgrep mocp); then mocp -f; else /home/david/Share/bin/spotify_control next; fi"
--- prev          = "if (pgrep mocp); then mocp -r; else /home/david/Share/bin/spotify_control previous; fi"
--- pause         = "if (pgrep mocp); then mocp -f; else /home/david/Share/bin/spotify_control playpause; fi"
+spotifyCtl    = ("~/Share/bin/user_interface/spotify_control.sh " ++)
+-- next          = "if (pgrep mocp); then mocp -f; else ~/Share/bin/spotify_control next; fi"
+-- prev          = "if (pgrep mocp); then mocp -r; else ~/Share/bin/spotify_control previous; fi"
+-- pause         = "if (pgrep mocp); then mocp -f; else ~/Share/bin/spotify_control playpause; fi"
 youtubeViewer = terminalWith "-name youtube-viewer -e youtube-viewer"
 
 
 -- other
-toggleTrayer  = "/home/david/Share/bin/user_interface/toggle_trayer.sh"
+toggleTrayer  = "~/Share/bin/user_interface/toggle_trayer.sh"
 
 
 -- TODO: make list and map over it in startuphook!
@@ -61,7 +61,7 @@ dunst             = "dunst -print >> ~/.dunst.log"
 htop              = terminalWith "-e htop -u david"
 -- kbLayout          = "setxkbmap -layout \"us, de\" -option \"grp:caps_toggle\""
 mousePointer      = "xsetroot -cursor_name left_ptr"
-myBackground      = "/home/david/Share/bin/bg-set"
+myBackground      = "~/Share/bin/bg-set"
 noBell            = "xset -b"
 offlineimap       = terminalWith "-name offlineimap -e offlineimap"
 pulseaudio        = "start-pulseaudio-x11"

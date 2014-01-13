@@ -39,7 +39,7 @@ screenSetup "heraklit" =
                     { _name  = "LVDS1"
                     , _state = Configured
                         { _mode     = Mode (1366, 768)
-                        , _position = (0, 0)
+                        , _position = (0, 384)
                         , _rotation = RNormal
                         }
                     }
@@ -62,6 +62,12 @@ screenSetup "heraklit" =
                         , _rotation = RNormal
                         }
                     }
+                , Output
+                    { _name = "VGA1"
+                    , _state = Disconnected
+                    }
+                    -- TODO: do this Disconnected-thing when setting only a few
+                    -- outputs and leaving others blank
                 ]
             )
         ]
