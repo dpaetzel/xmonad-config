@@ -28,6 +28,18 @@ screenSetup "aristoteles" =
                     }
                 ]
             )
+
+        ,   (onlyConnected ["DVI-0"],
+                [ Output
+                    { _name = "DVI-0"
+                    , _state = Configured
+                        { _mode     = Mode (1280, 1024)
+                        , _position = (0, 0)
+                        , _rotation = RLeft
+                        }
+                    }
+                ]
+            )
         ]
 
 
