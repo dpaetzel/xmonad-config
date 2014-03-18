@@ -45,6 +45,7 @@ startupHook' host = do
     spawnOnce browser
     -- spawnOnce musicPlayer
     spawnOnceSleep 5 htop
+    spawnOnceSleep 10 ircClient
 
     -- start host specific things
     spawnOnceSleepOn 7 dropbox "aristoteles"
