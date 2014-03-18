@@ -11,6 +11,7 @@ import Graphics.X11.ExtraTypes
 import System.Exit
 import XMonad
 import XMonad.Actions.CycleWS
+import XMonad.Actions.NoBorders
 import XMonad.Actions.WindowBringer
 import XMonad.Hooks.ManageDocks
 import qualified XMonad.StackSet as W
@@ -116,6 +117,8 @@ keys' host conf = M.fromList $
     , ((winMask, xK_comma                                        ), sendMessage (IncMasterN 1))
     -- Decrement the number of windows in the master area
     , ((winMask, xK_period                                       ), sendMessage (IncMasterN (-1)))
+    -- Toggle Window Borders
+    , ((winMask, xK_d                                            ), withFocused toggleBorder)
 
     -- Quit xmonad
     , ((winMask .|. shiftMask, xK_F12                            ), io exitSuccess)
