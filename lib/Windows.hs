@@ -36,7 +36,7 @@ manageHook' = (composeAll . concat $
         irc      = ["weechat"]
         float    = ["File Transfers", "java", "Steam", "dota_linux", "mandelbrot"]
         center   = ["MPlayer", "Plugin-container"]
-        media    = ["youtube-viewer", "musicPlayer", "spotify"]
+        media    = ["youtube-viewer", "musicPlayer", "spotify", "plugin-container"]
         vnc      = ["vncviewer"]
         java     = ["Intelligent SpeedMeter", "sun-awt-X11-XFramePeer", "Main", "MeinProgramm",
                     "openDLX-main-OpenDLXSimulatorMain", "u11-gui-Main", "java"]
