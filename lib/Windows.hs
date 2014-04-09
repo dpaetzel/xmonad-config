@@ -37,7 +37,7 @@ manageHook' = (composeAll . concat $
         float    = ["File Transfers", "java", "Steam", "dota_linux", "mandelbrot"]
         center   = ["MPlayer", "Plugin-container"]
         media    = ["youtube-viewer", "musicPlayer", "spotify", "plugin-container"]
-        vnc      = ["vncviewer"]
+        vnc      = ["vncviewer", "vinagre"]
         java     = ["Intelligent SpeedMeter", "sun-awt-X11-XFramePeer", "Main", "MeinProgramm",
                     "openDLX-main-OpenDLXSimulatorMain", "u11-gui-Main", "java"]
         trash    = ["offlineimap", "vino"]

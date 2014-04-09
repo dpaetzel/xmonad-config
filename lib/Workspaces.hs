@@ -27,20 +27,21 @@ layoutHook' =
     avoidStruts  $
     smartBorders $
     onWorkspace "email"    Full $
-    onWorkspace "web"      Full $
-    onWorkspace "vnc"      Full $
+    onWorkspace "web"      (Full ||| tiled halfs ||| Mirror (tiled halfs)) $
+    -- onWorkspace "vnc"      Full $
     onWorkspace "chat"     Grid $
     onWorkspace "top"      Full $
-    onWorkspace "trash"    Grid $
-    onWorkspace "terminal" Full $
-    tiled ||| Mirror tiled ||| noBorders Full
+    onWorkspace "trash"    (Grid ||| Full) $
+    onWorkspace "terminal" (Full ||| Grid) $
+    tiled thirds ||| tiled halfs ||| Mirror (tiled halfs) ||| noBorders Full
 
     where
         -- default tiling algorithm partitions the screen into two panes
-        tiled   = Tall nmaster delta ratio
+        tiled   = Tall nmaster delta
         -- The default number of windows in the master pane
         nmaster = 1
-        -- Default proportion of screen occupied by master pane
-        ratio   = 1/2
+        -- Proportion of screen occupied by master pane
+        thirds = 2/3
+        halfs  = 1/2
         -- Percent of screen to increment by when resizing panes
         delta   = 3/100
