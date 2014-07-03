@@ -12,6 +12,7 @@ import System.Exit
 import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Actions.NoBorders
+import XMonad.Actions.SpawnOn
 import XMonad.Actions.WindowBringer
 import XMonad.Hooks.ManageDocks
 import qualified XMonad.StackSet as W
@@ -30,13 +31,13 @@ appMask = mod4Mask
 keys' host conf = M.fromList $
 
     -- main programs
-    [ ((winMask, xK_Return                                       ), spawn terminal')
-    , ((winMask .|. shiftMask, xK_Return                         ), spawn editor)
-    , ((appMask, xK_o                                            ), spawn documentViewer)
-    , ((appMask, xK_p                                            ), spawn musicPlayer)
-    , ((appMask, xK_e                                            ), spawn fileManager)
-    , ((appMask, xK_i                                            ), spawn ircClient)
-    , ((appMask, xK_y                                            ), spawn youtubeViewer)
+    [ ((winMask, xK_Return                                       ), spawnHere terminal')
+    , ((winMask .|. shiftMask, xK_Return                         ), spawnHere editor)
+    , ((appMask, xK_o                                            ), spawnHere documentViewer)
+    , ((appMask, xK_p                                            ), spawn     musicPlayer)
+    , ((appMask, xK_e                                            ), spawnHere fileManager)
+    , ((appMask, xK_i                                            ), spawn     ircClient)
+    , ((appMask, xK_y                                            ), spawn     youtubeViewer)
 
 
     -- util
@@ -73,7 +74,7 @@ keys' host conf = M.fromList $
 
 
     -- other
-    -- , ((appMask, xK_t                                            ), spawn toggleTrayer)
+    , ((appMask, xK_t                                            ), spawn toggleTrayer)
     , ((appMask, xK_F4                                           ), io $ screenSetup host)
     , ((appMask, xK_r                                            ), sendMessage ToggleStruts)
     , ((winMask, xK_Tab                                          ), toggle "terminal")
