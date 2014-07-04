@@ -8,26 +8,27 @@ import XMonad.Hooks.ManageHelpers
 
 
 -- window rules
-manageHook' = manageSpawn
-    <+> (composeAll . concat $
-        [ [anyQuery x --> doIgnore            | x <- ignore]
-        , [anyQuery x --> doShift "terminal"  | x <- terminal]
-        , [anyQuery x --> doShift "email"     | x <- email]
-        , [anyQuery x --> doShift "web"       | x <- web]
-        , [anyQuery x --> doShift "workspace" | x <- dev]
-        , [anyQuery x --> doShift "3"         | x <- java]
-        , [anyQuery x --> doShift "chat"      | x <- chat ++ irc]
-        , [anyQuery x --> doShift "top"       | x <- top]
-        , [anyQuery x --> doShift "vnc"       | x <- vnc]
-        , [anyQuery x --> doShift "media"     | x <- media]
-        , [anyQuery x --> doShift "trash"     | x <- trash]
-        , [anyQuery x --> doCenterFloat       | x <- center]
-        , [anyQuery x --> doFloat             | x <- float ++ java]
+manageHook' = (composeAll . concat $
+    [ [anyQuery x --> doIgnore            | x <- ignore]
+    , [anyQuery x --> doShift "terminal"  | x <- terminal]
+    , [anyQuery x --> doShift "email"     | x <- email]
+    , [anyQuery x --> doShift "web"       | x <- web]
+    , [anyQuery x --> doShift "workspace" | x <- dev]
+    , [anyQuery x --> doShift "3"         | x <- java]
+    , [anyQuery x --> doShift "chat"      | x <- chat ++ irc]
+    , [anyQuery x --> doShift "top"       | x <- top]
+    , [anyQuery x --> doShift "vnc"       | x <- vnc]
+    , [anyQuery x --> doShift "media"     | x <- media]
+    , [anyQuery x --> doShift "trash"     | x <- trash]
+    , [anyQuery x --> doCenterFloat       | x <- center]
+    , [anyQuery x --> doFloat             | x <- float ++ java]
 
-        , [x --> doCenterFloat                | x <- splash]
+    , [x --> doCenterFloat                | x <- splash]
 
-        , [manageDocks]
-        ])
+    , [manageDocks]
+    ])
+
+    <+> manageSpawn
     <+> manageDocks
     <+> manageHook defaultConfig
 
