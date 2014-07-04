@@ -23,6 +23,9 @@ manageHook' = manageSpawn
         , [anyQuery x --> doShift "trash"     | x <- trash]
         , [anyQuery x --> doCenterFloat       | x <- center]
         , [anyQuery x --> doFloat             | x <- float ++ java]
+
+        , [x --> doCenterFloat                | x <- splash]
+
         , [manageDocks]
         ])
     <+> manageDocks
@@ -42,6 +45,7 @@ manageHook' = manageSpawn
         vnc      = ["vncviewer", "vinagre"]
         java     = ["Intelligent SpeedMeter", "sun-awt-X11-XFramePeer", "Main", "MeinProgramm",
                     "openDLX-main-OpenDLXSimulatorMain", "u11-gui-Main", "java"]
+        splash   = [title =? "Wireshark"]
         trash    = ["offlineimap", "vino"]
         terminal = ["terminal"]
 

@@ -41,7 +41,8 @@ keys' host conf = M.fromList $
 
 
     -- util
-    , ((appMask, xK_space                                        ), spawn dmenu)
+    , ((appMask, xK_space                                        ), dmenu)
+    , ((appMask .|. shiftMask, xK_space                          ), dmenuAll)
     , ((appMask, xK_d                                            ), spawn dropboxToggle)
     , ((appMask, xK_Delete                                       ), spawn ejectTray)
     , ((appMask, xK_Insert                                       ), spawn insertTray)
