@@ -88,7 +88,7 @@ keys' host conf = M.fromList $
     -- toogle last workspace
     , ((winMask, xK_o                                            ), toggleWS)
     -- window finder
-    , ((winMask, xK_semicolon                                    ), gotoMenu)
+    , ((winMask, xK_semicolon                                    ), gotoMenuArgs dmenuArgs)
     -- close focused window
     , ((winMask .|. shiftMask, xK_q                              ), kill)
      -- Rotate through the available layout algorithms

@@ -13,20 +13,15 @@ import qualified XMonad.Util.Dmenu as D
 
 -- dmenu_run-alike but with spawnHere
 dmenu :: X ()
-dmenu = io executables >>= D.menuArgs "dmenu" args >>= spawnHere
+dmenu = io executables >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
     where
-    args :: [String]
-    -- args = ["-l", "10", "-i", "-nb", "#000000", "-nf", "#ffffff", "-sb", "#ffffff", "-sf", "#000000", "-fn", "Inconsolata-14:normal"] -- "Roboto-14:normal"]
-    args = ["-l", "16", "-i", "-nb", "#000000", "-nf", "#729fcf", "-sb", "#000000", "-sf", "#ffffff", "-fn", "Inconsolata-14:normal"] -- "Roboto-14:normal"]
     executables :: IO [String]
     executables = fmap (map (replace ".desktop" "") . splitOn "\n") $ runProcessWithInput "ls" ["/usr/share/applications"] []
 
 
 dmenuAll :: X ()
-dmenuAll = io executables >>= D.menuArgs "dmenu" args >>= spawnHere
+dmenuAll = io executables >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
     where
-    args :: [String]
-    args = ["-l", "16", "-i", "-nb", "#000000", "-nf", "#729fcf", "-sb", "#000000", "-sf", "#ffffff", "-fn", "Inconsolata-14:normal"] -- "Roboto-14:normal"]
     executables :: IO [String]
     executables = fmap (sort . splitOn "\n") $ args >>= flip (runProcessWithInput "stest") []
         where
@@ -35,6 +30,11 @@ dmenuAll = io executables >>= D.menuArgs "dmenu" args >>= spawnHere
             where
             path :: IO [String]
             path = fmap (splitOn ":") $ getEnv "PATH"
+
+
+dmenuArgs :: [String]
+dmenuArgs = ["-l", "16", "-i", "-nb", "#000000", "-nf", "#729fcf", "-sb", "#000000", "-sf", "#ffffff", "-fn", "Inconsolata-14:normal"]
+-- dmenuArgs = ["-l", "10", "-i", "-nb", "#000000", "-nf", "#ffffff", "-sb", "#ffffff", "-sf", "#000000", "-fn", "Roboto-14:normal"]
 
 
 -- main programs
