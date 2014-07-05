@@ -3,6 +3,7 @@ import Data.Monoid
 import System.Posix.Unistd
 
 import XMonad
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.FadeInactive
 
 
@@ -19,7 +20,7 @@ focusFollowsMouse' = False
 
 
 -- event handling
-eventHook' = mempty
+eventHook' = mempty <+> fullscreenEventHook
 
 
 -- status bars and logging
@@ -31,7 +32,7 @@ logHook' = fadeInactiveLogHook fadeAmount
 
 main = do
     host <- fmap nodeName getSystemID
-    xmonad $ defaultConfig
+    xmonad $ ewmh defaultConfig
         { terminal           = terminal'
         , focusFollowsMouse  = focusFollowsMouse'
         , modMask            = winMask

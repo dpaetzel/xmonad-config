@@ -39,15 +39,15 @@ dmenuAll = io executables >>= D.menuArgs "dmenu" args >>= spawnHere
 
 -- main programs
 terminal'      = "urxvt -uc"
-terminalWith   = unwords . ([terminal'] ++) . return
-terminal''     = terminalWith "-name terminal"
+terminal''     = "urxvt -uc -name terminal -title terminal"
+terminalWith windowName command  = intercalate " " [terminal', "-name", windowName, "-title", windowName, "-e", command]
 documentViewer = "evince"
 browser        = "firefox"
 editor         = "gvim"
-musicPlayer    = terminalWith "-name musicPlayer -e 'cmus'"
-mailClient     = terminalWith "-name mailClient -e mutt"
+musicPlayer    = terminalWith "musicPlayer" "cmus"
+mailClient     = terminalWith "mailClient" "mutt"
 fileManager    = "thunar"
-ircClient      = terminalWith "-name ircClient -e weechat"
+ircClient      = terminalWith "ircClient" "weechat"
 
 
 -- util
@@ -56,7 +56,7 @@ dropboxToggle = "if (pgrep dropbox); then dropbox stop; sleep 5; killall dropbox
 ejectTray     = "eject"
 insertTray    = "eject -t"
 lockScreen    = "xscreensaver-command -lock"
-powerTop      = terminalWith "-name powertop -e sudo powertop"
+powerTop      = terminalWith "powertop" "sudo powertop"
 putAwayMouse  = "xdotool mousemove 1680 1280"
 scrotWin      = "sleep 0.2; scrot -s -e \'mv $f ~/Pictures/screenshots/not-yet-archived/\'"
 scrotFull     = "scrot -e \'mv $f ~/Pictures/screenshots/not-yet-archived/\'"
@@ -84,7 +84,7 @@ spotifyCtl    = ("~/Share/bin/user_interface/spotifyctl.sh " ++)
 -- next          = "if (pgrep mocp); then mocp -f; else ~/Share/bin/spotify_control next; fi"
 -- prev          = "if (pgrep mocp); then mocp -r; else ~/Share/bin/spotify_control previous; fi"
 -- pause         = "if (pgrep mocp); then mocp -f; else ~/Share/bin/spotify_control playpause; fi"
-youtubeViewer = terminalWith "-name youtube-viewer -e youtube-viewer"
+youtubeViewer = terminalWith "youtube-viewer" "youtube-viewer"
 
 
 -- other
@@ -96,12 +96,12 @@ toggleTrayer  = "~/Share/bin/user_interface/toggle_trayer.sh"
 conky             = "conky"
 dropbox           = "dropbox start"
 dunst             = "dunst -print >> ~/.dunst.log"
-htop              = terminalWith "-e htop -u $USER"
+htop              = terminalWith "htop" "htop -u $USER"
 -- kbLayout          = "setxkbmap -layout \"us, de\" -option \"grp:caps_toggle\""
 mousePointer      = "xsetroot -cursor_name left_ptr"
 myBackground      = "~/Share/bin/bg-set"
 noBell            = "xset -b"
-offlineimap       = terminalWith "-name offlineimap -e offlineimap"
+offlineimap       = terminalWith "offlineimap" "offlineimap"
 pulseaudio        = "start-pulseaudio-x11"
 singleColorbg     = "xsetroot -solid black"
 -- trayer            = toggleTrayer

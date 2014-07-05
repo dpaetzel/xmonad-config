@@ -15,15 +15,15 @@ manageHook' = (composeAll . concat $
     , [anyQuery x --> doShift "web"       | x <- web]
     , [anyQuery x --> doShift "workspace" | x <- dev]
     , [anyQuery x --> doShift "3"         | x <- java]
-    , [anyQuery x --> doShift "chat"      | x <- chat ++ irc]
-    , [anyQuery x --> doShift "top"       | x <- top]
     , [anyQuery x --> doShift "vnc"       | x <- vnc]
     , [anyQuery x --> doShift "media"     | x <- media]
     , [anyQuery x --> doShift "trash"     | x <- trash]
     , [anyQuery x --> doCenterFloat       | x <- center]
-    , [anyQuery x --> doFloat             | x <- float ++ java]
+    , [anyQuery x --> doFloat             | x <- float' ++ java]
 
-    , [x --> doCenterFloat                | x <- splash]
+    , [x --> doFloat                      | x <- splash ++ float]
+    , [x --> doShift "top"                | x <- top]
+    , [x --> doShift "chat"               | x <- chat]
 
     , [manageDocks]
     ])
@@ -35,19 +35,27 @@ manageHook' = (composeAll . concat $
     where
         email    = ["mailClient", "Mail", "Thunderbird", "mutt"]
         ignore   = ["desktop_window", "desktop", "notify-osd", "trayer", "stalonetray"]
-        chat     = ["Skype", "Pidgin", "Gajim"]
         web      = ["Firefox", "Chromium", "Google-chrome", "Chromium-browser"]
         dev      = ["Eclipse"]
-        top      = ["htop", "powertop"]
-        irc      = ["weechat"]
-        float    = ["File Transfers", "java", "Steam", "dota_linux", "mandelbrot"]
+        float'   = ["File Transfers", "java", "Steam", "dota_linux", "mandelbrot"]
         center   = ["MPlayer", "Plugin-container"]
         media    = ["youtube-viewer", "musicPlayer", "spotify", "plugin-container"]
         vnc      = ["vncviewer", "vinagre"]
         java     = ["Intelligent SpeedMeter", "sun-awt-X11-XFramePeer", "Main", "MeinProgramm",
                     "openDLX-main-OpenDLXSimulatorMain", "u11-gui-Main", "java"]
-        splash   = [title =? "Wireshark"]
         trash    = ["offlineimap", "vino"]
         terminal = ["terminal"]
+
+
+        float  = [title =? "Firefox Preferences"]
+        splash = [title =? "Wireshark"]
+        top    =
+            [ title =? "htop"
+            , title =? "powertop"]
+        chat   =
+            [ title =? "ircClient"
+            , title =? "Skype"
+            , title =? "Pidgin"
+            , title =? "Gajim"]
 
         anyQuery x = fmap or . mapM (=? x) $ [resource, className, title]
