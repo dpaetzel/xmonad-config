@@ -9,25 +9,24 @@ import XMonad.Hooks.ManageHelpers
 
 -- window rules
 manageHook' = (composeAll . concat $
-    [ [anyQuery x --> doIgnore            | x <- ignore]
-    , [anyQuery x --> doShift "terminal"  | x <- terminal]
-    , [anyQuery x --> doShift "email"     | x <- email]
-    , [anyQuery x --> doShift "web"       | x <- web]
-    , [anyQuery x --> doShift "workspace" | x <- dev]
-    , [anyQuery x --> doShift "3"         | x <- java]
-    , [anyQuery x --> doShift "vnc"       | x <- vnc]
-    , [anyQuery x --> doShift "media"     | x <- media]
-    , [anyQuery x --> doShift "trash"     | x <- trash]
-    , [anyQuery x --> doCenterFloat       | x <- center]
-    , [anyQuery x --> doFloat             | x <- float' ++ java]
+    [ [anyQuery x --> doIgnore               | x <- ignore]
+    , [anyQuery x --> doShift "tab:terminal" | x <- terminal]
+    , [anyQuery x --> doShift "`:email"      | x <- email]
+    , [anyQuery x --> doShift "1:web"        | x <- web]
+    , [anyQuery x --> doShift "2:workspace"  | x <- dev]
+    , [anyQuery x --> doShift "3"            | x <- java]
+    -- , [anyQuery x --> doShift "vnc"       | x <- vnc]
+    , [anyQuery x --> doShift "7:media"      | x <- media]
+    , [anyQuery x --> doShift "0:trash"      | x <- trash]
+    , [anyQuery x --> doCenterFloat          | x <- center]
+    , [anyQuery x --> doFloat                | x <- float' ++ java]
 
-    , [x --> doFloat                      | x <- splash ++ float]
-    , [x --> doShift "top"                | x <- top]
-    , [x --> doShift "chat"               | x <- chat]
+    , [x --> doFloat          | x <- splash ++ float]
+    , [x --> doShift "9:top"  | x <- top]
+    , [x --> doShift "8:chat" | x <- chat]
 
     , [manageDocks]
     ])
-
     <+> manageSpawn
     <+> manageDocks
     <+> manageHook defaultConfig

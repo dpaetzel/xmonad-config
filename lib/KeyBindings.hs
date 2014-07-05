@@ -38,6 +38,7 @@ keys' host conf = M.fromList $
     , ((appMask, xK_e                                            ), spawnHere fileManager)
     , ((appMask, xK_i                                            ), spawn     ircClient)
     , ((appMask, xK_y                                            ), spawn     youtubeViewer)
+    , ((appMask, xK_u                                            ), spawnHere todo)
 
 
     -- util
@@ -55,14 +56,14 @@ keys' host conf = M.fromList $
 
 
     -- sound
-    , ((appMask, xK_Home                                         ), spawn inToggle)
-    , ((appMask, xK_End                                          ), spawn outToggle)
-    , ((0, xF86XK_AudioRaiseVolume                               ), spawn outUp)
-    , ((0, xF86XK_AudioLowerVolume                               ), spawn outDown)
+    , ((appMask, xK_Home                                         ), spawn       inToggle)
+    , ((appMask, xK_End                                          ), spawn       outToggle)
+    , ((0, xF86XK_AudioRaiseVolume                               ), spawn       outUp)
+    , ((0, xF86XK_AudioLowerVolume                               ), spawn       outDown)
     , ((0, xF86XK_AudioMute                                      ), mapM_ spawn [outToggle, inToggle])
-    , ((appMask, xK_m                                            ), spawn pavuControl)
-    , ((appMask, xK_q                                            ), spawn equalizer)
-    , ((appMask, xK_Page_Up                                      ), spawn applause)
+    , ((appMask, xK_m                                            ), spawnHere   pavuControl)
+    , ((appMask, xK_q                                            ), spawnHere   equalizer)
+    , ((appMask, xK_Page_Up                                      ), spawn       applause)
 
 
     -- music
@@ -78,7 +79,7 @@ keys' host conf = M.fromList $
     , ((appMask, xK_t                                            ), spawn toggleTrayer)
     , ((appMask, xK_F4                                           ), io $ screenSetup host)
     , ((appMask, xK_r                                            ), sendMessage ToggleStruts)
-    , ((winMask, xK_Tab                                          ), toggle "terminal")
+    , ((winMask, xK_Tab                                          ), toggle "tab:terminal")
 
 
     -- go to the next "xinerama" screen

@@ -48,6 +48,7 @@ musicPlayer    = terminalWith "musicPlayer" "cmus"
 mailClient     = terminalWith "mailClient" "mutt"
 fileManager    = "thunar"
 ircClient      = terminalWith "ircClient" "weechat"
+todo           = intercalate " " [editor, "~/Todo/todo.org"]
 
 
 -- util

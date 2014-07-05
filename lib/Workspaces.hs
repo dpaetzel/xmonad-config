@@ -2,38 +2,38 @@ module Workspaces where
 
 import XMonad
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.Circle
 import XMonad.Layout.Grid
 import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 
 -- workspaces
 workspaces' =
-    [ "email"
-    , "web"
-    , "workspace"
+    [ "`:email"
+    , "1:web"
+    , "2:workspace"
     , "3"
     , "4"
     , "5"
-    , "vnc"
-    , "media"
-    , "chat"
-    , "top"
-    , "trash"
-    , "terminal"]
+    , "6"
+    , "7:media"
+    , "8:chat"
+    , "9:top"
+    , "0:trash"
+    , "tab:terminal"]
 
 
 -- workspace layouts
 layoutHook' =
     avoidStruts  $
     smartBorders $
-    onWorkspace "email"    Full $
-    onWorkspace "web"      (Full ||| tiled halfs ||| Mirror (tiled halfs)) $
-    -- onWorkspace "vnc"      Full $
-    onWorkspace "chat"     Grid $
-    onWorkspace "top"      Full $
-    onWorkspace "trash"    (Grid ||| Full) $
-    onWorkspace "terminal" (Full ||| Grid) $
-    tiled thirds ||| tiled halfs ||| Mirror (tiled halfs) ||| noBorders Full
+    onWorkspace "`:email"    Full $
+    onWorkspace "1:web"      (Full ||| tiled halfs ||| Mirror (tiled halfs)) $
+    onWorkspace "8:chat"     Grid $
+    onWorkspace "9:top"      Full $
+    onWorkspace "0:trash"    (Grid ||| Full) $
+    onWorkspace "tab:terminal" (Full ||| Grid) $
+    tiled thirds ||| tiled halfs ||| Mirror (tiled halfs) ||| noBorders Full ||| Circle
 
     where
         -- default tiling algorithm partitions the screen into two panes
