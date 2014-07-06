@@ -79,7 +79,7 @@ keys' host conf = M.fromList $
     , ((appMask, xK_t                                            ), spawn toggleTrayer)
     , ((appMask, xK_F4                                           ), io $ screenSetup host)
     , ((appMask, xK_r                                            ), sendMessage ToggleStruts)
-    , ((winMask, xK_Tab                                          ), toggle "tab:terminal")
+    , ((winMask, xK_Tab                                          ), toggle "terminal")
 
 
     -- go to the next "xinerama" screen

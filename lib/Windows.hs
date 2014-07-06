@@ -10,14 +10,14 @@ import XMonad.Hooks.ManageHelpers
 -- window rules
 manageHook' = (composeAll . concat $
     [ [anyQuery x --> doIgnore               | x <- ignore]
-    , [anyQuery x --> doShift "tab:terminal" | x <- terminal]
-    , [anyQuery x --> doShift "`:email"      | x <- email]
+    , [anyQuery x --> doShift "terminal"     | x <- terminal]
+    , [anyQuery x --> doShift "0:email"      | x <- email]
     , [anyQuery x --> doShift "1:web"        | x <- web]
-    , [anyQuery x --> doShift "2:workspace"  | x <- dev]
+    , [anyQuery x --> doShift "2"            | x <- dev]
     , [anyQuery x --> doShift "3"            | x <- java]
     -- , [anyQuery x --> doShift "vnc"       | x <- vnc]
     , [anyQuery x --> doShift "7:media"      | x <- media]
-    , [anyQuery x --> doShift "0:trash"      | x <- trash]
+    , [anyQuery x --> doShift "10:trash"     | x <- trash]
     , [anyQuery x --> doCenterFloat          | x <- center]
     , [anyQuery x --> doFloat                | x <- float' ++ java]
 

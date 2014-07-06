@@ -9,9 +9,9 @@ import XMonad.Layout.PerWorkspace
 
 -- workspaces
 workspaces' =
-    [ "`:email"
+    [ "0:email"
     , "1:web"
-    , "2:workspace"
+    , "2"
     , "3"
     , "4"
     , "5"
@@ -19,19 +19,19 @@ workspaces' =
     , "7:media"
     , "8:chat"
     , "9:top"
-    , "0:trash"
-    , "tab:terminal"]
+    , "10:trash"
+    , "terminal"]
 
 
 -- workspace layouts
 layoutHook' =
     avoidStruts  $
     smartBorders $
-    onWorkspace "`:email"    Full $
+    onWorkspace "0:email"    Full $
     onWorkspace "1:web"      (Full ||| tiled halfs ||| Mirror (tiled halfs)) $
     onWorkspace "8:chat"     Grid $
     onWorkspace "9:top"      Full $
-    onWorkspace "0:trash"    (Grid ||| Full) $
+    onWorkspace "10:trash"    (Grid ||| Full) $
     onWorkspace "tab:terminal" (Full ||| Grid) $
     tiled thirds ||| tiled halfs ||| Mirror (tiled halfs) ||| noBorders Full ||| Circle
 

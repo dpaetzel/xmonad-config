@@ -1,0 +1,10 @@
+# Readme
+
+My current xmonad configuration. It is splitted on several files for easier
+maintenance. Currently I change and try out a lot therefore a few things are not
+at the right place.
+
+# Credits
+
+Credit for the icons goes to Bill Indelicato
+(https://github.com/windelicato/dotfiles.git).
