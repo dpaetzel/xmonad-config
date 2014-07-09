@@ -52,9 +52,9 @@ manageHook' = (composeAll . concat $
             [ title =? "htop"
             , title =? "powertop"]
         chat   =
-            [ title =? "ircClient"
-            , title =? "Skype"
-            , title =? "Pidgin"
-            , title =? "Gajim"]
+            [ title     =? "ircClient"
+            , className =? "Skype"
+            , className =? "Pidgin"
+            , className =? "Gajim"]
 
         anyQuery x = fmap or . mapM (=? x) $ [resource, className, title]

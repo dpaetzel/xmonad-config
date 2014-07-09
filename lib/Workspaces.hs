@@ -4,6 +4,7 @@ import XMonad
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.Circle
 import XMonad.Layout.Grid
+import XMonad.Layout.IM
 import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 
@@ -29,14 +30,14 @@ layoutHook' =
     smartBorders $
     onWorkspace "0:email"    Full $
     onWorkspace "1:web"      (Full ||| tiled halfs ||| Mirror (tiled halfs)) $
-    onWorkspace "8:chat"     Grid $
+    onWorkspace "8:chat"     im $
     onWorkspace "9:top"      Full $
     onWorkspace "10:trash"    (Grid ||| Full) $
     onWorkspace "tab:terminal" (Full ||| Grid) $
     tiled thirds ||| tiled halfs ||| Mirror (tiled halfs) ||| noBorders Full ||| Circle
 
     where
-        -- default tiling algorithm partitions the screen into two panes
+        -- Default tiling algorithm partitions the screen into two panes
         tiled   = Tall nmaster delta
         -- The default number of windows in the master pane
         nmaster = 1
@@ -45,3 +46,5 @@ layoutHook' =
         halfs  = 1/2
         -- Percent of screen to increment by when resizing panes
         delta   = 3/100
+        -- Instant Messaging layout
+        im = withIM (1/10) (ClassName "Skype") Full
