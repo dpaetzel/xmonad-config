@@ -27,13 +27,13 @@ workspaces' =
 layoutHook' =
     avoidStruts  $
     smartBorders $
-    onWorkspace "0:email"    Full $
-    onWorkspace "1:web"      (Full ||| tiled halfs ||| Mirror (tiled halfs)) $
-    onWorkspace "8:chat"     Grid $
-    onWorkspace "9:top"      Full $
-    onWorkspace "10:trash"    (Grid ||| Full) $
+    onWorkspace "0:email"      (noBorders Full) $
+    onWorkspace "1:web"        (noBorders Full ||| tiled halfs ||| Mirror (tiled halfs)) $
+    onWorkspace "8:chat"       (Grid ||| tiled halfs ||| Mirror (tiled halfs) ||| noBorders Full ||| Circle) $
+    onWorkspace "9:top"        (noBorders Full) $  -- ||| tiled halfs ||| Mirror (tiled halfs) ||| Circle) $
+    onWorkspace "10:trash"     (Grid ||| Full) $
     onWorkspace "tab:terminal" (Full ||| Grid) $
-    tiled thirds ||| tiled halfs ||| Mirror (tiled halfs) ||| noBorders Full ||| Circle
+    tiled halfs ||| Mirror (tiled halfs) ||| noBorders Full ||| Circle
 
     where
         -- default tiling algorithm partitions the screen into two panes
