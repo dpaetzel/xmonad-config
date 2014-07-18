@@ -28,13 +28,13 @@ workspaces' =
 layoutHook' =
     avoidStruts  $
     smartBorders $
-    onWorkspace "0:email"    Full $
-    onWorkspace "1:web"      (Full ||| tiled halfs ||| Mirror (tiled halfs)) $
-    onWorkspace "8:chat"     im $
-    onWorkspace "9:top"      Full $
-    onWorkspace "10:trash"    (Grid ||| Full) $
+    onWorkspace "0:email"      (noBorders Full) $
+    onWorkspace "1:web"        (noBorders Full ||| tiled halfs ||| Mirror (tiled halfs)) $
+    onWorkspace "8:chat"       im $
+    onWorkspace "9:top"        (noBorders Full) $  -- ||| tiled halfs ||| Mirror (tiled halfs) ||| Circle) $
+    onWorkspace "10:trash"     (Grid ||| Full) $
     onWorkspace "tab:terminal" (Full ||| Grid) $
-    tiled thirds ||| tiled halfs ||| Mirror (tiled halfs) ||| noBorders Full ||| Circle
+    tiled halfs ||| Mirror (tiled halfs) ||| noBorders Full ||| Circle
 
     where
         -- Default tiling algorithm partitions the screen into two panes
@@ -47,4 +47,4 @@ layoutHook' =
         -- Percent of screen to increment by when resizing panes
         delta   = 3/100
         -- Instant Messaging layout
-        im = withIM (1/10) (ClassName "Skype") Full
+        im = withIM (1/10) (ClassName "skype") Full
