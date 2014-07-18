@@ -15,11 +15,11 @@ dzenPP' handle = defaultPP
     { ppOutput          = hPutStrLn handle
     -- , ppCurrent         = surroundWith "[ " " ]" . return . head
     -- , ppVisible         = surroundWith "[ " " ] " . return . head
-    , ppCurrent         = dzenColor "#729fcf" ""
+    , ppCurrent         = dzenColor "#729fcf" "" -- tango blue
     , ppVisible         = dzenColor "white" ""
-    , ppHidden          = dzenColor "#555753" ""
+    , ppHidden          = dzenColor "#555753" "" -- tango lightblack
     , ppHiddenNoWindows = const ""
-    , ppUrgent          = dzenColor "#ef2929" ""
+    , ppUrgent          = dzenColor "#ef2929" "" -- tango lightred
     , ppSep             = "  |  "
     , ppWsSep           = "  "
     , ppTitle           = shorten 50
@@ -38,5 +38,3 @@ dzenPP' handle = defaultPP
         "Grid" -> "^i(~/.xmonad/icons/grid.xbm)"
         "Circle" -> "^i(~/.xmonad/icons/empty.xbm)"
         other -> other
-
-    
