@@ -21,7 +21,6 @@ workspaces' =
     , "8:chat"
     , "9:top"
     , "10:trash"]
-    -- , "terminal"]
 
 
 -- workspace layouts
@@ -33,7 +32,6 @@ layoutHook' =
     onWorkspace "8:chat"       im $
     onWorkspace "9:top"        (noBorders Full) $  -- ||| tiled halfs ||| Mirror (tiled halfs) ||| Circle) $
     onWorkspace "10:trash"     (Grid ||| Full) $
-    -- onWorkspace "tab:terminal" (Full ||| Grid) $
     tiled halfs ||| Mirror (tiled halfs) ||| noBorders Full ||| Circle
 
     where

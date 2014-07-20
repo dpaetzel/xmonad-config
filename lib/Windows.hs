@@ -26,7 +26,6 @@ manageHook' = manageSpawn
     , [x --> doShift "1:web"    | x <- web]
     , [x --> doShift "8:chat"   | x <- chat]
     , [x --> doShift "9:top"    | x <- top]
-    -- , [x --> doShift "terminal" | x <- terminal]
 
     , [isFullscreen --> doFullFloat]
     , [manageDocks]
@@ -51,7 +50,6 @@ manageHook' = manageSpawn
 
         float  = [title =? "Firefox Preferences"]
         splash = [title =? "Wireshark"]
-        -- terminal = [ className =? "terminal"]
         top =
             [ title =? "htop"
             , title =? "powertop"

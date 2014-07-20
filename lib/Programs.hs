@@ -55,7 +55,6 @@ dmenuAll = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
 
 -- main programs
 terminal'      = "urxvt -uc"
--- terminal''     = "urxvt -uc -name terminal -title terminal"
 terminalWith windowName command  = intercalate " " [terminal', "-name", windowName, "-title", windowName, "-e", command]
 documentViewer = "evince"
 browser        = "firefox"
