@@ -39,7 +39,7 @@ startupHook' host = do
     spawnOnceSleep 2 conky
 
     -- start clients
-    spawnOnce terminal''
+    -- spawnOnce terminal''
     spawnOnce offlineimap
     spawnOnce mailClient
     spawnOnce browser

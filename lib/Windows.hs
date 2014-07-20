@@ -5,10 +5,13 @@ import XMonad
 import XMonad.Actions.SpawnOn
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
+import XMonad.Util.Scratchpad
+import qualified XMonad.StackSet as W
 
 
 -- window rules
-manageHook' = (composeAll . concat $
+manageHook' = manageSpawn
+    <+> (composeAll . concat $
     [ [anyQuery x --> doIgnore               | x <- ignore]
     , [anyQuery x --> doShift "0:email"      | x <- email]
     , [anyQuery x --> doShift "2"            | x <- dev]
@@ -23,13 +26,13 @@ manageHook' = (composeAll . concat $
     , [x --> doShift "1:web"    | x <- web]
     , [x --> doShift "8:chat"   | x <- chat]
     , [x --> doShift "9:top"    | x <- top]
-    , [x --> doShift "terminal" | x <- terminal]
+    -- , [x --> doShift "terminal" | x <- terminal]
 
     , [isFullscreen --> doFullFloat]
     , [manageDocks]
     ])
-    <+> manageSpawn
     <+> manageDocks
+    <+> scratchpadManageHook (W.RationalRect 0 0 1 1)
     <+> manageHook defaultConfig
 
     where
@@ -48,7 +51,7 @@ manageHook' = (composeAll . concat $
 
         float  = [title =? "Firefox Preferences"]
         splash = [title =? "Wireshark"]
-        terminal = [ className =? "terminal"]
+        -- terminal = [ className =? "terminal"]
         top =
             [ title =? "htop"
             , title =? "powertop"
