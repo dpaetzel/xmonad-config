@@ -48,7 +48,10 @@ manageHook' = manageSpawn
         trash    = ["offlineimap", "vino"]
 
 
-        float  = [title =? "Firefox Preferences"]
+        float =
+            [ title =? "Firefox Preferences"
+            , title =? "Tab Mix Plus Options"
+            ]
         splash = [title =? "Wireshark"]
         top =
             [ title =? "htop"

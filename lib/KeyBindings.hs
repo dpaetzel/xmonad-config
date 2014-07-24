@@ -14,6 +14,7 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.NoBorders
 import XMonad.Actions.SpawnOn
 import XMonad.Actions.WindowBringer
+import XMonad.Actions.WithAll
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Scratchpad
 import qualified XMonad.StackSet as W
@@ -40,6 +41,7 @@ keys' host conf = M.fromList $
     , ((appMask, xK_i                                            ), spawn     ircClient)
     , ((appMask, xK_y                                            ), spawn     youtubeViewer)
     , ((appMask, xK_u                                            ), spawnHere todo)
+    , ((appMask, xK_j                                            ), spawnHere jiu)
 
 
     -- util
@@ -126,9 +128,13 @@ keys' host conf = M.fromList $
     , ((winMask, xK_d                                            ), withFocused toggleBorder)
 
     -- Quit xmonad
-    , ((winMask .|. shiftMask, xK_F12                            ), io exitSuccess)
+    , ((winMask .|. shiftMask, xK_F12                            ), closeAll >> io exitSuccess)
     -- Restart xmonad
     , ((winMask, xK_F12                                          ), spawn "xmonad --recompile; xmonad --restart")
+    -- Suspend computer
+    , ((winMask, xK_Delete                                       ), suspend)
+    -- Shutdown computer
+    , ((winMask .|. shiftMask, xK_Delete                         ), shutdown)
     ]
     ++
 
@@ -171,3 +177,25 @@ toggle wsName = do
     if currentWSTag == wsName
     then toggleWS
     else windows $ W.greedyView wsName
+
+
+-- close all windows on all workspaces
+closeAll :: X ()
+closeAll = do
+    stackset <- fmap windowset get
+    let allWindows = W.allWindows stackset
+    mapM_ killWindow allWindows
+
+
+-- poweroff the computer, close windows gracefully before
+shutdown :: X ()
+shutdown = do
+    closeAll
+    spawn "sleep 7 && systemctl poweroff"
+
+
+-- lock screen and suspend the computer
+suspend :: X ()
+suspend = do
+    spawn lockScreen
+    spawn "sleep 3 && systemctl suspend"
