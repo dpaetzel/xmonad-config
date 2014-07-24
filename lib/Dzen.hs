@@ -8,18 +8,18 @@ import XMonad.Util.Run
 
 
 dzenCommand :: String
-dzenCommand = "dzen2 -p -xs 1 -ta r -tw 1680 -fn Inconsolata-14:normal -fg '#ffffff' -bg '#000000' -e 'onStart=lower'"
+dzenCommand = "killall dzen2; dzen2 -p -xs 1 -ta r -tw 1680 -fn Inconsolata-14:normal -fg '#ffffff' -bg '#000000' -e 'onStart=lower'"
 
 
 dzenPP' handle = defaultPP
     { ppOutput          = hPutStrLn handle
     -- , ppCurrent         = surroundWith "[ " " ]" . return . head
     -- , ppVisible         = surroundWith "[ " " ] " . return . head
-    , ppCurrent         = dzenColor "#729fcf" ""
+    , ppCurrent         = dzenColor "#729fcf" "" -- tango blue
     , ppVisible         = dzenColor "white" ""
-    , ppHidden          = dzenColor "#555753" ""
+    , ppHidden          = dzenColor "#555753" "" -- tango lightblack
     , ppHiddenNoWindows = const ""
-    , ppUrgent          = dzenColor "#ef2929" ""
+    , ppUrgent          = dzenColor "#ef2929" "" -- tango lightred
     , ppSep             = "  |  "
     , ppWsSep           = "  "
     , ppTitle           = shorten 50
@@ -38,5 +38,3 @@ dzenPP' handle = defaultPP
         "Grid" -> "^i(~/.xmonad/icons/grid.xbm)"
         "Circle" -> "^i(~/.xmonad/icons/empty.xbm)"
         other -> other
-
-    

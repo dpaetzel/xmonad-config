@@ -15,6 +15,7 @@ import XMonad.Actions.NoBorders
 import XMonad.Actions.SpawnOn
 import XMonad.Actions.WindowBringer
 import XMonad.Hooks.ManageDocks
+import XMonad.Util.Scratchpad
 import qualified XMonad.StackSet as W
 
 
@@ -79,7 +80,8 @@ keys' host conf = M.fromList $
     , ((appMask, xK_t                                            ), spawn toggleTrayer)
     , ((appMask, xK_F4                                           ), io $ screenSetup host)
     , ((appMask, xK_r                                            ), sendMessage ToggleStruts)
-    , ((winMask, xK_Tab                                          ), toggle "terminal")
+    -- , ((winMask, xK_Tab                                          ), toggle "terminal")
+    , ((winMask, xK_Tab                                          ), scratchpadSpawnAction conf)
 
 
     -- go to the next "xinerama" screen

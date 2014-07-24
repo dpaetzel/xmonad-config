@@ -1,29 +1,50 @@
 module Programs where
 
 
-import XMonad
-import XMonad.Actions.SpawnOn
-import XMonad.Util.Run
-import System.Environment
 import Data.List
 import Data.List.Split
 import Data.String.Utils
+import System.Environment
+import Text.Regex.Posix
+import XMonad
+import XMonad.Actions.SpawnOn
+import XMonad.Util.Run
 import qualified XMonad.Util.Dmenu as D
+
+
+dmenuArgs :: [String]
+dmenuArgs = ["-l", "16", "-i", "-nb", "#000000", "-nf", "#729fcf", "-sb", "#000000", "-sf", "#ffffff", "-fn", "Inconsolata-14:normal"]
+-- #729fcf is tango blue
+
+
+applicationsPath :: String
+applicationsPath = "/usr/share/applications/"
 
 
 -- dmenu_run-alike but with spawnHere
 dmenu :: X ()
-dmenu = io executables >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
+-- dmenu = programNames >>= D.menuArgs "dmenu" dmenuArgs >>= io executable >>= spawnHere
+dmenu = (io programNames) >>= D.menuArgs "dmenu" dmenuArgs >>= (io . executable) >>= spawnHere
     where
-    executables :: IO [String]
-    executables = fmap (map (replace ".desktop" "") . splitOn "\n") $ runProcessWithInput "ls" ["/usr/share/applications"] []
+    programNames :: IO [String]
+    programNames = fmap (map (replace ".desktop" "") . splitOn "\n") $ runProcessWithInput "ls" [applicationsPath] []
+    executable :: String -> IO String
+    executable programName = do
+        (_, _, _, catch) <- match
+        return $ head catch
+
+        where
+        match :: IO (String, String, String, [String])
+        match = fmap (=~ regex) $ readFile (applicationsPath ++ programName ++ ".desktop")
+        regex :: String
+        regex = "\nExec=([^%]*)( .*\n|\n)"
 
 
 dmenuAll :: X ()
-dmenuAll = io executables >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
+dmenuAll = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
     where
-    executables :: IO [String]
-    executables = fmap (sort . splitOn "\n") $ args >>= flip (runProcessWithInput "stest") []
+    programNames :: IO [String]
+    programNames = fmap (sort . splitOn "\n") $ args >>= flip (runProcessWithInput "stest") []
         where
         args :: IO [String]
         args = fmap ("-flx" :) path
@@ -32,14 +53,8 @@ dmenuAll = io executables >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
             path = fmap (splitOn ":") $ getEnv "PATH"
 
 
-dmenuArgs :: [String]
-dmenuArgs = ["-l", "16", "-i", "-nb", "#000000", "-nf", "#729fcf", "-sb", "#000000", "-sf", "#ffffff", "-fn", "Inconsolata-14:normal"]
--- dmenuArgs = ["-l", "10", "-i", "-nb", "#000000", "-nf", "#ffffff", "-sb", "#ffffff", "-sf", "#000000", "-fn", "Roboto-14:normal"]
-
-
 -- main programs
 terminal'      = "urxvt -uc"
-terminal''     = "urxvt -uc -name terminal -title terminal"
 terminalWith windowName command  = intercalate " " [terminal', "-name", windowName, "-title", windowName, "-e", command]
 documentViewer = "evince"
 browser        = "firefox"
