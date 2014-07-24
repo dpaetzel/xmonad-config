@@ -51,7 +51,7 @@ screenSetup "heraklit" =
                     { _name  = "LVDS1"
                     , _state = Configured
                         { _mode     = Mode (1366, 768)
-                        , _position = (0, 384)
+                        , _position = (0, 312)
                         , _rotation = RNormal
                         }
                     }
@@ -59,7 +59,7 @@ screenSetup "heraklit" =
                     { _name = "VGA1"
                     , _state = Configured
                         { _mode     = Auto
-                        , _position = (1366, 0)
+                        , _position = (1367, 0)
                         , _rotation = RNormal
                         }
                     }
