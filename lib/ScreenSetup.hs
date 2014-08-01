@@ -6,32 +6,32 @@ import Util.XRandR.Types
 
 
 screenSetup :: String -> IO ()
-screenSetup "aristoteles" =
+screenSetup "anaxagoras" =
     condChange
         [
-            (onlyConnected ["HDMI-0", "DVI-0"],
+            (onlyConnected ["HDMI-1", "DVI-I-1"],
                 [ Output
-                    { _name  = "HDMI-0"
+                    { _name  = "HDMI-1"
                     , _state = Configured
-                        { _mode     = Mode (1680, 1050)
+                        { _mode     = Mode (1920, 1080)
                         , _position = (0, 0)
                         , _rotation = RNormal
                         }
                     }
                 , Output
-                    { _name = "DVI-0"
+                    { _name = "DVI-I-1"
                     , _state = Configured
                         { _mode     = Mode (1280, 1024)
-                        , _position = (1680, -230)
+                        , _position = (1920, -200)
                         , _rotation = RLeft
                         }
                     }
                 ]
             )
 
-        ,   (onlyConnected ["DVI-0"],
+        ,   (onlyConnected ["DVI-I-1"],
                 [ Output
-                    { _name = "DVI-0"
+                    { _name = "DVI-I-1"
                     , _state = Configured
                         { _mode     = Mode (1280, 1024)
                         , _position = (0, 0)
@@ -80,6 +80,43 @@ screenSetup "heraklit" =
                     }
                     -- TODO: do this Disconnected-thing when setting only a few
                     -- outputs and leaving others blank
+                ]
+            )
+        ]
+
+
+screenSetup "aristoteles" =
+    condChange
+        [
+            (onlyConnected ["HDMI-0", "DVI-0"],
+                [ Output
+                    { _name  = "HDMI-0"
+                    , _state = Configured
+                        { _mode     = Mode (1680, 1050)
+                        , _position = (0, 0)
+                        , _rotation = RNormal
+                        }
+                    }
+                , Output
+                    { _name = "DVI-0"
+                    , _state = Configured
+                        { _mode     = Mode (1280, 1024)
+                        , _position = (1680, -230)
+                        , _rotation = RLeft
+                        }
+                    }
+                ]
+            )
+
+        ,   (onlyConnected ["DVI-0"],
+                [ Output
+                    { _name = "DVI-0"
+                    , _state = Configured
+                        { _mode     = Mode (1280, 1024)
+                        , _position = (0, 0)
+                        , _rotation = RLeft
+                        }
+                    }
                 ]
             )
         ]
