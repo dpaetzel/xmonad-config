@@ -31,7 +31,7 @@ manageHook' = manageSpawn
     , [manageDocks]
     ])
     <+> manageDocks
-    <+> scratchpadManageHook (W.RationalRect 0 0 1 1)
+    -- <+> scratchpadManageHook (W.RationalRect 0 0 1 1)
     <+> manageHook defaultConfig
 
     where
