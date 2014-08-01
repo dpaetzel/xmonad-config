@@ -7,7 +7,9 @@ import Data.String.Utils
 import System.Environment
 import Text.Regex.Posix
 import XMonad
+import XMonad.Actions.CycleWS
 import XMonad.Actions.SpawnOn
+import qualified XMonad.StackSet as W
 import XMonad.Util.Run
 import qualified XMonad.Util.Dmenu as D
 
@@ -27,7 +29,7 @@ dmenu :: X ()
 dmenu = (io programNames) >>= D.menuArgs "dmenu" dmenuArgs >>= (io . executable) >>= spawnHere
     where
     programNames :: IO [String]
-    programNames = fmap (map (replace ".desktop" "") . splitOn "\n") $ runProcessWithInput "ls" [applicationsPath] []
+    programNames = fmap (map (replace ".desktop" "") . lines) $ runProcessWithInput "ls" [applicationsPath] []
     executable :: String -> IO String
     executable programName = do
         (_, _, _, catch) <- match
@@ -44,7 +46,7 @@ dmenuAll :: X ()
 dmenuAll = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
     where
     programNames :: IO [String]
-    programNames = fmap (sort . splitOn "\n") $ args >>= flip (runProcessWithInput "stest") []
+    programNames = fmap (sort . lines) $ args >>= flip (runProcessWithInput "stest") []
         where
         args :: IO [String]
         args = fmap ("-flx" :) path
@@ -53,8 +55,61 @@ dmenuAll = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
             path = fmap (splitOn ":") $ getEnv "PATH"
 
 
+-- my own scratchpad action (I like toggling workspace more than bringing
+-- window): Toggle terminal workspace and start terminal if not yet existing.
+toggleScratchpad :: X ()
+toggleScratchpad = do
+    stackSet <- fmap windowset get
+    let currentWSTag = W.tag . W.workspace $ W.current stackSet
+    if currentWSTag == "terminal"
+    then toggleWS
+    else (windows $ W.greedyView "terminal") >> (startIfNecessary)
+
+        where
+        startIfNecessary :: X ()
+        startIfNecessary = do
+            stackSet <- fmap windowset get
+            let numberOfWindows = length $ W.index stackSet
+            if numberOfWindows == 0
+            then spawnHere terminal''
+            else return ()
+
+
+-- toggle a workspace (if not there, go there; if there, go to the last one)
+toggle :: String -> X()
+toggle wsName = do
+    stackSet <- fmap windowset get
+    let currentWSTag = W.tag . W.workspace $ W.current stackSet
+    if currentWSTag == wsName
+    then toggleWS
+    else windows $ W.greedyView wsName
+
+
+-- close all windows on all workspaces
+closeAll :: X ()
+closeAll = do
+    stackset <- fmap windowset get
+    let allWindows = W.allWindows stackset
+    mapM_ killWindow allWindows
+
+
+-- poweroff the computer, close windows gracefully before
+shutdown :: X ()
+shutdown = do
+    closeAll
+    spawn "sleep 7 && systemctl poweroff"
+
+
+-- lock screen and suspend the computer
+suspend :: X ()
+suspend = do
+    spawn lockScreen
+    spawn "sleep 3 && systemctl suspend"
+
+
 -- main programs
 terminal'      = "urxvt -uc"
+terminal''     = "urxvt -uc -name terminal -title terminal"
 terminalWith windowName command  = intercalate " " [terminal', "-name", windowName, "-title", windowName, "-e", command]
 documentViewer = "evince"
 browser        = "firefox"

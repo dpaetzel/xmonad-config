@@ -16,7 +16,7 @@ import XMonad.Actions.SpawnOn
 import XMonad.Actions.WindowBringer
 import XMonad.Actions.WithAll
 import XMonad.Hooks.ManageDocks
-import XMonad.Util.Scratchpad
+-- import XMonad.Util.Scratchpad
 import qualified XMonad.StackSet as W
 
 
@@ -82,8 +82,8 @@ keys' host conf = M.fromList $
     , ((appMask, xK_t                                            ), spawn toggleTrayer)
     , ((appMask, xK_F4                                           ), io $ screenSetup host)
     , ((appMask, xK_r                                            ), sendMessage ToggleStruts)
-    -- , ((winMask, xK_Tab                                          ), toggle "terminal")
-    , ((winMask, xK_Tab                                          ), scratchpadSpawnAction conf)
+    , ((winMask, xK_Tab                                          ), toggleScratchpad)
+    -- , ((winMask, xK_Tab                                          ), scratchpadSpawnAction conf)
 
 
     -- go to the next "xinerama" screen
@@ -167,35 +167,3 @@ mouseBindings' _ = M.fromList
     , ((winMask, button3), \w -> focus w >> mouseResizeWindow w
         >> windows W.shiftMaster)
     ]
-
-
--- toggle a workspace (if not there, go there; if there, go to the last one)
-toggle :: String -> X()
-toggle wsName = do
-    stackSet <- fmap windowset get
-    let currentWSTag = W.tag . W.workspace $ W.current stackSet
-    if currentWSTag == wsName
-    then toggleWS
-    else windows $ W.greedyView wsName
-
-
--- close all windows on all workspaces
-closeAll :: X ()
-closeAll = do
-    stackset <- fmap windowset get
-    let allWindows = W.allWindows stackset
-    mapM_ killWindow allWindows
-
-
--- poweroff the computer, close windows gracefully before
-shutdown :: X ()
-shutdown = do
-    closeAll
-    spawn "sleep 7 && systemctl poweroff"
-
-
--- lock screen and suspend the computer
-suspend :: X ()
-suspend = do
-    spawn lockScreen
-    spawn "sleep 3 && systemctl suspend"
