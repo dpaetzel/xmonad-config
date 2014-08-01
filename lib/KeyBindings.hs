@@ -16,7 +16,6 @@ import XMonad.Actions.SpawnOn
 import XMonad.Actions.WindowBringer
 import XMonad.Actions.WithAll
 import XMonad.Hooks.ManageDocks
--- import XMonad.Util.Scratchpad
 import qualified XMonad.StackSet as W
 
 
@@ -83,7 +82,6 @@ keys' host conf = M.fromList $
     , ((appMask, xK_F4                                           ), io $ screenSetup host)
     , ((appMask, xK_r                                            ), sendMessage ToggleStruts)
     , ((winMask, xK_Tab                                          ), toggleScratchpad)
-    -- , ((winMask, xK_Tab                                          ), scratchpadSpawnAction conf)
 
 
     -- go to the next "xinerama" screen
