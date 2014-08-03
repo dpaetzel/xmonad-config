@@ -29,17 +29,26 @@ dmenu :: X ()
 dmenu = (io programNames) >>= D.menuArgs "dmenu" dmenuArgs >>= (io . executable) >>= spawnHere
     where
     programNames :: IO [String]
-    programNames = fmap (map (replace ".desktop" "") . lines) $ runProcessWithInput "ls" [applicationsPath] []
+    programNames = fmap (map removeSuffix . onlyDesktopFiles . lines) $ lsApplicationsPath
+        where
+        lsApplicationsPath :: IO String
+        lsApplicationsPath = runProcessWithInput "ls" [applicationsPath] []
+        onlyDesktopFiles :: [String] -> [String]
+        onlyDesktopFiles = filter (=~ ".*\\.desktop")
+        removeSuffix :: String -> String
+        removeSuffix = replace ".desktop" ""
+
     executable :: String -> IO String
     executable programName = do
         (_, _, _, catch) <- match
         return $ head catch
-
-        where
-        match :: IO (String, String, String, [String])
-        match = fmap (=~ regex) $ readFile (applicationsPath ++ programName ++ ".desktop")
-        regex :: String
-        regex = "\nExec=([^%]*)( .*\n|\n)"
+            where
+            match :: IO (String, String, String, [String])
+            match = fmap (command . execLine . lines) $ readFile (applicationsPath ++ programName ++ ".desktop")
+            execLine :: [String] -> String
+            execLine = head . filter (=~ "^Exec=.*$")
+            command :: String -> (String, String, String, [String])
+            command = (=~ "Exec=([^%]*)( |$)")
 
 
 dmenuAll :: X ()
