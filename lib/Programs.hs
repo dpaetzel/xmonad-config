@@ -105,8 +105,19 @@ closeAll = do
 -- poweroff the computer, close windows gracefully before
 shutdown :: X ()
 shutdown = do
+    spawn outReset
     closeAll
-    spawn "sleep 7 && systemctl poweroff"
+    spawn shutdownSound
+    spawn "sleep 9 && systemctl poweroff"
+
+
+-- reboot the computer, close windows gracefully before
+reboot :: X ()
+reboot = do
+    spawn outReset
+    closeAll
+    spawn shutdownSound
+    spawn "sleep 9 && systemctl reboot"
 
 
 -- lock screen and suspend the computer
@@ -138,23 +149,26 @@ ejectTray     = "eject"
 insertTray    = "eject -t"
 lockScreen    = "xscreensaver-command -lock"
 powerTop      = terminalWith "powertop" "sudo powertop"
-putAwayMouse  = "xdotool mousemove 1680 1280"
+putAwayMouse  = "xdotool mousemove 0 1280"
 scrotWin      = "sleep 0.2; scrot -s -e \'mv $f ~/Pictures/screenshots/not-yet-archived/\'"
 scrotFull     = "scrot -e \'mv $f ~/Pictures/screenshots/not-yet-archived/\'"
 xKill         = "xkill"
 
 
 -- sound
-inToggle    = "amixer sset 'Capture' toggle"
-outUp       = "~/Share/bin/sound/change_volume.sh +3%"
-outDown     = "~/Share/bin/sound/change_volume.sh -3%"
-outToggle   = "~/Share/bin/sound/change_volume.sh %"
--- outUp       = "~/Share/git/hasu/Volume/volume +"
--- outDown     = "~/Share/git/hasu/Volume/volume -"
--- outToggle   = "~/Share/git/hasu/Volume/volume %"
-pavuControl = "pavucontrol"
-equalizer   = "pulseaudio-equalizer-gtk"
-applause    = "mplayer -endpos 3 ~/Music/effects/applause.mp3"
+inToggle      = "amixer sset 'Capture' toggle"
+outUp         = "~/Share/bin/sound/change_volume.sh +3%"
+outDown       = "~/Share/bin/sound/change_volume.sh -3%"
+outToggle     = "~/Share/bin/sound/change_volume.sh %"
+outReset      = "~/Share/bin/sound/change_volume.sh 17%"
+-- outUp         = "~/Share/git/hasu/Volume/volume +"
+-- outDown       = "~/Share/git/hasu/Volume/volume -"
+-- outToggle     = "~/Share/git/hasu/Volume/volume %"
+pavuControl   = "pavucontrol"
+equalizer     = "pulseaudio-equalizer-gtk"
+applause      = "mplayer -endpos 3 ~/Music/effects/applause.mp3"
+startupSound  = "mplayer ~/Share/confs/sound/borealis/Startup1_2.wav"
+shutdownSound = "mplayer ~/Share/confs/sound/borealis/Exit1_1.wav"
 
 
 -- media
@@ -177,6 +191,7 @@ toggleTrayer  = "~/Share/bin/user_interface/toggle_trayer.sh"
 conky             = "conky"
 dropbox           = "dropbox start"
 dunst             = "dunst -print >> ~/.dunst.log"
+jabberClient      = "padsp gajim"
 htop              = terminalWith "htop" "htop -u $USER"
 -- kbLayout          = "setxkbmap -layout \"us, de\" -option \"grp:caps_toggle\""
 mousePointer      = "xsetroot -cursor_name left_ptr"

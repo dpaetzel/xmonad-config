@@ -17,6 +17,7 @@ import XMonad.Actions.WindowBringer
 import XMonad.Actions.WithAll
 import XMonad.Hooks.ManageDocks
 import qualified XMonad.StackSet as W
+import XMonad.Util.Paste
 
 
 import Programs
@@ -50,6 +51,7 @@ keys' host conf = M.fromList $
     , ((appMask, xK_Delete                                       ), spawn ejectTray)
     , ((appMask, xK_Insert                                       ), spawn insertTray)
     , ((appMask, xK_l                                            ), spawn lockScreen)
+    , ((0, xK_Insert                                             ), pasteSelection)
     , ((appMask, xK_b                                            ), spawn powerTop)
     , ((winMask, xK_a                                            ), spawn putAwayMouse)
     , ((appMask, xK_Print                                        ), spawn scrotWin)
@@ -133,6 +135,8 @@ keys' host conf = M.fromList $
     , ((winMask, xK_Delete                                       ), suspend)
     -- Shutdown computer
     , ((winMask .|. shiftMask, xK_Delete                         ), shutdown)
+    -- Reboot computer
+    , ((winMask .|. shiftMask, xK_Insert                         ), reboot)
     ]
     ++
 

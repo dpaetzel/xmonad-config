@@ -19,10 +19,10 @@ manageHook' = manageSpawn
     -- , [anyQuery x --> doShift "vnc"       | x <- vnc]
     , [anyQuery x --> doShift "7:media"      | x <- media]
     , [anyQuery x --> doShift "10:trash"     | x <- trash]
-    -- , [anyQuery x --> doCenterFloat          | x <- center]
     , [anyQuery x --> doFloat                | x <- float' ++ java]
 
     , [x --> doFloat            | x <- splash ++ float]
+    , [x --> doCenterFloat      | x <- centerFloat]
     , [x --> doShift "1:web"    | x <- web]
     , [x --> doShift "8:chat"   | x <- chat]
     , [x --> doShift "9:top"    | x <- top]
@@ -40,7 +40,6 @@ manageHook' = manageSpawn
         -- web'      = ["Firefox", "Chromium", "Google-chrome", "Chromium-browser"]
         dev      = ["Eclipse"]
         float'   = ["File Transfers", "java", "Steam", "dota_linux", "mandelbrot"]
-        center   = ["MPlayer", "Plugin-container"]
         media    = ["youtube-viewer", "musicPlayer", "spotify"] --, "plugin-container"]
         vnc      = ["vncviewer", "vinagre"]
         java     = ["Intelligent SpeedMeter", "sun-awt-X11-XFramePeer", "Main", "MeinProgramm",
@@ -51,6 +50,10 @@ manageHook' = manageSpawn
         float =
             [ title =? "Firefox Preferences"
             , title =? "Tab Mix Plus Options"
+            ]
+        -- those not floating centered go here
+        centerFloat =
+            [ title =? "FoxyProxy Standard"
             ]
         splash = [title =? "Wireshark"]
         top =

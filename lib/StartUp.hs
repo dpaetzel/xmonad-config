@@ -22,8 +22,8 @@ startupHook' host = do
     setWMName "LG3D"
 
     -- screen configuration
-    setDefaultCursor xC_left_ptr
     xfork $ screenSetup host
+    setDefaultCursor xC_left_ptr
     spawn myBackground
 
     spawnOnce unclutter
@@ -44,10 +44,14 @@ startupHook' host = do
     spawnOnce browser
     -- spawnOnce musicPlayer
     spawnOnceSleep 5 htop
+    spawnOnceSleep 10 jabberClient
     spawnOnceSleep 10 ircClient
 
+    -- startup sound (not good here, because of reconfiguration)
+    -- spawn startupSound
+
     -- start host specific things
-    spawnOnceSleepOn 7 dropbox "aristoteles"
+    -- spawnOnceSleepOn 7 dropbox "aristoteles"
 
     where
         spawnOnceSleep :: Double -> String -> X ()

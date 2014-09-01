@@ -47,4 +47,4 @@ layoutHook' =
         -- Percent of screen to increment by when resizing panes
         delta   = 3/100
         -- Instant Messaging layout
-        im = withIM (1/10) (ClassName "skype") Full
+        im = withIM (1/8) (Role "roster") Grid
