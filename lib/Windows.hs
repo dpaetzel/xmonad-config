@@ -15,11 +15,11 @@ manageHook' = manageSpawn
     [ [anyQuery x --> doIgnore               | x <- ignore]
     , [anyQuery x --> doShift "0:email"      | x <- email]
     , [anyQuery x --> doShift "2"            | x <- dev]
-    , [anyQuery x --> doShift "3"            | x <- java]
+    -- , [anyQuery x --> doShift "3"            | x <- java]
     -- , [anyQuery x --> doShift "vnc"       | x <- vnc]
     , [anyQuery x --> doShift "7:media"      | x <- media]
     , [anyQuery x --> doShift "10:trash"     | x <- trash]
-    , [anyQuery x --> doFloat                | x <- float' ++ java]
+    , [anyQuery x --> doFloat                | x <- float'] -- ++ java]
 
     , [x --> doFloat            | x <- splash ++ float]
     , [x --> doCenterFloat      | x <- centerFloat]

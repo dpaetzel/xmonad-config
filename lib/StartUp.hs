@@ -17,45 +17,54 @@ import ScreenSetup
 
 -- startup
 startupHook' :: String -> X ()
-startupHook' host = do
-    -- don't know why i do this
-    setWMName "LG3D"
+startupHook' host = case host of
 
-    -- screen configuration
-    xfork $ screenSetup host
-    setDefaultCursor xC_left_ptr
-    spawn myBackground
 
-    spawnOnce unclutter
-    spawnOnce xcompmgr
-    spawnOnce xflux
-    spawnOnce xscreensaver
+    "anaxagoras" -> do
 
-    -- other configuration
-    spawnOnce pulseaudio
-    spawnOnce noBell
-    spawnOnce xmodmap
-    spawnOnce dunst
-    spawnOnceSleep 2 conky
+        -- spawnOnce musicPlayer
+        spawnOnceSleep 10 jabberClient
+        spawnOnceSleep 10 ircClient
 
-    -- start clients
-    spawnOnce offlineimap
-    spawnOnce mailClient
-    spawnOnce browser
-    -- spawnOnce musicPlayer
-    spawnOnceSleep 5 htop
-    spawnOnceSleep 10 jabberClient
-    spawnOnceSleep 10 ircClient
+        defaultStartupHook
 
-    -- startup sound (not good here, because of reconfiguration)
-    -- spawn startupSound
 
-    -- start host specific things
-    -- spawnOnceSleepOn 7 dropbox "aristoteles"
+    "heraklit" -> do
+
+        -- screen configuration
+        xfork $ screenSetup host
+
+        defaultStartupHook
+
+
+    _ -> defaultStartupHook
 
     where
         spawnOnceSleep :: Double -> String -> X ()
         spawnOnceSleep t = spawnOnce . printf "sh -c 'sleep %f; exec %s'" (t :: Double)
 
-        spawnOnceSleepOn :: Double -> String -> String -> X ()
-        spawnOnceSleepOn t runOnHost = when (runOnHost == host) . spawnOnceSleep t
+        defaultStartupHook :: X ()
+        defaultStartupHook = do
+
+            -- don't know why i do this
+            setWMName "LG3D"
+
+            -- look and feel
+            spawn myBackground
+            setDefaultCursor xC_left_ptr
+            spawnOnce dunst
+            spawnOnce xcompmgr
+            spawnOnce xscreensaver
+            spawnOnce xmodmap
+            spawnOnce unclutter
+            spawnOnce xflux
+            -- spawnOnce pulseaudio -- started via xinitrc
+            spawnOnce noBell
+            spawnOnceSleep 2 conky
+
+            -- start applications
+            spawnOnce offlineimap
+            spawnOnce mailClient
+            spawnOnce browser
+
+            spawnOnceSleep 5 htop

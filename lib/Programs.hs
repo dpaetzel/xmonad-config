@@ -3,7 +3,6 @@ module Programs where
 
 import Data.List
 import Data.List.Split
-import Data.String.Utils
 import System.Environment
 import Text.Regex.Posix
 import XMonad
@@ -36,7 +35,7 @@ dmenu = (io programNames) >>= D.menuArgs "dmenu" dmenuArgs >>= (io . executable)
         onlyDesktopFiles :: [String] -> [String]
         onlyDesktopFiles = filter (=~ ".*\\.desktop")
         removeSuffix :: String -> String
-        removeSuffix = replace ".desktop" ""
+        removeSuffix = reverse . drop 8 . reverse
 
     executable :: String -> IO String
     executable programName = do
@@ -150,7 +149,7 @@ insertTray    = "eject -t"
 lockScreen    = "xscreensaver-command -lock"
 powerTop      = terminalWith "powertop" "sudo powertop"
 putAwayMouse  = "xdotool mousemove 0 1280"
-scrotWin      = "sleep 0.2; scrot -s -e \'mv $f ~/Pictures/screenshots/not-yet-archived/\'"
+scrotWin      = "sleep 0.2; scrot -s -e \'gimp $f\'"
 scrotFull     = "scrot -e \'mv $f ~/Pictures/screenshots/not-yet-archived/\'"
 xKill         = "xkill"
 
@@ -160,7 +159,7 @@ inToggle      = "amixer sset 'Capture' toggle"
 outUp         = "~/Share/bin/sound/change_volume.sh +3%"
 outDown       = "~/Share/bin/sound/change_volume.sh -3%"
 outToggle     = "~/Share/bin/sound/change_volume.sh %"
-outReset      = "~/Share/bin/sound/change_volume.sh 17%"
+outReset      = "~/Share/bin/sound/change_volume.sh 20%"
 -- outUp         = "~/Share/git/hasu/Volume/volume +"
 -- outDown       = "~/Share/git/hasu/Volume/volume -"
 -- outToggle     = "~/Share/git/hasu/Volume/volume %"
