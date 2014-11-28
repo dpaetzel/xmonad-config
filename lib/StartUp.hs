@@ -56,6 +56,7 @@ startupHook' host = case host of
             spawnOnce xcompmgr
             spawnOnce xscreensaver
             spawnOnce xmodmap
+            spawnOnce japaneseInput
             spawnOnce unclutter
             spawnOnce xflux
             -- spawnOnce pulseaudio -- started via xinitrc
