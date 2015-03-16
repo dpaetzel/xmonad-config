@@ -40,7 +40,7 @@ keys' host conf = M.fromList $
     , ((appMask, xK_e                                            ), spawnHere fileManager)
     , ((appMask, xK_i                                            ), spawn     ircClient)
     , ((appMask, xK_y                                            ), spawn     youtubeViewer)
-    , ((appMask, xK_u                                            ), spawnHere todo)
+    , ((appMask, xK_u                                            ), spawnHere scratch)
     , ((appMask, xK_j                                            ), spawnHere jiu)
 
 
@@ -51,7 +51,6 @@ keys' host conf = M.fromList $
     , ((appMask, xK_Delete                                       ), spawn ejectTray)
     , ((appMask, xK_Insert                                       ), spawn insertTray)
     , ((appMask, xK_l                                            ), spawn lockScreen)
-    , ((0, xK_Insert                                             ), pasteSelection)
     , ((appMask, xK_b                                            ), spawn powerTop)
     , ((winMask, xK_a                                            ), spawn putAwayMouse)
     , ((appMask, xK_Print                                        ), spawn scrotWin)
