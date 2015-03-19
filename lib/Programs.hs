@@ -207,6 +207,6 @@ singleColorbg     = "xsetroot -solid black"
 -- trayer            = toggleTrayer
 unclutter         = "unclutter -idle 5 -root"
 xcompmgr          = "xcompmgr"
-xflux             = "xflux -l 48.3714407 -g 10.8982552 -k 4000"
+xflux             = "xflux -l 48.3 -g 10.9 -k 4000"
 xmodmap           = "xmodmap ~/.Xmodmap"
 xscreensaver      = "xscreensaver -no-splash"
