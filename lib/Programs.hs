@@ -139,7 +139,7 @@ musicPlayer    = "spotify"
 mailClient     = terminalWith "mailClient" "mutt"
 fileManager    = "thunar"
 ircClient      = terminalWith "ircClient" "weechat"
-todo           = intercalate " " [editor, "~/Todo/todo.org"]
+scratch        = intercalate " " [editor, "~/Documents/general.org"]
 jiu            = intercalate " " [editor, "~/Documents/jiu/jiu.org"]
 
 
@@ -161,7 +161,7 @@ inToggle      = "amixer sset 'Capture' toggle"
 outUp         = "~/Share/bin/sound/change_volume.sh +3%"
 outDown       = "~/Share/bin/sound/change_volume.sh -3%"
 outToggle     = "~/Share/bin/sound/change_volume.sh %"
-outReset      = "~/Share/bin/sound/change_volume.sh 20%"
+outReset      = "~/Share/bin/sound/change_volume.sh 30%"
 -- outUp         = "~/Share/git/hasu/Volume/volume +"
 -- outDown       = "~/Share/git/hasu/Volume/volume -"
 -- outToggle     = "~/Share/git/hasu/Volume/volume %"
