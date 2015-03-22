@@ -204,6 +204,7 @@ noBell            = "xset -b"
 offlineimap       = terminalWith "offlineimap" "offlineimap"
 pulseaudio        = "start-pulseaudio-x11"
 singleColorbg     = "xsetroot -solid black"
+telegram          = "telegram"
 -- trayer            = toggleTrayer
 unclutter         = "unclutter -idle 5 -root"
 xcompmgr          = "xcompmgr"
