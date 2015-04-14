@@ -59,8 +59,8 @@ startupHook' host = case host of
             spawnOnce japaneseInput
             spawnOnce unclutter
             spawnOnce xflux
-            -- spawnOnce pulseaudio -- started via xinitrc
             spawnOnce noBell
+            spawnOnce nmApplet
             spawnOnceSleep 2 conky
 
             -- start applications
