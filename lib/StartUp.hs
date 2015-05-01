@@ -24,6 +24,7 @@ startupHook' host = case host of
 
         -- spawnOnce musicPlayer
         spawnOnceSleep 10 jabberClient
+        spawnOnceSleep 10 telegramClient
         spawnOnceSleep 10 ircClient
 
         defaultStartupHook

@@ -64,6 +64,7 @@ manageHook' = manageSpawn
             [ title     =? "ircClient"
             , className =? "Skype"
             , className =? "Pidgin"
+            , className =? "Telegram"
             , className =? "Gajim"
             ]
         web =
