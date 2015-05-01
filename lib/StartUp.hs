@@ -34,8 +34,7 @@ startupHook' host = case host of
 
         -- screen configuration
         xfork $ screenSetup host
-        -- no jabber, but telegram
-        spawnOnceSleep 10 telegram
+        spawnOnceSleep 10 telegramClient
 
         defaultStartupHook
 
