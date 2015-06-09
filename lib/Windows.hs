@@ -50,6 +50,8 @@ manageHook' = manageSpawn
         float =
             [ title =? "Firefox Preferences"
             , title =? "Tab Mix Plus Options"
+            , className =? "sun-awt-X11-XDialogPeer"
+            , className =? "scalafx.application.AppHelper"
             ]
         -- those not floating centered go here
         centerFloat =
