@@ -48,10 +48,11 @@ manageHook' = manageSpawn
 
 
         float =
-            [ title =? "Firefox Preferences"
-            , title =? "Tab Mix Plus Options"
+            [ title     =? "Firefox Preferences"
+            , title     =? "Tab Mix Plus Options"
+            , className =? "scalafx.application.AppHelper"
             ]
-        -- those not floating centered go here
+        -- those not floating centered by default go here
         centerFloat =
             [ title =? "FoxyProxy Standard"
             ]

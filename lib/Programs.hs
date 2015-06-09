@@ -3,14 +3,21 @@ module Programs where
 
 import Data.List
 import Data.List.Split
+import Data.Time
+import System.Directory
 import System.Environment
 import Text.Regex.Posix
 import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Actions.SpawnOn
-import qualified XMonad.StackSet as W
+import XMonad.Prompt
+import XMonad.Prompt.AppendFile
 import XMonad.Util.Run
+import qualified XMonad.StackSet as W
 import qualified XMonad.Util.Dmenu as D
+
+
+-- TODO add proper user directory usage (do not use "~", rather use getHomeDirectory
 
 
 dmenuArgs :: [String]
@@ -61,6 +68,28 @@ dmenuAll = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
             where
             path :: IO [String]
             path = fmap (splitOn ":") $ getEnv "PATH"
+
+
+addInNote :: X ()
+addInNote = do
+    io appendDate
+    io filename >>= appendFilePrompt myXPConfig
+      where
+      appendDate :: IO ()
+      appendDate = do
+          f <- filename
+          d <- currentDate
+          appendFile f (d ++ " ")
+      currentDate :: IO String
+      currentDate = fmap (show . utctDay) getCurrentTime
+      filename :: IO String
+      filename = fmap (++ "/in") getHomeDirectory
+      myXPConfig = defaultXPConfig {
+          bgColor = "#000000",
+          fgColor = "#ffffff",
+          font = "xft: Inconsolata-14:normal",
+          promptBorderWidth = 0
+      }
 
 
 -- my own scratchpad action (I like toggling workspace more than bringing
@@ -129,7 +158,7 @@ suspend = do
 -- main programs
 terminal'      = "urxvt -uc"
 terminal''     = "urxvt -uc -name terminal -title terminal"
-terminalWith windowName command  = intercalate " " [terminal', "-name", windowName, "-title", windowName, "-e", command]
+terminalWith windowName command  = unwords [terminal', "-name", windowName, "-title", windowName, "-e", command]
 -- documentViewer = "evince"
 documentViewer = "zathura"
 browser        = "firefox"
@@ -139,8 +168,9 @@ musicPlayer    = "spotify"
 mailClient     = terminalWith "mailClient" "mutt"
 fileManager    = "thunar"
 ircClient      = terminalWith "ircClient" "weechat"
-scratch        = intercalate " " [editor, "~/Documents/general.org"]
-jiu            = intercalate " " [editor, "~/Documents/jiu/jiu.org"]
+jiu            = unwords [editor, "~/Documents/jiu/jiu.org"]
+gtd            = unwords [editor, "~/todo.org"]
+gtdIn          = unwords [editor, "~/in"]
 
 
 -- util
