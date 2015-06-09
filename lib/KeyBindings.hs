@@ -40,8 +40,10 @@ keys' host conf = M.fromList $
     , ((appMask, xK_e                                            ), spawnHere fileManager)
     , ((appMask, xK_i                                            ), spawn     ircClient)
     , ((appMask, xK_y                                            ), spawn     youtubeViewer)
-    , ((appMask, xK_u                                            ), spawnHere scratch)
+    , ((appMask, xK_u                                            ), spawnHere gtd)
     , ((appMask, xK_j                                            ), spawnHere jiu)
+    , ((appMask, xK_Return                                       ), addInNote)
+    , ((appMask .|. shiftMask, xK_Return                         ), spawnHere gtdIn)
 
 
     -- util
