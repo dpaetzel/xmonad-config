@@ -188,10 +188,10 @@ xKill         = "xkill"
 
 -- sound
 inToggle      = "amixer sset 'Capture' toggle"
-outUp         = "~/Share/bin/sound/change_volume.sh +3%"
-outDown       = "~/Share/bin/sound/change_volume.sh -3%"
-outToggle     = "~/Share/bin/sound/change_volume.sh %"
-outReset      = "~/Share/bin/sound/change_volume.sh 30%"
+outUp         = "~/Bin/sound/change_volume.sh +3%"
+outDown       = "~/Bin/sound/change_volume.sh -3%"
+outToggle     = "~/Bin/sound/change_volume.sh %"
+outReset      = "~/Bin/sound/change_volume.sh 30%"
 -- outUp         = "~/Share/git/hasu/Volume/volume +"
 -- outDown       = "~/Share/git/hasu/Volume/volume -"
 -- outToggle     = "~/Share/git/hasu/Volume/volume %"
@@ -206,16 +206,16 @@ shutdownSound = "mplayer ~/Share/confs/sound/borealis/Exit1_1.wav"
 mocNext       = "mocp -f"
 mocPrev       = "mocp -r"
 mocPlay       = "mocp -G"
-spotifyCtl    = ("~/Share/bin/user_interface/spotifyctl.sh " ++)
--- next          = "if (pgrep mocp); then mocp -f; else ~/Share/bin/spotify_control next; fi"
--- prev          = "if (pgrep mocp); then mocp -r; else ~/Share/bin/spotify_control previous; fi"
--- pause         = "if (pgrep mocp); then mocp -f; else ~/Share/bin/spotify_control playpause; fi"
+spotifyCtl    = ("~/Bin/user_interface/spotifyctl.sh " ++)
+-- next          = "if (pgrep mocp); then mocp -f; else ~/Bin/spotify_control next; fi"
+-- prev          = "if (pgrep mocp); then mocp -r; else ~/Bin/spotify_control previous; fi"
+-- pause         = "if (pgrep mocp); then mocp -f; else ~/Bin/spotify_control playpause; fi"
 youtubeViewer = terminalWith "youtube-viewer" "youtube-viewer"
 spotify        = "spotify"
 
 
 -- other
-toggleTrayer  = "~/Share/bin/user_interface/toggle_trayer.sh"
+toggleTrayer  = "~/Bin/user_interface/toggle_trayer.sh"
 
 
 -- TODO: make list and map over it in startuphook!
@@ -229,7 +229,7 @@ japaneseInput     = "fcitx"
 htop              = terminalWith "htop" "htop -u $USER"
 -- kbLayout          = "setxkbmap -layout \"us, de\" -option \"grp:caps_toggle\""
 mousePointer      = "xsetroot -cursor_name left_ptr"
-myBackground      = "~/Share/bin/bg-set"
+myBackground      = "~/Bin/bg-set"
 nmApplet          = "nm-applet"
 noBell            = "xset -b"
 offlineimap       = terminalWith "offlineimap" "offlineimap"
