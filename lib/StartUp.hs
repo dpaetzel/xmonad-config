@@ -3,13 +3,11 @@ module StartUp where
 
 import Control.Concurrent
 import Control.Monad (when)
--- import System.Posix.Unistd
-import Text.Printf
 import XMonad
 import XMonad.Hooks.SetWMName
 import XMonad.Util.Cursor
--- import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
+
 
 import Programs
 import ScreenSetup
@@ -19,32 +17,29 @@ import ScreenSetup
 startupHook' :: String -> X ()
 startupHook' host = case host of
 
-
+    -- {{{ anaxagoras specific
     "anaxagoras" -> do
 
-        -- spawnOnce musicPlayer
-        spawnOnceSleep 10 jabberClient
-        spawnOnceSleep 10 telegramClient
-        spawnOnceSleep 10 ircClient
+        spawnOnceSleep 10 "pidgin"
+        -- TODO wrote "weechat" twice
+        onceInTerminalWithNameSleep 10 "ircClient" "weechat"
 
         defaultStartupHook
+    -- }}}
 
-
+    -- {{{ heraklit specific
     "heraklit" -> do
 
         -- screen configuration
         xfork $ screenSetup host
-        spawnOnceSleep 10 telegramClient
 
         defaultStartupHook
+    -- }}}
 
-
+    -- {{{ default
     _ -> defaultStartupHook
 
     where
-        spawnOnceSleep :: Double -> String -> X ()
-        spawnOnceSleep t = spawnOnce . printf "sh -c 'sleep %f; exec %s'" (t :: Double)
-
         defaultStartupHook :: X ()
         defaultStartupHook = do
 
@@ -52,22 +47,27 @@ startupHook' host = case host of
             setWMName "LG3D"
 
             -- look and feel
-            spawn myBackground
+            home "Bin/bg-set" >>= spawn
             setDefaultCursor xC_left_ptr
-            spawnOnce dunst
-            spawnOnce xcompmgr
-            spawnOnce xscreensaver
-            spawnOnce xmodmap
-            spawnOnce japaneseInput
-            spawnOnce unclutter
-            spawnOnce xflux
-            spawnOnce noBell
-            spawnOnce nmApplet
-            spawnOnceSleep 2 conky
+            spawnOnce "dunst -print >> ~/.dunst.log"
+            spawnOnce "xcompmgr"
+            spawnOnce "xscreensaver -no-splash"
+            spawnOnce "xmodmap ~/.Xmodmap"
+            spawnOnce "fcitx"
+            spawnOnce "unclutter -idle 5 -root"
+            spawnOnce "xflux -l 48.3 -g 10.9 -k 4000"
+            spawnOnce "xset -b"
+            spawnOnce "nm-applet"
+            spawnOnceSleep 2 "conky"
 
             -- start applications
-            spawnOnce offlineimap
-            spawnOnce mailClient
-            spawnOnce browser
+            offlineimap
+            mailClient
+            browser
 
-            spawnOnceSleep 5 htop
+            onceInTerminalWithNameSleep 5 "htop" "htop -u david"
+            spawnOnceSleep 10 "telegram"
+    -- }}}
+
+
+-- vim: foldmethod=marker:

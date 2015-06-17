@@ -40,7 +40,7 @@ main = do
         . ewmh
         . withUrgencyHook NoUrgencyHook
         $ defaultConfig
-            { terminal           = terminal'
+            { terminal           = terminalName
             , focusFollowsMouse  = focusFollowsMouse'
             , modMask            = winMask
             , workspaces         = workspaces'

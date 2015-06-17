@@ -33,55 +33,48 @@ appMask = mod4Mask
 keys' host conf = M.fromList $
 
     -- main programs
-    [ ((winMask, xK_Return                                       ), spawnHere terminal')
-    , ((winMask .|. shiftMask, xK_Return                         ), spawnHere editor)
-    , ((appMask, xK_o                                            ), spawnHere documentViewer)
-    , ((appMask, xK_p                                            ), spawn     musicPlayer)
-    , ((appMask, xK_e                                            ), spawnHere fileManager)
-    , ((appMask, xK_i                                            ), spawn     ircClient)
-    , ((appMask, xK_y                                            ), spawn     youtubeViewer)
-    , ((appMask, xK_u                                            ), spawnHere gtd)
-    , ((appMask, xK_j                                            ), spawnHere jiu)
+    [ ((winMask, xK_Return                                       ), runTerminal)
+    , ((winMask .|. shiftMask, xK_Return                         ), editor)
+    , ((appMask, xK_o                                            ), documentViewer)
+    , ((appMask, xK_minus                                        ), dmenuProjectOrg)
+    , ((appMask, xK_e                                            ), fileManager)
+    , ((appMask, xK_y                                            ), youtubeViewer)
+    , ((appMask, xK_u                                            ), gtd)
+    , ((appMask, xK_j                                            ), jiu)
     , ((appMask, xK_Return                                       ), addInNote)
-    , ((appMask .|. shiftMask, xK_Return                         ), spawnHere gtdIn)
+    , ((appMask .|. shiftMask, xK_Return                         ), gtdIn)
 
 
     -- util
     , ((appMask, xK_space                                        ), dmenu)
     , ((appMask .|. shiftMask, xK_space                          ), dmenuAll)
-    , ((appMask, xK_d                                            ), spawn dropboxToggle)
-    , ((appMask, xK_Delete                                       ), spawn ejectTray)
-    , ((appMask, xK_Insert                                       ), spawn insertTray)
-    , ((appMask, xK_l                                            ), spawn lockScreen)
-    , ((appMask, xK_b                                            ), spawn powerTop)
-    , ((winMask, xK_a                                            ), spawn putAwayMouse)
-    , ((appMask, xK_Print                                        ), spawn scrotWin)
-    , ((0, xK_Print                                              ), spawn scrotFull)
-    , ((appMask, xK_k                                            ), spawn xKill)
+    , ((appMask, xK_Delete                                       ), ejectTray)
+    , ((appMask, xK_Insert                                       ), insertTray)
+    , ((appMask, xK_l                                            ), lockScreen)
+    , ((appMask, xK_b                                            ), powerTop)
+    , ((winMask, xK_a                                            ), putAwayMouse)
+    , ((appMask, xK_Print                                        ), scrotWin)
+    , ((0, xK_Print                                              ), scrotFull)
+    , ((appMask, xK_k                                            ), xKill)
 
 
     -- sound
-    , ((appMask, xK_Home                                         ), spawn       inToggle)
-    , ((appMask, xK_End                                          ), spawn       outToggle)
-    , ((0, xF86XK_AudioRaiseVolume                               ), spawn       outUp)
-    , ((0, xF86XK_AudioLowerVolume                               ), spawn       outDown)
-    , ((0, xF86XK_AudioMute                                      ), mapM_ spawn [outToggle, inToggle])
-    , ((appMask, xK_m                                            ), spawnHere   pavuControl)
-    , ((appMask, xK_q                                            ), spawnHere   equalizer)
-    , ((appMask, xK_Page_Up                                      ), spawn       applause)
+    , ((appMask, xK_Home                                         ), inToggle)
+    , ((appMask, xK_End                                          ), outToggle)
+    , ((0, xF86XK_AudioRaiseVolume                               ), outUp)
+    , ((0, xF86XK_AudioLowerVolume                               ), outDown)
+    , ((0, xF86XK_AudioMute                                      ), sequence_ [outToggle, inToggle])
+    , ((appMask, xK_m                                            ), pavuControl)
+    , ((appMask, xK_q                                            ), equalizer)
 
 
     -- music
-    -- , ((0, xF86XK_AudioNext                                   ), spawn mocNext)
-    , ((0, xF86XK_AudioNext                                      ), spawn . spotifyCtl $ "next")
-    -- , ((0, xF86XK_AudioPrev                                   ), spawn mocPrev)
-    , ((0, xF86XK_AudioPrev                                      ), spawn . spotifyCtl $ "previous")
-    -- , ((0, xF86XK_AudioPlay                                   ), spawn mocPlay)
-    , ((0, xF86XK_AudioPlay                                      ), spawn . spotifyCtl $ "playpause")
+    , ((0, xF86XK_AudioNext                                      ), spotifyCtl $ "next")
+    , ((0, xF86XK_AudioPrev                                      ), spotifyCtl $ "previous")
+    , ((0, xF86XK_AudioPlay                                      ), spotifyCtl $ "playpause")
 
 
     -- other
-    , ((appMask, xK_t                                            ), spawn toggleTrayer)
     , ((appMask, xK_F4                                           ), io $ screenSetup host)
     , ((appMask, xK_r                                            ), sendMessage ToggleStruts)
     , ((winMask, xK_Tab                                          ), toggleScratchpad)
