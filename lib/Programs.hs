@@ -100,26 +100,28 @@ dmenuProjectOrg = projectNames >>= D.menuArgs "dmenu" dmenuArgs >>= openInEditor
     openInEditor name = editorWith =<< toOrgFile name
 
 
-addInNote :: X ()
-addInNote = do
-    io appendDate
-    io filename >>= appendFilePrompt myXPConfig
-      where
-      appendDate :: IO ()
-      appendDate = do
-          f <- filename
-          d <- currentDate
-          appendFile f (d ++ " ")
-      currentDate :: IO String
-      currentDate = fmap (show . utctDay) getCurrentTime
-      filename :: IO String
-      filename = fmap (++ "/in") getHomeDirectory
-      myXPConfig = defaultXPConfig {
-          bgColor = "#000000",
-          fgColor = "#ffffff",
-          font = "xft: Inconsolata-14:normal",
-          promptBorderWidth = 0
-      }
+data Note = Note
+instance XPrompt Note where
+    showXPrompt Note = "in < "
+
+
+addNote :: X ()
+addNote = mkXPrompt Note myXPConfig complFun appendToIn
+    where
+    complFun :: String -> IO [String]
+    complFun = return . const []
+    appendToIn :: String -> X ()
+    appendToIn "" = return ()
+    appendToIn note = io $ do
+        date <- fmap (show . utctDay) getCurrentTime
+        file <- fmap (++ "/in") getHomeDirectory
+        appendFile file (date ++ " " ++ note ++ "\n")
+    myXPConfig = defaultXPConfig {
+        bgColor = "#000000",
+        fgColor = "#ffffff",
+        font = "xft: Inconsolata-14:normal",
+        promptBorderWidth = 0
+    }
 
 
 -- my own scratchpad action (I like toggling workspace more than bringing

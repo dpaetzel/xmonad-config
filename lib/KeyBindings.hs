@@ -41,7 +41,7 @@ keys' host conf = M.fromList $
     , ((appMask, xK_y                                            ), youtubeViewer)
     , ((appMask, xK_u                                            ), gtd)
     , ((appMask, xK_j                                            ), jiu)
-    , ((appMask, xK_Return                                       ), addInNote)
+    , ((appMask, xK_Return                                       ), addNote)
     , ((appMask .|. shiftMask, xK_Return                         ), gtdIn)
 
 
