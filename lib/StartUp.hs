@@ -61,10 +61,9 @@ startupHook' host = case host of
             spawnOnceSleep 2 "conky"
 
             -- start applications
-            offlineimap
-            mailClient
-            browser
-
+            withTerminalWithName spawnOnce "offlineimap" "offlineimap"
+            withTerminalWithName spawnOnce "mailClient" "mutt"
+            spawn "firefox"
             onceInTerminalWithNameSleep 5 "htop" "htop -u david"
             spawnOnceSleep 10 "telegram"
     -- }}}

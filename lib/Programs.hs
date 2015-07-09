@@ -250,24 +250,12 @@ documentViewer :: X ()
 documentViewer = spawn "zathura"
 
 
-browser :: X ()
-browser = spawn "firefox"
-
-
 editor :: X ()
 editor = spawn "gvim"
 
 
 musicPlayer :: X ()
 musicPlayer = spawn "spotify"
-
-
-mailClient :: X ()
-mailClient = inTerminalWithName "mailClient" "mutt"
-
-
-offlineimap :: X ()
-offlineimap = inTerminalWithName "offlineimap" "offlineimap"
 
 
 fileManager :: X ()
@@ -279,7 +267,7 @@ ircClient = inTerminalWithName "ircClient" "weechat"
 
 
 spotifyCtl :: String -> X ()
-spotifyCtl cmd = (fmap (++ cmd) $ home "Bin/user_interface/spotifyctl.sh") >>= spawn
+spotifyCtl cmd = (fmap (++ " " ++ cmd) $ home "Bin/user_interface/spotifyctl.sh") >>= spawn
 
 
 youtubeViewer :: X ()
