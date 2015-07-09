@@ -243,7 +243,7 @@ onceInTerminalWithNameSleep t = withTerminalWithName (spawnOnceSleep t)
 
 -- {{{ applications
 editorWith :: String -> X ()
-editorWith file = spawn $ "gvim " ++ file
+editorWith file = spawn $ "emacs " ++ file
 
 
 documentViewer :: X ()
@@ -255,7 +255,7 @@ browser = spawn "firefox"
 
 
 editor :: X ()
-editor = spawn "gvim"
+editor = spawn "emacs"
 
 
 musicPlayer :: X ()
