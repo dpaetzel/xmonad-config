@@ -30,6 +30,7 @@ manageHook' = manageSpawn
     , [isFullscreen --> doFullFloat]
     , [manageDocks]
     ])
+    -- TODO which one
     <+> manageDocks
     -- <+> scratchpadManageHook (W.RationalRect 0 0 1 1)
     <+> manageHook defaultConfig
@@ -52,6 +53,7 @@ manageHook' = manageSpawn
             , title     =? "Tab Mix Plus Options"
             , className =? "scalafx.application.AppHelper"
             , className =? "sun-awt-X11-XDialogPeer"
+            , className =? "nm-openconnect-auth-dialog"
             ]
         -- those not floating centered by default go here
         centerFloat =
