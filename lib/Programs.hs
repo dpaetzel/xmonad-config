@@ -243,7 +243,7 @@ onceInTerminalWithNameSleep t = withTerminalWithName (spawnOnceSleep t)
 
 -- {{{ applications
 editorWith :: String -> X ()
-editorWith file = spawn $ "emacs " ++ file
+editorWith file = spawn $ "emacsclient -a emacs " ++ file
 
 
 documentViewer :: X ()
@@ -251,7 +251,7 @@ documentViewer = spawn "zathura"
 
 
 editor :: X ()
-editor = spawn "emacs"
+editor = spawn "emacsclient -c -a emacs"
 
 
 musicPlayer :: X ()
@@ -328,19 +328,19 @@ inToggle = spawn "amixer sset 'Capture' toggle"
 
 
 outUp :: X ()
-outUp = home "Bin/sound/change_volume.sh +3%" >>= spawn
+outUp = home "Bin/change-volume +3%" >>= spawn
 
 
 outDown :: X ()
-outDown = home "Bin/sound/change_volume.sh -3%" >>= spawn
+outDown = home "Bin/change-volume -3%" >>= spawn
 
 
 outToggle :: X ()
-outToggle = home "Bin/sound/change_volume.sh %" >>= spawn
+outToggle = home "Bin/change-volume.sh %" >>= spawn
 
 
 outReset :: X ()
-outReset = home "Bin/sound/change_volume.sh 30%" >>= spawn
+outReset = home "Bin/change-volume 30%" >>= spawn
 
 
 pavuControl :: X ()

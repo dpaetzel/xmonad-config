@@ -63,7 +63,9 @@ startupHook' host = case host of
             -- start applications
             withTerminalWithName spawnOnce "offlineimap" "offlineimap"
             withTerminalWithName spawnOnce "mailClient" "mutt"
-            spawn "firefox"
+            spawnOnce "firefox"
+            -- dies from bug
+            spawnOnce "emacs --daemon"
             onceInTerminalWithNameSleep 5 "htop" "htop -u david"
             spawnOnceSleep 10 "telegram"
     -- }}}
