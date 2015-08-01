@@ -267,7 +267,7 @@ ircClient = inTerminalWithName "ircClient" "weechat"
 
 
 spotifyCtl :: String -> X ()
-spotifyCtl cmd = (fmap (++ " " ++ cmd) $ home "Bin/user_interface/spotifyctl.sh") >>= spawn
+spotifyCtl cmd = (fmap (++ " " ++ cmd) $ home "Bin/spotifyctl") >>= spawn
 
 
 youtubeViewer :: X ()

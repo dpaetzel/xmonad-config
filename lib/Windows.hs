@@ -58,6 +58,7 @@ manageHook' = manageSpawn
         -- those not floating centered by default go here
         centerFloat =
             [ title =? "FoxyProxy Standard"
+            , title     =? "Volume Control"
             ]
         splash = [title =? "Wireshark"]
         top =
