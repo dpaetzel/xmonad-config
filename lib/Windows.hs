@@ -26,6 +26,7 @@ manageHook' = manageSpawn
     , [x --> doShift "1:web"    | x <- web]
     , [x --> doShift "8:chat"   | x <- chat]
     , [x --> doShift "9:top"    | x <- top]
+    , [x --> doShift "editor"   | x <- editor]
 
     , [isFullscreen --> doFullFloat]
     , [manageDocks]
@@ -75,6 +76,9 @@ manageHook' = manageSpawn
         web =
             [ className =? "Firefox"
             , className =? "Chromium"
+            ]
+        editor =
+            [ className =? "Emacs"
             ]
 
         anyQuery x = fmap or . mapM (=? x) $ [resource, className, title]

@@ -33,7 +33,7 @@ keys' host conf = M.fromList $
 
     -- main programs
     [ ((winMask, xK_Return                                       ), runTerminal)
-    , ((winMask .|. shiftMask, xK_Return                         ), editor)
+    , ((winMask .|. shiftMask, xK_Return                         ), toggleEditor)
     , ((appMask, xK_o                                            ), documentViewer)
     , ((appMask, xK_minus                                        ), dmenuProjectOrg)
     , ((appMask, xK_e                                            ), fileManager)

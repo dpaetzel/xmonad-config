@@ -150,6 +150,24 @@ toggleScratchpad = do
             if numberOfWindows == 0
             then runTerminalWithName "terminal"
             else return ()
+
+
+toggleEditor :: X ()
+toggleEditor = do
+    stackSet <- fmap windowset get
+    let currentWSTag = W.tag . W.workspace $ W.current stackSet
+    if currentWSTag == "editor"
+    then toggleWS
+    else (windows $ W.greedyView "editor") >> (startIfNecessary)
+
+        where
+        startIfNecessary :: X ()
+        startIfNecessary = do
+            stackSet <- fmap windowset get
+            let numberOfWindows = length $ W.index stackSet
+            if numberOfWindows == 0
+            then editor
+            else return ()
 -- }}}
 
 
