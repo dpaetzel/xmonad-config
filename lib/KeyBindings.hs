@@ -17,7 +17,6 @@ import XMonad.Actions.WindowBringer
 import XMonad.Actions.WithAll
 import XMonad.Hooks.ManageDocks
 import qualified XMonad.StackSet as W
-import XMonad.Util.Paste
 
 
 import Programs
@@ -48,6 +47,8 @@ keys' host conf = M.fromList $
     -- util
     , ((appMask, xK_space                                        ), dmenu)
     , ((appMask .|. shiftMask, xK_space                          ), dmenuAll)
+    , ((winMask, xK_bracketleft                                  ), setClipboard)
+    , ((winMask, xK_bracketright                                 ), pasteClipboard)
     , ((appMask, xK_Delete                                       ), ejectTray)
     , ((appMask, xK_Insert                                       ), insertTray)
     , ((appMask, xK_l                                            ), lockScreen)

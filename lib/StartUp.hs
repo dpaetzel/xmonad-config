@@ -50,6 +50,7 @@ startupHook' host = case host of
             home "Bin/bg-set" >>= spawn
             setDefaultCursor xC_left_ptr
             spawnOnce "dunst -print >> ~/.dunst.log"
+            spawnOnce "clipmenud"
             spawnOnce "xcompmgr"
             spawnOnce "xscreensaver -no-splash"
             spawnOnce "xmodmap ~/.Xmodmap"

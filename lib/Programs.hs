@@ -13,6 +13,7 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.SpawnOn
 import XMonad.Prompt
 import XMonad.Prompt.AppendFile
+import XMonad.Util.Paste (pasteSelection)
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
 import qualified XMonad.StackSet as W
@@ -103,6 +104,13 @@ dmenuProjectOrg = projectNames >>= D.menuArgs "dmenu" dmenuArgs >>= openInEditor
 data Note = Note
 instance XPrompt Note where
     showXPrompt Note = "in < "
+
+
+clipmenuArgs = ["-l", "16", "-i", "-nb", "\\#000000", "-nf", "\\#729fcf", "-sb", "\\#000000", "-sf", "\\#ffffff", "-fn", "Inconsolata-14:normal"]
+setClipboard :: X ()
+setClipboard = spawn $ "clipmenu " ++ unwords clipmenuArgs
+pasteClipboard :: X ()
+pasteClipboard = pasteSelection
 
 
 addNote :: X ()
