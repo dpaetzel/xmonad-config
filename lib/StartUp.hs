@@ -23,6 +23,7 @@ startupHook' host = case host of
         spawnOnceSleep 10 "pidgin"
         -- TODO wrote "weechat" twice
         onceInTerminalWithNameSleep 10 "ircClient" "weechat"
+        spawnOnceSleep 10 "rm ~/.config/UnofficialWhatsApp/Application\ Cache/Index*; WhatsApp"
 
         defaultStartupHook
     -- }}}
