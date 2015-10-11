@@ -305,11 +305,11 @@ jiu = home "Documents/jiu/jiu.org" >>= editorWith
 
 
 gtd :: X ()
-gtd = home "todo.org" >>= editorWith
+gtd = home "TODO.org" >>= editorWith
 
 
 gtdIn :: X ()
-gtdIn = home "in" >>= editorWith
+gtdIn = home "In" >>= editorWith
 -- }}}
 
 

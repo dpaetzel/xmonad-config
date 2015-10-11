@@ -68,7 +68,7 @@ manageHook' = manageSpawn
             ]
         chat =
             [ title     =? "ircClient"
-            , title     =? "WhatsApp Web"
+            , title     =? "Unofficial WhatsApp for Desktop"
             , className =? "Skype"
             , className =? "Pidgin"
             , className =? "Telegram"
