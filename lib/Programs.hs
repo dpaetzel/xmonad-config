@@ -103,7 +103,7 @@ dmenuProjectOrg = projectNames >>= D.menuArgs "dmenu" dmenuArgs >>= openInEditor
 
 data Note = Note
 instance XPrompt Note where
-    showXPrompt Note = "In < "
+    showXPrompt Note = "In.org < "
 
 
 clipmenuArgs = ["-l", "16", "-i", "-nb", "\\#000000", "-nf", "\\#729fcf", "-sb", "\\#000000", "-sf", "\\#ffffff", "-fn", "Inconsolata-14:normal"]
@@ -122,8 +122,8 @@ addNote = mkXPrompt Note myXPConfig complFun appendToIn
     appendToIn "" = return ()
     appendToIn note = io $ do
         date <- fmap (show . utctDay) getCurrentTime
-        file <- fmap (++ "/In") getHomeDirectory
-        appendFile file (date ++ " " ++ note ++ "\n")
+        file <- fmap (++ "/In.org") getHomeDirectory
+        appendFile file ("* " ++ note ++ "\n")
     myXPConfig = defaultXPConfig {
         bgColor = "#000000",
         fgColor = "#ffffff",
@@ -309,7 +309,7 @@ gtd = home "TODO.org" >>= editorWith
 
 
 gtdIn :: X ()
-gtdIn = home "In" >>= editorWith
+gtdIn = home "In.org" >>= editorWith
 -- }}}
 
 
