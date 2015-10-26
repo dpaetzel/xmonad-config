@@ -54,12 +54,12 @@ manageHook' = manageSpawn
             , title     =? "Tab Mix Plus Options"
             , className =? "scalafx.application.AppHelper"
             , className =? "sun-awt-X11-XDialogPeer"
-            , className =? "nm-openconnect-auth-dialog"
             ]
         -- those not floating centered by default go here
         centerFloat =
             [ title =? "FoxyProxy Standard"
             , title     =? "Volume Control"
+            , className =? "Nm-openconnect-auth-dialog"
             ]
         splash = [title =? "Wireshark"]
         top =

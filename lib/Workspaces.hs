@@ -44,9 +44,8 @@ layoutHook' =
         -- The default number of windows in the master pane
         nmaster = 1
         -- Proportion of screen occupied by master pane
-        thirds = 2/3
         halfs  = 1/2
         -- Percent of screen to increment by when resizing panes
         delta   = 3/100
         -- Instant Messaging layout
-        im = withIM (1/8) (Title "Buddy List") Grid
+        im = withIM (1/8) (ClassName "Skype") $ tiled halfs

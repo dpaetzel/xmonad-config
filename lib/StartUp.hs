@@ -20,7 +20,8 @@ startupHook' host = case host of
     -- {{{ anaxagoras specific
     "anaxagoras" -> do
 
-        spawnOnceSleep 10 "pidgin"
+        -- spawnOnceSleep 10 "pidgin"
+        spawnOnceSleep 10 "skype"
         -- TODO wrote "weechat" twice
         onceInTerminalWithNameSleep 10 "ircClient" "weechat"
         home "Bin/launchers/wa" >>= spawnOnceSleep 10
