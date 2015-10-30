@@ -91,7 +91,7 @@ dmenuProjectOrg = projectNames >>= D.menuArgs "dmenu" dmenuArgs >>= openInEditor
         p <- projectPath
         runProcessWithInput "ls" [p] []
     onlyOrg :: [String] -> [String]
-    onlyOrg = filter (=~ ".*\\.org")
+    onlyOrg = filter (=~ ".*\\.org$")
     deOrg :: String -> String
     deOrg = reverse . drop 4 . reverse
     toOrgFile :: String -> X String
