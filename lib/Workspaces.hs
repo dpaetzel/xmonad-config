@@ -48,4 +48,4 @@ layoutHook' =
         -- Percent of screen to increment by when resizing panes
         delta   = 3/100
         -- Instant Messaging layout
-        im = withIM (1/8) (ClassName "Skype") $ tiled halfs
+        im = withIM (1/8) (And (ClassName "Skype") (Not $ Role "ConversationsWindow")) $ tiled halfs
