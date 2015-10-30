@@ -10,6 +10,7 @@ import qualified Data.Map as M
 import Graphics.X11.ExtraTypes
 import System.Exit
 import XMonad
+import XMonad.Actions.CopyWindow
 import XMonad.Actions.CycleWS
 import XMonad.Actions.NoBorders
 import XMonad.Actions.SpawnOn
@@ -81,6 +82,10 @@ keys' host conf = M.fromList $
     , ((winMask, xK_Tab                                          ), toggleScratchpad)
 
 
+    -- copy the window to all workspaces (make it "sticky")
+    , ((winMask, xK_c                                            ), windows copyToAll)
+    -- make window non-sticky
+    , ((winMask .|. shiftMask, xK_c                              ), killAllOtherCopies)
     -- go to the next "xinerama" screen
     , ((winMask, xK_r                                            ), nextScreen)
     -- swap screens
@@ -88,7 +93,7 @@ keys' host conf = M.fromList $
     -- toogle last workspace
     , ((winMask, xK_o                                            ), toggleWS)
     -- window finder
-    , ((winMask, xK_semicolon                                    ), gotoMenuArgs dmenuArgs)
+    , ((winMask, xK_g                                            ), gotoMenuArgs dmenuArgs)
     -- close focused window
     , ((winMask .|. shiftMask, xK_q                              ), kill)
      -- Rotate through the available layout algorithms
