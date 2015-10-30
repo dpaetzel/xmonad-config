@@ -32,8 +32,8 @@ appMask = mod4Mask
 keys' host conf = M.fromList $
 
     -- main programs
-    [ ((winMask, xK_Return                                       ), runTerminal)
-    , ((winMask .|. shiftMask, xK_Return                         ), toggleEditor)
+    [ ((winMask, xK_b                                            ), runTerminal)
+    , ((winMask, xK_n                                            ), toggleEditor)
     , ((appMask, xK_o                                            ), documentViewer)
     , ((appMask, xK_minus                                        ), dmenuProjectOrg)
     , ((appMask, xK_e                                            ), fileManager)
@@ -52,7 +52,7 @@ keys' host conf = M.fromList $
     , ((appMask, xK_Delete                                       ), ejectTray)
     , ((appMask, xK_Insert                                       ), insertTray)
     , ((appMask, xK_l                                            ), lockScreen)
-    , ((appMask, xK_b                                            ), powerTop)
+    -- , ((appMask, xK_b                                            ), powerTop)
     , ((winMask, xK_a                                            ), putAwayMouse)
     , ((appMask, xK_Print                                        ), scrotWin)
     , ((0, xK_Print                                              ), scrotFull)
@@ -96,7 +96,7 @@ keys' host conf = M.fromList $
     --  Reset the layouts on the current workspace to default
     , ((winMask .|. shiftMask, xK_p                              ), setLayout $ XMonad.layoutHook conf)
     -- Resize viewed windows to the correct size
-    , ((winMask, xK_n                                            ), refresh)
+    -- , ((winMask, xK_n                                            ), refresh)
     -- Move focus to the next window
     , ((winMask, xK_j                                            ), windows W.focusDown)
     -- Move focus to the previous window
