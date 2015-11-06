@@ -87,8 +87,8 @@ keys' host conf = M.fromList $
     -- make window non-sticky
     , ((winMask .|. shiftMask, xK_c                              ), killAllOtherCopies)
     -- go to the next "xinerama" screen
-    , ((winMask, xK_r                                            ), nextScreen)
-    -- swap screens
+    -- , ((winMask, xK_r                                            ), nextScreen)
+        -- swap screens
     , ((winMask, xK_s                                            ), swapPrevScreen)
     -- toogle last workspace
     , ((winMask, xK_o                                            ), toggleWS)
@@ -142,15 +142,21 @@ keys' host conf = M.fromList $
 
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
-    [ ((winMask .|. m, k), windows $ f i)
+    [ ((winMask .|. m, k), f i)
     | (i, k) <- zip (XMonad.workspaces conf) ([xK_dead_circumflex] ++ [xK_1 .. xK_9] ++ [xK_0])
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+        -- , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+        , (f, m) <- [(toggleOrView, 0), (windows . W.shift, shiftMask)]]
     ++
 
-    -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
-    -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
+    [ ((winMask, xK_h                                            ), toggleOrView "1:web")
+    , ((winMask .|. shiftMask, xK_h                              ), windows $ W.shift "1:web")
+    ]
+    ++
+
+    -- mod-{c,e,ä}, Switch to physical/Xinerama screens 1, 2, or 3
+    -- mod-shift-{c,e,ä}, Move client to screen 1, 2, or 3
     [((m .|. winMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e] [0..]
+        | (key, sc) <- zip [xK_c, xK_e, xK_adiaeresis] [0..]
         --, (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
