@@ -53,7 +53,6 @@ keys' host conf = M.fromList $
     , ((appMask, xK_Delete                                       ), ejectTray)
     , ((appMask, xK_Insert                                       ), insertTray)
     , ((appMask, xK_l                                            ), lockScreen)
-    -- , ((appMask, xK_b                                            ), powerTop)
     , ((winMask, xK_a                                            ), putAwayMouse)
     , ((appMask, xK_Print                                        ), scrotWin)
     , ((0, xK_Print                                              ), scrotFull)
@@ -79,29 +78,12 @@ keys' host conf = M.fromList $
     -- other
     , ((appMask, xK_F4                                           ), io $ screenSetup host)
     , ((appMask, xK_r                                            ), sendMessage ToggleStruts)
-    , ((winMask, xK_Tab                                          ), toggleScratchpad)
+    , ((winMask, xK_t                                            ), toggleScratchpad)
 
 
-    -- copy the window to all workspaces (make it "sticky")
-    , ((winMask, xK_c                                            ), windows copyToAll)
-    -- make window non-sticky
-    , ((winMask .|. shiftMask, xK_c                              ), killAllOtherCopies)
-    -- go to the next "xinerama" screen
-    -- , ((winMask, xK_r                                            ), nextScreen)
-        -- swap screens
-    , ((winMask, xK_s                                            ), swapPrevScreen)
-    -- toogle last workspace
-    , ((winMask, xK_o                                            ), toggleWS)
-    -- window finder
-    , ((winMask, xK_g                                            ), gotoMenuArgs dmenuArgs)
-    -- close focused window
+    -- windows
+    -- Close focused window
     , ((winMask .|. shiftMask, xK_q                              ), kill)
-     -- Rotate through the available layout algorithms
-    , ((winMask, xK_p                                            ), sendMessage NextLayout)
-    --  Reset the layouts on the current workspace to default
-    , ((winMask .|. shiftMask, xK_p                              ), setLayout $ XMonad.layoutHook conf)
-    -- Resize viewed windows to the correct size
-    -- , ((winMask, xK_n                                            ), refresh)
     -- Move focus to the next window
     , ((winMask, xK_j                                            ), windows W.focusDown)
     -- Move focus to the previous window
@@ -114,23 +96,55 @@ keys' host conf = M.fromList $
     , ((winMask .|. shiftMask, xK_j                              ), windows W.swapDown  )
     -- Swap the focused window with the previous window
     , ((winMask .|. shiftMask, xK_k                              ), windows W.swapUp    )
+    -- Push window back into tiling
+    , ((winMask, xK_i                                            ), withFocused $ windows . W.sink)
+    -- Toggle Window Borders
+    , ((winMask, xK_d                                            ), withFocused toggleBorder)
+    -- window finder
+    , ((winMask, xK_g                                            ), gotoMenuArgs dmenuArgs)
+    -- Resize viewed windows to the correct size
+    -- , ((winMask, xK_n                                            ), refresh)
+    -- Copy the window to all workspaces (make it "sticky")
+    -- , ((winMask, xK_c                                            ), windows copyToAll)
+    -- Make window non-sticky
+    -- , ((winMask .|. shiftMask, xK_c                              ), killAllOtherCopies)
+
+
+    -- workspaces
+    -- toogle last workspace
+    , ((winMask, xK_o                                            ), toggleWS)
+
+
+    -- layouts
+    -- Rotate through the available layout algorithms
+    , ((winMask, xK_p                                            ), sendMessage NextLayout)
+    --  Reset the layouts on the current workspace to default
+    , ((winMask .|. shiftMask, xK_p                              ), setLayout $ XMonad.layoutHook conf)
     -- Shrink the master area
     , ((winMask, xK_h                                            ), sendMessage Shrink)
     -- Expand the master area
     , ((winMask, xK_l                                            ), sendMessage Expand)
-    -- Push window back into tiling
-    , ((winMask, xK_t                                            ), withFocused $ windows . W.sink)
     -- Increment the number of windows in the master area
     , ((winMask, xK_comma                                        ), sendMessage (IncMasterN 1))
     -- Decrement the number of windows in the master area
     , ((winMask, xK_period                                       ), sendMessage (IncMasterN (-1)))
-    -- Toggle Window Borders
-    , ((winMask, xK_d                                            ), withFocused toggleBorder)
 
+
+    -- screens
+    -- go to the next "xinerama" screen
+    -- , ((winMask, xK_r                                            ), nextScreen)
+        -- swap screens
+    , ((winMask, xK_s                                            ), swapPrevScreen)
+
+
+    -- xmonad
     -- Quit xmonad
     , ((winMask .|. shiftMask, xK_F12                            ), closeAll >> io exitSuccess)
     -- Restart xmonad
     , ((winMask, xK_F12                                          ), spawn "xmonad --recompile; xmonad --restart")
+
+
+    -- power management
     -- Suspend computer
     , ((winMask, xK_Delete                                       ), suspend)
     -- Shutdown computer
@@ -140,6 +154,7 @@ keys' host conf = M.fromList $
     ]
     ++
 
+
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
     [ ((winMask .|. m, k), f i)
@@ -148,10 +163,12 @@ keys' host conf = M.fromList $
         , (f, m) <- [(toggleOrView, 0), (windows . W.shift, shiftMask)]]
     ++
 
+
     [ ((winMask, xK_h                                            ), toggleOrView "1:web")
     , ((winMask .|. shiftMask, xK_h                              ), windows $ W.shift "1:web")
     ]
     ++
+
 
     -- mod-{c,e,ä}, Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{c,e,ä}, Move client to screen 1, 2, or 3
