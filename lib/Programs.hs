@@ -26,7 +26,22 @@ terminalName = "urxvt -uc"
 
 
 dmenuArgs :: [String]
-dmenuArgs = ["-l", "16", "-i", "-nb", "#000000", "-nf", "#729fcf", "-sb", "#000000", "-sf", "#ffffff", "-fn", "Inconsolata-14:normal"]
+dmenuArgs =
+  -- number of lines
+  [ "-l", "10"
+  -- case insensitive
+  , "-i"
+  -- screen dimming opacity
+  -- , "-dim", "0.5"
+  , "-nb", "#000000"
+  , "-nf", "#729fcf"
+  , "-sb", "#000000"
+  , "-sf", "#ffffff"
+  , "-fn", "Inconsolata-14:normal"]
+
+
+dmenuArgsWithFuzzy :: [String]
+dmenuArgsWithFuzzy = "-z" : dmenuArgs
 
 
 applicationsPath :: String
@@ -82,7 +97,7 @@ dmenuAll = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
             path = fmap (splitOn ":") $ getEnv "PATH"
 
 
-dmenuProjectOrg = projectNames >>= D.menuArgs "dmenu" dmenuArgs >>= openInEditor
+dmenuProjectOrg = projectNames >>= D.menuArgs "dmenu" dmenuArgsWithFuzzy >>= openInEditor
     where
     projectNames :: X [String]
     projectNames = fmap (map deOrg . onlyOrg . lines) $ lsProjectPath
@@ -106,13 +121,6 @@ instance XPrompt Note where
     showXPrompt Note = "In.org < "
 
 
-clipmenuArgs = ["-l", "16", "-i", "-nb", "\\#000000", "-nf", "\\#729fcf", "-sb", "\\#000000", "-sf", "\\#ffffff", "-fn", "Inconsolata-14:normal"]
-setClipboard :: X ()
-setClipboard = spawn $ "clipmenu " ++ unwords clipmenuArgs
-pasteClipboard :: X ()
-pasteClipboard = pasteSelection
-
-
 addNote :: X ()
 addNote = mkXPrompt Note myXPConfig complFun appendToIn
     where
@@ -130,6 +138,22 @@ addNote = mkXPrompt Note myXPConfig complFun appendToIn
         font = "xft: Inconsolata-14:normal",
         promptBorderWidth = 0
     }
+
+
+clipmenuArgs :: [String]
+clipmenuArgs =
+  [ "-l", "16"
+  , "-i"
+  , "-nb", "\\#000000"
+  , "-nf", "\\#729fcf"
+  , "-sb", "\\#000000"
+  , "-sf", "\\#ffffff"
+  , "-fn", "Inconsolata-14:normal"
+  ]
+setClipboard :: X ()
+setClipboard = spawn $ "clipmenu " ++ unwords clipmenuArgs
+pasteClipboard :: X ()
+pasteClipboard = pasteSelection
 
 
 -- my own scratchpad action (I like toggling workspace more than bringing
