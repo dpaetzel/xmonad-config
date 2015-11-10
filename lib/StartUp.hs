@@ -59,7 +59,7 @@ startupHook' host = case host of
             spawnOnce "setxkbmap -layout de,de -model pc105 -variant neo,basic -option grp:sclk_toggle,grp_led:scroll"
             spawnOnce "fcitx"
             spawnOnce "unclutter -idle 5 -root"
-            spawnOnce "xflux -l 48.3 -g 10.9 -k 4000"
+            spawnOnce "xflux -l 48.3 -g 10.9 -k 3000"
             spawnOnce "xset -b"
             spawnOnce "nm-applet"
             spawnOnceSleep 2 "conky"
