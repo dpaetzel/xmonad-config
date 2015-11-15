@@ -13,7 +13,6 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.SpawnOn
 import XMonad.Prompt
 import XMonad.Prompt.AppendFile
-import XMonad.Util.Paste (pasteSelection)
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
 import qualified XMonad.StackSet as W
@@ -152,8 +151,6 @@ clipmenuArgs =
   ]
 setClipboard :: X ()
 setClipboard = spawn $ "clipmenu " ++ unwords clipmenuArgs
-pasteClipboard :: X ()
-pasteClipboard = pasteSelection
 
 
 -- my own scratchpad action (I like toggling workspace more than bringing

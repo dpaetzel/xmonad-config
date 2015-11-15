@@ -10,12 +10,9 @@ import qualified Data.Map as M
 import Graphics.X11.ExtraTypes
 import System.Exit
 import XMonad
-import XMonad.Actions.CopyWindow
 import XMonad.Actions.CycleWS
 import XMonad.Actions.NoBorders
-import XMonad.Actions.SpawnOn
 import XMonad.Actions.WindowBringer
-import XMonad.Actions.WithAll
 import XMonad.Hooks.ManageDocks
 import qualified XMonad.StackSet as W
 
@@ -35,12 +32,12 @@ keys' host conf = M.fromList $
     -- main programs
     [ ((winMask, xK_b                                            ), runTerminal)
     , ((winMask, xK_n                                            ), toggleEditor)
+    , ((winMask, xK_t                                            ), toggleScratchpad)
     , ((appMask, xK_o                                            ), documentViewer)
     , ((appMask, xK_minus                                        ), dmenuProjectOrg)
     , ((appMask, xK_e                                            ), fileManager)
     , ((appMask, xK_y                                            ), youtubeViewer)
     , ((appMask, xK_u                                            ), gtd)
-    , ((appMask, xK_j                                            ), jiu)
     , ((appMask, xK_Return                                       ), addNote)
     , ((appMask .|. shiftMask, xK_Return                         ), gtdIn)
 
@@ -48,8 +45,7 @@ keys' host conf = M.fromList $
     -- util
     , ((appMask, xK_space                                        ), dmenu)
     , ((appMask .|. shiftMask, xK_space                          ), dmenuAll)
-    , ((winMask, xK_bracketleft                                  ), setClipboard)
-    , ((winMask, xK_bracketright                                 ), pasteClipboard)
+    , ((appMask, xK_c                                            ), setClipboard)
     , ((appMask, xK_Delete                                       ), ejectTray)
     , ((appMask, xK_Insert                                       ), insertTray)
     , ((appMask, xK_l                                            ), lockScreen)
@@ -76,9 +72,7 @@ keys' host conf = M.fromList $
 
 
     -- other
-    , ((appMask, xK_F4                                           ), io $ screenSetup host)
-    , ((appMask, xK_r                                            ), sendMessage ToggleStruts)
-    , ((winMask, xK_t                                            ), toggleScratchpad)
+    , ((winMask, xK_r                                            ), sendMessage ToggleStruts)
 
 
     -- windows
@@ -88,26 +82,20 @@ keys' host conf = M.fromList $
     , ((winMask, xK_j                                            ), windows W.focusDown)
     -- Move focus to the previous window
     , ((winMask, xK_k                                            ), windows W.focusUp  )
-    -- Move focus to the master window
-    , ((winMask, xK_m                                            ), windows W.focusMaster  )
-    -- Swap the focused window and the master window
-    , ((winMask .|. shiftMask, xK_m                              ), windows W.swapMaster)
     -- Swap the focused window with the next window
     , ((winMask .|. shiftMask, xK_j                              ), windows W.swapDown  )
     -- Swap the focused window with the previous window
     , ((winMask .|. shiftMask, xK_k                              ), windows W.swapUp    )
+    -- Move focus to the master window
+    , ((winMask, xK_m                                            ), windows W.focusMaster  )
+    -- Swap the focused window and the master window
+    , ((winMask .|. shiftMask, xK_m                              ), windows W.swapMaster)
     -- Push window back into tiling
     , ((winMask, xK_i                                            ), withFocused $ windows . W.sink)
     -- Toggle Window Borders
     , ((winMask, xK_d                                            ), withFocused toggleBorder)
     -- window finder
     , ((winMask, xK_g                                            ), gotoMenuArgs dmenuArgs)
-    -- Resize viewed windows to the correct size
-    -- , ((winMask, xK_n                                            ), refresh)
-    -- Copy the window to all workspaces (make it "sticky")
-    -- , ((winMask, xK_c                                            ), windows copyToAll)
-    -- Make window non-sticky
-    -- , ((winMask .|. shiftMask, xK_c                              ), killAllOtherCopies)
 
 
     -- workspaces
@@ -133,7 +121,7 @@ keys' host conf = M.fromList $
     -- screens
     -- go to the next "xinerama" screen
     -- , ((winMask, xK_r                                            ), nextScreen)
-        -- swap screens
+    -- swap screens
     , ((winMask, xK_s                                            ), swapPrevScreen)
 
 
@@ -159,8 +147,7 @@ keys' host conf = M.fromList $
     -- mod-shift-[1..9], Move client to workspace N
     [ ((winMask .|. m, k), f i)
     | (i, k) <- zip (XMonad.workspaces conf) ([xK_dead_circumflex] ++ [xK_1 .. xK_9] ++ [xK_0])
-        -- , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-        , (f, m) <- [(toggleOrView, 0), (windows . W.shift, shiftMask)]]
+    , (f, m) <- [(toggleOrView, 0), (windows . W.shift, shiftMask)]]
     ++
 
 
@@ -173,9 +160,8 @@ keys' host conf = M.fromList $
     -- mod-{c,e,ä}, Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{c,e,ä}, Move client to screen 1, 2, or 3
     [((m .|. winMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_c, xK_e, xK_adiaeresis] [0..]
-        --, (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    | (key, sc) <- zip [xK_c, xK_e, xK_adiaeresis] [0..]
+    , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 
 -- mouse bindings
