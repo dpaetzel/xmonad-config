@@ -147,11 +147,13 @@ keys' host conf = M.fromList $
     -- mod-shift-[1..9], Move client to workspace N
     [ ((winMask .|. m, k), f i)
     | (i, k) <- zip (XMonad.workspaces conf) ([xK_dead_circumflex] ++ [xK_1 .. xK_9] ++ [xK_0])
-    , (f, m) <- [(toggleOrView, 0), (windows . W.shift, shiftMask)]]
+    -- this is the greedy variant
+    -- , (f, m) <- [(toggleOrView, 0), (windows . W.shift, shiftMask)]]
+    , (f, m) <- [(toggleOrDoSkip [] W.view, 0), (windows . W.shift, shiftMask)]]
     ++
 
 
-    [ ((winMask, xK_h                                            ), toggleOrView "1:web")
+    [ ((winMask, xK_h                                            ), toggleOrDoSkip [] W.view "1:web")
     , ((winMask .|. shiftMask, xK_h                              ), windows $ W.shift "1:web")
     ]
     ++

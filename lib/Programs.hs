@@ -161,7 +161,8 @@ toggleScratchpad = do
     let currentWSTag = W.tag . W.workspace $ W.current stackSet
     if currentWSTag == "terminal"
     then toggleWS
-    else (windows $ W.greedyView "terminal") >> (startIfNecessary)
+    -- else (windows $ W.greedyView "terminal") >> (startIfNecessary)
+    else (windows $ W.view "terminal") >> (startIfNecessary)
 
         where
         startIfNecessary :: X ()
@@ -179,7 +180,8 @@ toggleEditor = do
     let currentWSTag = W.tag . W.workspace $ W.current stackSet
     if currentWSTag == "editor"
     then toggleWS
-    else (windows $ W.greedyView "editor") >> (startIfNecessary)
+    -- else (windows $ W.greedyView "editor") >> (startIfNecessary)
+    else (windows $ W.view "editor") >> (startIfNecessary)
 
         where
         startIfNecessary :: X ()
@@ -203,13 +205,13 @@ closeAll = do
 
 
 -- toggle between two workspaces
-toggle :: String -> X ()
-toggle wsName = do
-    stackSet <- fmap windowset get
-    let currentWSTag = W.tag . W.workspace $ W.current stackSet
-    if currentWSTag == wsName
-    then toggleWS
-    else windows $ W.greedyView wsName
+-- toggle :: String -> X ()
+-- toggle wsName = do
+--     stackSet <- fmap windowset get
+--     let currentWSTag = W.tag . W.workspace $ W.current stackSet
+--     if currentWSTag == wsName
+--     then toggleWS
+--     else windows $ W.greedyView wsName
 
 
 -- spawnOnce but sleep t seconds beforehand
