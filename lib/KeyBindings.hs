@@ -12,6 +12,7 @@ import System.Exit
 import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Actions.NoBorders
+import XMonad.Actions.OnScreen
 import XMonad.Actions.WindowBringer
 import XMonad.Hooks.ManageDocks
 import qualified XMonad.StackSet as W
@@ -31,6 +32,7 @@ keys' host conf = M.fromList $
 
     -- main programs
     [ ((winMask, xK_b                                            ), runTerminal)
+    , ((winMask, xK_s                                            ), toggleBrowser)
     , ((winMask, xK_n                                            ), toggleEditor)
     , ((winMask, xK_t                                            ), toggleScratchpad)
     , ((appMask, xK_o                                            ), documentViewer)
@@ -63,6 +65,11 @@ keys' host conf = M.fromList $
     , ((0, xF86XK_AudioMute                                      ), sequence_ [outToggle, inToggle])
     , ((appMask, xK_m                                            ), pavuControl)
     , ((appMask, xK_q                                            ), equalizer)
+
+
+    -- screen brightness
+    , ((0, xF86XK_MonBrightnessUp                               ), lightUp)
+    , ((0, xF86XK_MonBrightnessDown                             ), lightDown)
 
 
     -- music
@@ -122,7 +129,7 @@ keys' host conf = M.fromList $
     -- go to the next "xinerama" screen
     -- , ((winMask, xK_r                                            ), nextScreen)
     -- swap screens
-    , ((winMask, xK_s                                            ), swapPrevScreen)
+    -- , ((winMask, xK_s                                            ), swapPrevScreen)
 
 
     -- xmonad
@@ -142,20 +149,20 @@ keys' host conf = M.fromList $
     ]
     ++
 
-
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
     [ ((winMask .|. m, k), f i)
     | (i, k) <- zip (XMonad.workspaces conf) ([xK_dead_circumflex] ++ [xK_1 .. xK_9] ++ [xK_0])
+    -- this is the greedy variant
     , (f, m) <- [(toggleOrView, 0), (windows . W.shift, shiftMask)]]
+    -- , (f, m) <- [(toggleOrDoSkip [] W.view, 0), (windows . W.shift, shiftMask), (toggleOrView, appMask)]]
     ++
 
-
-    [ ((winMask, xK_h                                            ), toggleOrView "1:web")
-    , ((winMask .|. shiftMask, xK_h                              ), windows $ W.shift "1:web")
+    [ ((winMask .|. shiftMask, xK_s                              ), windows $ W.shift "browser")
+    , ((winMask .|. shiftMask, xK_n                              ), windows $ W.shift "editor")
+    , ((winMask .|. shiftMask, xK_t                              ), windows $ W.shift "terminal")
     ]
     ++
-
 
     -- mod-{c,e,ä}, Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{c,e,ä}, Move client to screen 1, 2, or 3

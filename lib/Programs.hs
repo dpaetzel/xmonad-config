@@ -165,6 +165,7 @@ toggleScratchpad = do
     if currentWSTag == "terminal"
     then toggleWS
     else (windows $ W.greedyView "terminal") >> (startIfNecessary)
+    -- else (windows $ W.view "terminal") >> (startIfNecessary)
 
         where
         startIfNecessary :: X ()
@@ -183,6 +184,7 @@ toggleEditor = do
     if currentWSTag == "editor"
     then toggleWS
     else (windows $ W.greedyView "editor") >> (startIfNecessary)
+    -- else (windows $ W.view "editor") >> (startIfNecessary)
 
         where
         startIfNecessary :: X ()
@@ -191,6 +193,25 @@ toggleEditor = do
             let numberOfWindows = length $ W.index stackSet
             if numberOfWindows == 0
             then editor
+            else return ()
+
+
+toggleBrowser :: X ()
+toggleBrowser = do
+    stackSet <- fmap windowset get
+    let currentWSTag = W.tag . W.workspace $ W.current stackSet
+    if currentWSTag == "browser"
+    then toggleWS
+    else (windows $ W.greedyView "browser") >> (startIfNecessary)
+    -- else (windows $ W.view "editor") >> (startIfNecessary)
+
+        where
+        startIfNecessary :: X ()
+        startIfNecessary = do
+            stackSet <- fmap windowset get
+            let numberOfWindows = length $ W.index stackSet
+            if numberOfWindows == 0
+            then browser
             else return ()
 -- }}}
 
@@ -206,13 +227,13 @@ closeAll = do
 
 
 -- toggle between two workspaces
-toggle :: String -> X ()
-toggle wsName = do
-    stackSet <- fmap windowset get
-    let currentWSTag = W.tag . W.workspace $ W.current stackSet
-    if currentWSTag == wsName
-    then toggleWS
-    else windows $ W.greedyView wsName
+-- toggle :: String -> X ()
+-- toggle wsName = do
+--     stackSet <- fmap windowset get
+--     let currentWSTag = W.tag . W.workspace $ W.current stackSet
+--     if currentWSTag == wsName
+--     then toggleWS
+--     else windows $ W.greedyView wsName
 
 
 -- spawnOnce but sleep t seconds beforehand
@@ -292,16 +313,20 @@ onceInTerminalWithNameSleep t = withTerminalWithName (spawnOnceSleep t)
 
 
 -- {{{ applications
+editor :: X ()
+editor = spawn "emacsclient -c -a emacs"
+
+
 editorWith :: String -> X ()
 editorWith file = spawn $ "emacsclient -a emacs " ++ file
 
 
+browser :: X ()
+browser = spawn "vimb"
+
+
 documentViewer :: X ()
 documentViewer = spawn "zathura"
-
-
-editor :: X ()
-editor = spawn "emacsclient -c -a emacs"
 
 
 musicPlayer :: X ()
@@ -399,6 +424,16 @@ pavuControl = spawnHere "pavucontrol"
 
 equalizer :: X ()
 equalizer = spawnHere "pulseaudio-equalizer-gtk"
+-- }}}
+
+
+-- {{{ screen brightness
+lightUp :: X ()
+lightUp = spawn "light -A 10"
+
+
+lightDown :: X ()
+lightDown = spawn "light -U 10"
 -- }}}
 
 
