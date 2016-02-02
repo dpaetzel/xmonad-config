@@ -44,7 +44,8 @@ dmenuArgsWithFuzzy = "-z" : dmenuArgs
 
 
 applicationsPath :: String
-applicationsPath = "/usr/share/applications/"
+-- applicationsPath = "/usr/share/applications/"
+applicationsPath = "/nix/var/nix/profiles/system/sw/share/applications"
 
 
 home :: FilePath -> X FilePath
@@ -96,7 +97,9 @@ dmenuAll = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
             path = fmap (splitOn ":") $ getEnv "PATH"
 
 
-dmenuProjectOrg = projectNames >>= D.menuArgs "dmenu" dmenuArgsWithFuzzy >>= openInEditor
+-- TODO repair this
+-- dmenuProjectOrg = projectNames >>= D.menuArgs "dmenu" dmenuArgsWithFuzzy >>= openInEditor
+dmenuProjectOrg = projectNames >>= D.menuArgs "dmenu" dmenuArgs >>= openInEditor
     where
     projectNames :: X [String]
     projectNames = fmap (map deOrg . onlyOrg . lines) $ lsProjectPath
