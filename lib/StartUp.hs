@@ -23,7 +23,7 @@ startupHook' host = case host of
         -- spawnOnceSleep 10 "pidgin"
         spawnOnceSleep 10 "skype"
         -- TODO wrote "weechat" twice
-        onceInTerminalWithNameSleep 10 "ircClient" "weechat"
+        -- onceInTerminalWithNameSleep 10 "ircClient" "weechat"
         home "Bin/launchers/wa" >>= spawnOnceSleep 10
 
         defaultStartupHook
@@ -67,9 +67,11 @@ startupHook' host = case host of
             -- start applications
             withTerminalWithName spawnOnce "offlineimap" "offlineimap"
             withTerminalWithName spawnOnce "mailClient" "mutt"
-            spawnOnce "firefox"
+            -- spawnOnce "firefox"
+            browser
             onceInTerminalWithNameSleep 5 "htop" "htop -u david"
             spawnOnceSleep 10 "telegram"
+            spawnOnceSleep 10 "chromium"
     -- }}}
 
 
