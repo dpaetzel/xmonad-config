@@ -41,7 +41,6 @@ manageHook' = manageSpawn
     where
         email    = ["mailClient", "Mail", "Thunderbird", "mutt"]
         ignore   = ["desktop_window", "desktop", "notify-osd", "trayer", "stalonetray"]
-        -- web'      = ["Firefox", "Chromium", "Google-chrome", "Chromium-browser"]
         dev      = ["Eclipse"]
         float'   = ["File Transfers", "java", "Steam", "dota_linux", "mandelbrot"]
         media'    = ["youtube-viewer", "musicPlayer"] --, "plugin-container"]
@@ -54,15 +53,13 @@ manageHook' = manageSpawn
         float =
             [ title     =? "Firefox Preferences"
             , title     =? "Tab Mix Plus Options"
+            , title     =? "FoxyProxy Standard"
             , className =? "scalafx.application.AppHelper"
             , className =? "sun-awt-X11-XDialogPeer"
-            ]
-        -- those not floating centered by default go here
-        centerFloat =
-            [ title =? "FoxyProxy Standard"
             , title     =? "Volume Control"
             , className =? "Nm-openconnect-auth-dialog"
             ]
+        centerFloat = []
         splash = [title =? "Wireshark"]
         top =
             [ title =? "htop"
@@ -79,6 +76,7 @@ manageHook' = manageSpawn
         web =
             [ className =? "Firefox"
             , className =? "chromium"
+            , className =? "chromium-browser"
             ]
         browser =
             [ className =? "Vimb"
