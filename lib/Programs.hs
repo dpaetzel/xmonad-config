@@ -322,7 +322,7 @@ editorWith file = spawn $ "emacsclient -a emacs " ++ file
 
 
 browser :: X ()
-browser = spawn "vimb"
+browser = spawn "chromium"
 
 
 documentViewer :: X ()
@@ -372,7 +372,7 @@ insertTray = spawn "eject -t"
 
 
 lockScreen :: X ()
-lockScreen = spawn "xscreensaver-command -lock"
+lockScreen = spawn "slock"
 
 
 powerTop :: X ()

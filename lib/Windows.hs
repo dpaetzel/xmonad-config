@@ -72,14 +72,15 @@ manageHook' = manageSpawn
             , className =? "Pidgin"
             , className =? "Telegram"
             , className =? "Gajim"
+            , title     =? "Hangouts" -- not yet working
             ]
         web =
             [ className =? "Firefox"
-            , className =? "chromium"
-            , className =? "chromium-browser"
+            , className =? "Vimb"
             ]
         browser =
-            [ className =? "Vimb"
+            [ className =? "chromium"
+            , className =? "chromium-browser"
             ]
         editor =
             [ className =? "Emacs"
