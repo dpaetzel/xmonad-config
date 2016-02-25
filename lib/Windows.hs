@@ -1,11 +1,13 @@
 module Windows where
 
 
+import Text.Regex.Posix
 import XMonad
 import XMonad.Actions.SpawnOn
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Util.Scratchpad
+import XMonad.Util.WindowPropertiesRE
 import qualified XMonad.StackSet as W
 
 
@@ -13,7 +15,6 @@ import qualified XMonad.StackSet as W
 manageHook' = manageSpawn
     <+> (composeAll . concat $
     [ [anyQuery x --> doIgnore               | x <- ignore]
-    , [anyQuery x --> doShift "0:email"      | x <- email]
     , [anyQuery x --> doShift "2"            | x <- dev]
     -- , [anyQuery x --> doShift "3"            | x <- java]
     -- , [anyQuery x --> doShift "vnc"       | x <- vnc]
@@ -23,6 +24,7 @@ manageHook' = manageSpawn
 
     , [x --> doFloat            | x <- splash ++ float]
     , [x --> doCenterFloat      | x <- centerFloat]
+    , [x --> doShift "news"     | x <- news]
     , [x --> doShift "1:web"    | x <- web]
     , [x --> doShift "browser"  | x <- browser]
     , [x --> doShift "7:media"  | x <- media]
@@ -39,7 +41,6 @@ manageHook' = manageSpawn
     <+> manageHook defaultConfig
 
     where
-        email    = ["mailClient", "Mail", "Thunderbird", "mutt"]
         ignore   = ["desktop_window", "desktop", "notify-osd", "trayer", "stalonetray"]
         dev      = ["Eclipse"]
         float'   = ["File Transfers", "java", "Steam", "dota_linux", "mandelbrot"]
@@ -87,6 +88,10 @@ manageHook' = manageSpawn
             ]
         media =
             [ className =? "Spotify"
+            ]
+        news =
+            [ title =? "mail"
+            , title =? "Thunderbird"
             ]
 
         anyQuery x = fmap or . mapM (=? x) $ [resource, className, title]

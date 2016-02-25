@@ -54,18 +54,15 @@ startupHook' host = case host of
             spawnOnce "dunst -print >> ~/.dunst.log"
             -- spawnOnce "clipmenud"
             spawnOnce "xcompmgr"
-            -- spawnOnce "xscreensaver -no-splash"
-            -- spawnOnce "setxkbmap -layout de,de -model pc105 -variant neo,basic -option grp:sclk_toggle,grp_led:scroll"
             spawnOnce "unclutter -idle 5 -root"
             spawnOnce "redshift -l 48.3:10.9 -t 5500:2800"
             spawnOnce "xset -b"
             spawnOnceSleep 2 "conky"
 
             -- start applications
-            withTerminalWithName spawnOnce "offlineimap" "offlineimap"
-            withTerminalWithName spawnOnce "mailClient" "mutt"
-            -- spawnOnce "firefox"
-            -- spawnOnceSleep 10 "chromium"
+            withTerminalWithName spawnOnce "twitter" "turses"
+            withTerminalWithName spawnOnce "mail" "offlineimap"
+            withTerminalWithName spawnOnce "mail" "mutt"
             browser
             onceInTerminalWithNameSleep 5 "htop" "htop -u david"
             spawnOnceSleep 10 "telegram"
