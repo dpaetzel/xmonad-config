@@ -54,6 +54,7 @@ keys' host conf = M.fromList $
     , ((winMask, xK_a                                            ), putAwayMouse)
     , ((appMask, xK_Print                                        ), scrotWin)
     , ((0, xK_Print                                              ), scrotFull)
+    , ((appMask, xK_n                                            ), showNeo)
     , ((appMask, xK_k                                            ), xKill)
 
 

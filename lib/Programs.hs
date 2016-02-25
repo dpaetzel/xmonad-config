@@ -387,9 +387,12 @@ scrotWin :: X ()
 scrotWin = spawn "sleep 0.2; scrot -s -e \'gimp $f\'"
 
 
--- TODO remove '~'
 scrotFull :: X ()
-scrotFull = spawn "scrot -e \'mv $f ~/Pictures/screenshots/not-yet-archived/\'"
+scrotFull = spawn "scrot"
+
+
+showNeo :: X ()
+showNeo = spawn "feh ~/.neo.png"
 
 
 xKill :: X ()
