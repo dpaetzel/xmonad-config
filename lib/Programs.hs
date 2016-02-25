@@ -270,7 +270,7 @@ suspend = do
 
 -- TODO remove '~'
 shutdownSound :: X ()
-shutdownSound = spawn "mplayer ~/Share/confs/sound/borealis/Exit1_1.wav"
+shutdownSound = spawn "mplayer ~/.sound/borealis/Exit1_1.wav"
 -- }}}
 
 
