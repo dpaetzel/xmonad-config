@@ -142,20 +142,6 @@ addNote = mkXPrompt Note myXPConfig complFun appendToIn
     }
 
 
-clipmenuArgs :: [String]
-clipmenuArgs =
-  [ "-l", "16"
-  , "-i"
-  , "-nb", "\\#000000"
-  , "-nf", "\\#729fcf"
-  , "-sb", "\\#000000"
-  , "-sf", "\\#ffffff"
-  , "-fn", "Inconsolata-14:normal"
-  ]
-setClipboard :: X ()
-setClipboard = spawn $ "clipmenu " ++ unwords clipmenuArgs
-
-
 -- my own scratchpad action (I like toggling workspace more than bringing
 -- window): Toggle terminal workspace and start terminal if not yet existing.
 toggleScratchpad :: X ()

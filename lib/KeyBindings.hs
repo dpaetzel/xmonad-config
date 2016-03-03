@@ -47,7 +47,6 @@ keys' host conf = M.fromList $
     -- util
     , ((appMask, xK_space                                        ), dmenu)
     , ((appMask .|. shiftMask, xK_space                          ), dmenuAll)
-    , ((appMask, xK_c                                            ), setClipboard)
     , ((appMask, xK_Delete                                       ), ejectTray)
     , ((appMask, xK_Insert                                       ), insertTray)
     , ((appMask, xK_l                                            ), lockScreen)

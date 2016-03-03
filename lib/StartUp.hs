@@ -52,7 +52,7 @@ startupHook' host = case host of
             home "Bin/bg-set" >>= spawn
             setDefaultCursor xC_left_ptr
             spawnOnce "dunst -print >> ~/.dunst.log"
-            -- spawnOnce "clipmenud"
+            spawnOnce "parcellite"
             spawnOnce "xcompmgr"
             spawnOnce "unclutter -idle 5 -root"
             spawnOnce "redshift -l 48.3:10.9 -t 5500:2800"
