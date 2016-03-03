@@ -7,11 +7,12 @@ import XMonad.Layout.IM
 import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Reflect
+import XMonad.Layout.Renamed
 
 -- workspaces
 workspaces' =
     [ "news"
-    , "1:web"
+    , "1"
     , "2"
     , "3"
     , "4"
@@ -20,7 +21,7 @@ workspaces' =
     , "7:media"
     , "8:chat"
     , "9:top"
-    , "10:trash"
+    , "0:trash"
     , "browser"
     , "terminal"
     , "editor"]
@@ -30,26 +31,29 @@ workspaces' =
 layoutHook' =
     avoidStruts  $
     smartBorders $
-    onWorkspace "news"         (Mirror . tiled $ 1/7) $
-    onWorkspace "1:web"        (noBorders Full) $
-    onWorkspace "8:chat"       im $
-    onWorkspace "9:top"        (noBorders Full) $
-    onWorkspace "10:trash"     (Grid ||| Full) $
-    onWorkspace "browser"      (tiled halfs ||| noBorders Full ||| Mirror (tiled halfs)) $
-    onWorkspace "terminal"     (noBorders Full) $
-    onWorkspace "editor"       (noBorders Full ||| tiled halfs) $
-    tiled halfs ||| Mirror (tiled halfs) ||| noBorders Full
+    onWorkspace "news"        newsLayout $
+    onWorkspace "8:chat"      chatLayout $
+    onWorkspace "0:trash"     trashLayout $
+    fullLayout ||| vertical halfs ||| horizontal halfs
 
     where
-        -- Default tiling algorithm partitions the screen into two panes
-        tiled = reflectHoriz . Tall nmaster delta
-        -- The default number of windows in the master pane
+        -- layout on the news workspace
+        newsLayout = rename "News" . Mirror . reflectHoriz . vertical $ 1/7
+        -- layout on the chat workspace
+        chatLayout = rename "Chat" . withIM (1/8) (And (ClassName "Skype") (Not $ Role "ConversationsWindow")) $ vertical halfs
+        -- layout on the trash workspace
+        trashLayout = rename "Trash" $ Grid
+        -- fullscreen layout
+        fullLayout = rename "Full" $ noBorders Full
+        -- horizontal tiled layout
+        horizontal = rename "Horizontal" . Mirror . Tall nmaster delta
+        -- vertical tiled layout
+        vertical = rename "Vertical" . Tall nmaster delta
+        -- default number of windows in the master pane
         nmaster = 1
-        -- Proportion of screen occupied by master pane
-        halfs  = 1/2
-        -- Proportion of screen occupied by master pane
-        thirds  = 3/5
-        -- Percent of screen to increment by when resizing panes
+        -- percent of screen to increment by when resizing panes
         delta   = 3/100
-        -- Instant Messaging layout
-        im = withIM (1/8) (And (ClassName "Skype") (Not $ Role "ConversationsWindow")) $ tiled halfs
+        -- proportion of screen occupied by master pane
+        halfs  = 1/2
+        -- rename a layout
+        rename = renamed . return . Replace
