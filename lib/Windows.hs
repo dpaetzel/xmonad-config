@@ -1,17 +1,15 @@
 module Windows where
 
-
-import Text.Regex.Posix
 import XMonad
 import XMonad.Actions.SpawnOn
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
-import XMonad.Util.Scratchpad
 import XMonad.Util.WindowPropertiesRE
-import qualified XMonad.StackSet as W
+-- import qualified XMonad.StackSet as W
 
 
 -- window rules
+manageHook' :: ManageHook
 manageHook' = manageSpawn
     <+> (composeAll . concat $
     [ [anyQuery x --> doIgnore               | x <- ignore]
@@ -38,7 +36,7 @@ manageHook' = manageSpawn
     -- TODO which one
     <+> manageDocks
     -- <+> scratchpadManageHook (W.RationalRect 0 0 1 1)
-    <+> manageHook defaultConfig
+    <+> manageHook def
 
     where
         ignore   = ["desktop_window", "desktop", "notify-osd", "trayer", "stalonetray"]

@@ -1,6 +1,5 @@
 module Dzen where
 
-
 import XMonad.Hooks.DynamicLog
 -- import XMonad.Util.Loggers
 import XMonad.Util.Run
@@ -11,7 +10,7 @@ dzenCommand :: String
 dzenCommand = "killall dzen2; dzen2 -p -xs 2 -ta r -tw 1920 -fn Inconsolata-14:normal -fg '#ffffff' -bg '#000000' -e 'onStart=lower'"
 
 
-dzenPP' handle = defaultPP
+dzenPP' handle = def
     { ppOutput          = hPutStrLn handle
     -- , ppCurrent         = surroundWith "[ " " ]" . return . head
     -- , ppVisible         = surroundWith "[ " " ] " . return . head

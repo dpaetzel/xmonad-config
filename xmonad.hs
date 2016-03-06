@@ -1,14 +1,13 @@
 import Data.Monoid
 
-import System.Posix.Unistd
+import System.Posix.Unistd (getSystemID, nodeName)
 
 import XMonad
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.FadeInactive
+import XMonad.Hooks.DynamicLog (dynamicLogWithPP)
+import XMonad.Hooks.EwmhDesktops (ewmh, fullscreenEventHook)
+import XMonad.Hooks.FadeInactive (fadeInactiveLogHook)
 import XMonad.Hooks.UrgencyHook
-import XMonad.Util.Run
-
+import XMonad.Util.Run (spawnPipe)
 
 import BorderColors
 import KeyBindings
@@ -22,16 +21,13 @@ import Dzen
 -- focus follows the mouse pointer?
 focusFollowsMouse' = False
 
-
 -- event handling
 eventHook' = mempty <+> fullscreenEventHook
-
 
 -- status bars and logging
 logHook' handle = fadeInactiveLogHook fadeAmount >> dynamicLogWithPP (dzenPP' handle)
     where
         fadeAmount = 0.7
-
 
 main = do
     host <- fmap nodeName getSystemID
@@ -39,7 +35,7 @@ main = do
     xmonad
         . ewmh
         . withUrgencyHook NoUrgencyHook
-        $ defaultConfig
+        $ def
             { terminal           = terminalName
             , focusFollowsMouse  = focusFollowsMouse'
             , modMask            = winMask

@@ -134,7 +134,7 @@ addNote = mkXPrompt Note myXPConfig complFun appendToIn
         date <- fmap (show . utctDay) getCurrentTime
         file <- fmap (++ "/In.org") getHomeDirectory
         appendFile file ("* " ++ note ++ "\n")
-    myXPConfig = defaultXPConfig {
+    myXPConfig = def {
         bgColor = "#000000",
         fgColor = "#ffffff",
         font = "xft: Inconsolata-14:normal",
