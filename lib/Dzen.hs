@@ -22,8 +22,8 @@ dzenPP' handle = def
     , ppSep             = "  |  "
     , ppWsSep           = "  "
     , ppTitle           = shorten 50
-    -- , ppLayout          = dzenColor "white" "" . icon
-    , ppLayout          = dzenColor "white" ""
+    , ppLayout          = dzenColor "white" "" . icon
+    -- , ppLayout          = dzenColor "white" ""
     , ppOrder           = reverse
     -- , ppSort            = mkWsSort getXineramaPhysicalWsCompare
     -- , ppExtras          =  [maildirNew "~/Mail/gmail/INBOX"] -- [date "%Y-%m-%d"]
@@ -31,9 +31,10 @@ dzenPP' handle = def
 
     where
     icon layout = case layout of
-        "Tall" -> "^i(~/.xmonad/icons/layout_tall.xbm)"
-        "Mirror Tall" -> "^i(~/.xmonad/icons/layout_mirror_tall.xbm)"
-        "Full" -> "^i(~/.xmonad/icons/layout_full.xbm)"
-        "Grid" -> "^i(~/.xmonad/icons/grid.xbm)"
-        "Circle" -> "^i(~/.xmonad/icons/empty.xbm)"
+        "News" -> "^i(.xmonad/icons/empty.xbm)"
+        "Chat" -> "^i(.xmonad/icons/empty.xbm)"
+        "Trash" -> "^i(.xmonad/icons/grid.xbm)"
+        "Full" -> "^i(.xmonad/icons/layout_full.xbm)"
+        "Horizontal" -> "^i(.xmonad/icons/layout_mirror_tall.xbm)"
+        "Vertical" -> "^i(.xmonad/icons/layout_tall.xbm)"
         other -> other
