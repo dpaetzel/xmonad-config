@@ -4,7 +4,6 @@ module KeyBindings
     , mouseBindings')
     where
 
-
 import Control.Monad (void)
 import qualified Data.Map as M
 import Graphics.X11.ExtraTypes
@@ -17,7 +16,6 @@ import XMonad.Actions.WindowBringer
 import XMonad.Hooks.ManageDocks
 import qualified XMonad.StackSet as W
 
-
 import Programs
 import ScreenSetup
 
@@ -25,7 +23,6 @@ import ScreenSetup
 -- modkeys
 winMask = mod1Mask
 appMask = mod4Mask
-
 
 -- key bindings
 keys' host conf = M.fromList $
@@ -43,7 +40,6 @@ keys' host conf = M.fromList $
     , ((appMask, xK_Return                                       ), addNote)
     , ((appMask .|. shiftMask, xK_Return                         ), gtdIn)
 
-
     -- util
     , ((appMask, xK_space                                        ), dmenu)
     , ((appMask .|. shiftMask, xK_space                          ), dmenuAll)
@@ -56,7 +52,6 @@ keys' host conf = M.fromList $
     , ((appMask, xK_n                                            ), showNeo)
     , ((appMask, xK_k                                            ), xKill)
 
-
     -- sound
     , ((appMask, xK_Home                                         ), inToggle)
     , ((appMask, xK_End                                          ), outToggle)
@@ -66,21 +61,17 @@ keys' host conf = M.fromList $
     , ((appMask, xK_m                                            ), pavuControl)
     , ((appMask, xK_q                                            ), equalizer)
 
-
     -- screen brightness
     , ((0, xF86XK_MonBrightnessUp                               ), lightUp)
     , ((0, xF86XK_MonBrightnessDown                             ), lightDown)
-
 
     -- music
     , ((0, xF86XK_AudioNext                                      ), spotifyCtl $ "next")
     , ((0, xF86XK_AudioPrev                                      ), spotifyCtl $ "previous")
     , ((0, xF86XK_AudioPlay                                      ), spotifyCtl $ "playpause")
 
-
     -- other
     , ((winMask, xK_r                                            ), sendMessage ToggleStruts)
-
 
     -- windows
     -- Close focused window
@@ -88,32 +79,30 @@ keys' host conf = M.fromList $
     -- Move focus to the next window
     , ((winMask, xK_j                                            ), windows W.focusDown)
     -- Move focus to the previous window
-    , ((winMask, xK_k                                            ), windows W.focusUp  )
+    , ((winMask, xK_k                                            ), windows W.focusUp)
     -- Swap the focused window with the next window
-    , ((winMask .|. shiftMask, xK_j                              ), windows W.swapDown  )
+    , ((winMask .|. shiftMask, xK_j                              ), windows W.swapDown)
     -- Swap the focused window with the previous window
-    , ((winMask .|. shiftMask, xK_k                              ), windows W.swapUp    )
+    , ((winMask .|. shiftMask, xK_k                              ), windows W.swapUp)
     -- Move focus to the master window
-    , ((winMask, xK_m                                            ), windows W.focusMaster  )
+    , ((winMask, xK_m                                            ), windows W.focusMaster)
     -- Swap the focused window and the master window
     , ((winMask .|. shiftMask, xK_m                              ), windows W.swapMaster)
     -- Push window back into tiling
     , ((winMask, xK_i                                            ), withFocused $ windows . W.sink)
     -- Toggle Window Borders
-    , ((winMask, xK_d                                            ), withFocused toggleBorder)
+    -- , ((winMask, xK_d                                            ), withFocused toggleBorder)
     -- window finder
     , ((winMask, xK_g                                            ), gotoMenuArgs dmenuArgs)
-
 
     -- workspaces
     -- toogle last workspace
     , ((winMask, xK_o                                            ), toggleWS)
 
-
     -- layouts
     -- Rotate through the available layout algorithms
     , ((winMask, xK_p                                            ), sendMessage NextLayout)
-    --  Reset the layouts on the current workspace to default
+    -- Reset the layouts on the current workspace to default
     , ((winMask .|. shiftMask, xK_p                              ), setLayout $ XMonad.layoutHook conf)
     -- Shrink the master area
     , ((winMask, xK_h                                            ), sendMessage Shrink)
@@ -124,20 +113,17 @@ keys' host conf = M.fromList $
     -- Decrement the number of windows in the master area
     , ((winMask, xK_period                                       ), sendMessage (IncMasterN (-1)))
 
-
     -- screens
     -- go to the next "xinerama" screen
     -- , ((winMask, xK_r                                            ), nextScreen)
     -- swap screens
     -- , ((winMask, xK_s                                            ), swapPrevScreen)
 
-
     -- xmonad
     -- Quit xmonad
     , ((winMask .|. shiftMask, xK_F12                            ), closeAll >> io exitSuccess)
     -- Restart xmonad
     , ((winMask, xK_F12                                          ), spawn "xmonad --recompile; xmonad --restart")
-
 
     -- power management
     -- Suspend computer
@@ -169,7 +155,6 @@ keys' host conf = M.fromList $
     [((m .|. winMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
     | (key, sc) <- zip [xK_c, xK_e, xK_adiaeresis] [0..]
     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
-
 
 -- mouse bindings
 mouseBindings' _ = M.fromList
