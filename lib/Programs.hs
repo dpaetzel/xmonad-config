@@ -1,20 +1,18 @@
 module Programs where
 
-
-import Data.List
-import Data.List.Split
-import Data.Time
-import System.Directory
-import System.Environment
-import Text.Printf
-import Text.Regex.Posix
+import Data.List (sort)
+import Data.List.Split (splitOn)
+import Data.Time (getCurrentTime, utctDay)
+import System.Directory (getHomeDirectory)
+import System.Environment (getEnv)
+import Text.Printf (printf)
+import Text.Regex.Posix ((=~))
 import XMonad
-import XMonad.Actions.CycleWS
-import XMonad.Actions.SpawnOn
+import XMonad.Actions.CycleWS (toggleWS)
+import XMonad.Actions.SpawnOn (spawnHere)
 import XMonad.Prompt
-import XMonad.Prompt.AppendFile
-import XMonad.Util.Run
-import XMonad.Util.SpawnOnce
+import XMonad.Util.Run (runProcessWithInput)
+import XMonad.Util.SpawnOnce (spawnOnce)
 import qualified XMonad.StackSet as W
 import qualified XMonad.Util.Dmenu as D
 

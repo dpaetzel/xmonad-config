@@ -4,24 +4,23 @@ module KeyBindings
     , mouseBindings')
     where
 
-import Control.Monad (void)
 import qualified Data.Map as M
 import Graphics.X11.ExtraTypes
-import System.Exit
+import System.Exit (exitSuccess)
 import XMonad
-import XMonad.Actions.CycleWS
-import XMonad.Actions.NoBorders
-import XMonad.Actions.OnScreen
-import XMonad.Actions.WindowBringer
+import XMonad.Actions.CycleWS (toggleOrView, toggleWS)
+import XMonad.Actions.WindowBringer (gotoMenuArgs)
 import XMonad.Hooks.ManageDocks
 import qualified XMonad.StackSet as W
 
 import Programs
-import ScreenSetup
 
 
 -- modkeys
+winMask :: KeyMask
 winMask = mod1Mask
+
+appMask :: KeyMask
 appMask = mod4Mask
 
 -- key bindings
@@ -66,9 +65,9 @@ keys' host conf = M.fromList $
     , ((0, xF86XK_MonBrightnessDown                             ), lightDown)
 
     -- music
-    , ((0, xF86XK_AudioNext                                      ), spotifyCtl $ "next")
-    , ((0, xF86XK_AudioPrev                                      ), spotifyCtl $ "previous")
-    , ((0, xF86XK_AudioPlay                                      ), spotifyCtl $ "playpause")
+    , ((0, xF86XK_AudioNext                                      ), spotifyCtl "next")
+    , ((0, xF86XK_AudioPrev                                      ), spotifyCtl "previous")
+    , ((0, xF86XK_AudioPlay                                      ), spotifyCtl "playpause")
 
     -- other
     , ((winMask, xK_r                                            ), sendMessage ToggleStruts)

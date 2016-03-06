@@ -2,8 +2,8 @@ module Dzen where
 
 import XMonad.Hooks.DynamicLog
 -- import XMonad.Util.Loggers
-import XMonad.Util.Run
--- import XMonad.Util.WorkspaceCompare
+import XMonad.Util.Run (hPutStrLn)
+import XMonad.Util.WorkspaceCompare (mkWsSort, getXineramaPhysicalWsCompare)
 
 
 dzenCommand :: String
@@ -12,8 +12,6 @@ dzenCommand = "killall dzen2; dzen2 -p -xs 2 -ta r -tw 1920 -fn Inconsolata-14:n
 
 dzenPP' handle = def
     { ppOutput          = hPutStrLn handle
-    -- , ppCurrent         = surroundWith "[ " " ]" . return . head
-    -- , ppVisible         = surroundWith "[ " " ] " . return . head
     , ppCurrent         = dzenColor "white" ""
     , ppVisible         = dzenColor "#729fcf" "" -- tango blue
     , ppHidden          = dzenColor "#555753" "" -- tango lightblack
@@ -23,10 +21,8 @@ dzenPP' handle = def
     , ppWsSep           = "  "
     , ppTitle           = shorten 50
     , ppLayout          = dzenColor "white" "" . icon
-    -- , ppLayout          = dzenColor "white" ""
     , ppOrder           = reverse
-    -- , ppSort            = mkWsSort getXineramaPhysicalWsCompare
-    -- , ppExtras          =  [maildirNew "~/Mail/gmail/INBOX"] -- [date "%Y-%m-%d"]
+    , ppSort            = mkWsSort getXineramaPhysicalWsCompare
     }
 
     where

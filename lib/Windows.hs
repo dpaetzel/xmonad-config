@@ -1,11 +1,10 @@
 module Windows where
 
 import XMonad
-import XMonad.Actions.SpawnOn
-import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.ManageHelpers
-import XMonad.Util.WindowPropertiesRE
--- import qualified XMonad.StackSet as W
+import XMonad.Actions.SpawnOn (manageSpawn)
+import XMonad.Hooks.ManageDocks (manageDocks)
+import XMonad.Hooks.ManageHelpers (doFullFloat, isFullscreen)
+import XMonad.Util.WindowPropertiesRE ((~?))
 
 
 -- window rules

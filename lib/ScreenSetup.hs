@@ -1,6 +1,5 @@
 module ScreenSetup where
 
-
 import Util.XRandR
 import Util.XRandR.Types
 

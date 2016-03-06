@@ -1,15 +1,17 @@
 module Workspaces where
 
 import XMonad
-import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageDocks (avoidStruts)
 import XMonad.Layout.Grid
 import XMonad.Layout.IM
-import XMonad.Layout.NoBorders
-import XMonad.Layout.PerWorkspace
-import XMonad.Layout.Reflect
+import XMonad.Layout.NoBorders (noBorders, smartBorders)
+import XMonad.Layout.PerWorkspace (onWorkspace)
+import XMonad.Layout.Reflect (reflectHoriz)
 import XMonad.Layout.Renamed
 
+
 -- workspaces
+workspaces' :: [String]
 workspaces' =
     [ "news"
     , "1"
@@ -42,7 +44,7 @@ layoutHook' =
         -- layout on the chat workspace
         chatLayout = rename "Chat" . withIM (1/8) (And (ClassName "Skype") (Not $ Role "ConversationsWindow")) $ vertical halfs
         -- layout on the trash workspace
-        trashLayout = rename "Trash" $ Grid
+        trashLayout = rename "Trash" Grid
         -- fullscreen layout
         fullLayout = rename "Full" $ noBorders Full
         -- horizontal tiled layout

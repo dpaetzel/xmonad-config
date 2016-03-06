@@ -1,16 +1,11 @@
 module StartUp where
 
-
-import Control.Concurrent
-import Control.Monad (when)
 import XMonad
-import XMonad.Hooks.SetWMName
-import XMonad.Util.Cursor
-import XMonad.Util.SpawnOnce
-
+import XMonad.Hooks.SetWMName (setWMName)
+import XMonad.Util.Cursor (setDefaultCursor)
+import XMonad.Util.SpawnOnce (spawnOnce)
 
 import Programs
-import ScreenSetup
 
 
 -- startup
@@ -20,10 +15,8 @@ startupHook' host = case host of
     -- {{{ anaxagoras specific
     "anaxagoras" -> do
 
-        -- spawnOnceSleep 10 "pidgin"
+        spawnOnceSleep 10 "telegram"
         spawnOnceSleep 10 "skype"
-        -- TODO wrote "weechat" twice
-        -- onceInTerminalWithNameSleep 10 "ircClient" "weechat"
         home "Bin/launchers/wa" >>= spawnOnceSleep 10
 
         defaultStartupHook
@@ -32,8 +25,7 @@ startupHook' host = case host of
     -- {{{ heraklit specific
     "heraklit" -> do
 
-        -- screen configuration
-        -- xfork $ screenSetup host
+        inTerminalWithName "Telegram" "telegram-cli"
 
         defaultStartupHook
     -- }}}
@@ -65,7 +57,6 @@ startupHook' host = case host of
             withTerminalWithName spawnOnce "mail" "mutt"
             browser
             onceInTerminalWithNameSleep 5 "htop" "htop -u david"
-            spawnOnceSleep 10 "telegram"
     -- }}}
 
 
