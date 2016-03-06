@@ -31,8 +31,8 @@ dzenPP' handle = def
 
     where
     icon layout = case layout of
-        "News" -> "^i(.xmonad/icons/empty.xbm)"
-        "Chat" -> "^i(.xmonad/icons/empty.xbm)"
+        "News" -> "^i(.xmonad/icons/grid.xbm)"
+        "Chat" -> "^i(.xmonad/icons/grid.xbm)"
         "Trash" -> "^i(.xmonad/icons/grid.xbm)"
         "Full" -> "^i(.xmonad/icons/layout_full.xbm)"
         "Horizontal" -> "^i(.xmonad/icons/layout_mirror_tall.xbm)"
