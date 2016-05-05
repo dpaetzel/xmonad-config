@@ -36,8 +36,9 @@ keys' host conf = M.fromList $
     , ((appMask, xK_e                                            ), fileManager)
     , ((appMask, xK_y                                            ), youtubeViewer)
     , ((appMask, xK_u                                            ), gtd)
-    , ((appMask, xK_Return                                       ), addNote)
-    , ((appMask .|. shiftMask, xK_Return                         ), gtdIn)
+    , ((winMask .|. appMask, xK_Return                           ), gtdIn)
+    , ((appMask, xK_Return                                       ), addNote True)
+    , ((appMask .|. shiftMask, xK_Return                         ), addNote False)
 
     -- util
     , ((appMask, xK_space                                        ), dmenu)
@@ -54,6 +55,8 @@ keys' host conf = M.fromList $
     -- sound
     , ((appMask, xK_Home                                         ), inToggle)
     , ((appMask, xK_End                                          ), outToggle)
+    , ((0, xK_KP_8                                               ), outUp)
+    , ((0, xK_KP_2                                               ), outDown)
     , ((0, xF86XK_AudioRaiseVolume                               ), outUp)
     , ((0, xF86XK_AudioLowerVolume                               ), outDown)
     , ((0, xF86XK_AudioMute                                      ), sequence_ [outToggle, inToggle])
@@ -65,9 +68,12 @@ keys' host conf = M.fromList $
     , ((0, xF86XK_MonBrightnessDown                             ), lightDown)
 
     -- music
+    , ((0, xF86XK_AudioPlay                                      ), spotifyCtl "playpause")
     , ((0, xF86XK_AudioNext                                      ), spotifyCtl "next")
     , ((0, xF86XK_AudioPrev                                      ), spotifyCtl "previous")
-    , ((0, xF86XK_AudioPlay                                      ), spotifyCtl "playpause")
+    , ((0, xK_KP_5                                               ), spotifyCtl "playpause")
+    , ((0, xK_KP_6                                               ), spotifyCtl "next")
+    , ((0, xK_KP_4                                               ), spotifyCtl "previous")
 
     -- other
     , ((winMask, xK_r                                            ), sendMessage ToggleStruts)

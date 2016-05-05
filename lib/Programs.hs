@@ -122,8 +122,8 @@ instance XPrompt Note where
     showXPrompt Note = "In.org < "
 
 
-addNote :: X ()
-addNote = mkXPrompt Note myXPConfig complFun appendToIn
+addNote :: Bool -> X ()
+addNote withDate = mkXPrompt Note myXPConfig complFun appendToIn
     where
     complFun :: String -> IO [String]
     complFun = return . const []
@@ -132,7 +132,9 @@ addNote = mkXPrompt Note myXPConfig complFun appendToIn
     appendToIn note = io $ do
         date <- fmap (show . utctDay) getCurrentTime
         file <- fmap (++ "/In.org") getHomeDirectory
-        appendFile file ("* " ++ note ++ "\n")
+        if withDate
+        then appendFile file ("* [" ++ date ++ "] " ++ note ++ "\n")
+        else appendFile file ("* " ++ note ++ "\n")
     myXPConfig = def {
         bgColor = "#000000",
         fgColor = "#ffffff",
