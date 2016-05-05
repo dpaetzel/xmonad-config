@@ -19,7 +19,8 @@ import qualified XMonad.Util.Dmenu as D
 
 -- {{{ general definitions and helper functions
 terminalName :: String
-terminalName = "urxvt -uc"
+-- terminalName = "urxvt -uc"
+terminalName = "lilyterm"
 
 
 dmenuArgs :: [String]
@@ -268,8 +269,9 @@ runTerminalWithName windowName =
     spawn $ unwords
         -- TODO generalize (see 14 lines below!)
         [ terminalName
-        , "-name", windowName
-        , "-title", windowName
+        -- , "-name", windowName
+        -- , "-title", windowName
+        , "--title", windowName
         ]
 
 
@@ -281,8 +283,9 @@ withTerminalWithName :: (String -> X ()) -> String -> String -> X ()
 withTerminalWithName action windowName command =
     action $ unwords
         [ terminalName
-        , "-name", windowName
-        , "-title", windowName
+        -- , "-name", windowName
+        -- , "-title", windowName
+        , "--title", windowName
         , "-e", command
         ]
 
