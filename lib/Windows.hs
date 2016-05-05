@@ -3,7 +3,7 @@ module Windows where
 import XMonad
 import XMonad.Actions.SpawnOn (manageSpawn)
 import XMonad.Hooks.ManageDocks (manageDocks)
-import XMonad.Hooks.ManageHelpers (doFullFloat, isFullscreen)
+import XMonad.Hooks.ManageHelpers (doCenterFloat, doFullFloat, isFullscreen)
 import XMonad.Util.WindowPropertiesRE ((~?))
 
 
@@ -27,6 +27,12 @@ manageHook' = manageSpawn
         , title     =? "Volume Control"
         , className =? "Nm-openconnect-auth-dialog"
         , title     =? "Wireshark"
+        -- TODO check whether these are needed/have any merit
+        , stringProperty "WM_WINDOW_ROLE" =? "app"
+        -- , stringProperty "_NET_WM_WINDOW_TYPE" =? "_NET_WM_WINDOW_TYPE_DIALOG"
+        ]
+    , these doCenterFloat
+        [ stringProperty "WM_WINDOW_ROLE" =? "gimp-toolbox-color-dialog"
         ]
     , these (doShift "news")
         [ title =? "mail"
