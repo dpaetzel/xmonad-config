@@ -59,6 +59,7 @@ startupHook' host = case host of
             withTerminalWithName spawnOnce "mail" "offlineimap"
             withTerminalWithName spawnOnce "mail" "mutt"
             browser
+            editor
             onceInTerminalWithNameSleep 5 "htop" "htop -u david"
     -- }}}
 
