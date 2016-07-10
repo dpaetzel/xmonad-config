@@ -53,6 +53,7 @@ manageHook' = manageSpawn
         , className =? "Skype"
         , className =? "Pidgin"
         , className =? "Telegram"
+        , className =? "telegram-desktop"
         , className =? "Gajim"
         , title     =? "Hangouts" -- not yet working
         ]

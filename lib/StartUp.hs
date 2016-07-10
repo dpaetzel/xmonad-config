@@ -12,28 +12,26 @@ import Programs
 startupHook' :: String -> X ()
 startupHook' host = case host of
 
-    -- {{{ anaxagoras specific
+    -- anaxagoras specific
     "anaxagoras" -> do
 
         spawn "/usr/local/bin/resetmsmice"
-        spawnOnceSleep 10 "telegram"
+        spawnOnceSleep 10 "telegram-desktop"
         spawnOnceSleep 10 "skype"
         -- home "Bin/launchers/wa" >>= spawnOnceSleep 10
         spawnOnceSleep 10 "whatsie"
 
         defaultStartupHook
-    -- }}}
 
-    -- {{{ heraklit specific
+    -- heraklit specific
     "heraklit" -> do
 
         -- inTerminalWithName "Telegram" "telegram-cli"
-        spawnOnceSleep 10 "cutegram"
+        -- spawnOnceSleep 10 "cutegram"
 
         defaultStartupHook
-    -- }}}
 
-    -- {{{ default
+    -- default
     _ -> defaultStartupHook
 
     where
@@ -55,13 +53,9 @@ startupHook' host = case host of
             spawnOnceSleep 5 "dunst" -- not too early or the keybindings don't work
 
             -- start applications
-            withTerminalWithName spawnOnce "twitter" "turses"
-            withTerminalWithName spawnOnce "mail" "offlineimap"
-            withTerminalWithName spawnOnce "mail" "mutt"
+            -- withTerminalWithName spawnOnce "twitter" "turses"
+            -- withTerminalWithName spawnOnce "mail" "offlineimap"
+            -- withTerminalWithName spawnOnce "mail" "mutt"
             browser
             editor
             onceInTerminalWithNameSleep 5 "htop" "htop -u david"
-    -- }}}
-
-
--- vim: foldmethod=marker:
