@@ -18,7 +18,6 @@ startupHook' host = case host of
         spawn "/usr/local/bin/resetmsmice"
         spawnOnceSleep 10 "telegram-desktop"
         spawnOnceSleep 10 "skype"
-        -- home "Bin/launchers/wa" >>= spawnOnceSleep 10
         spawnOnceSleep 10 "whatsie"
 
         defaultStartupHook
