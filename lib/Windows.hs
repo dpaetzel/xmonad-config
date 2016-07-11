@@ -50,9 +50,10 @@ manageHook' = manageSpawn
     , these (doShift "8:chat")
         [ title     =? "ircClient"
         , title     ~? ".*WhatsApp.*"
+        , title     =? "Whatsie"
+        , title     =? "Telegram"
         , className =? "Skype"
         , className =? "Pidgin"
-        , className =? "Telegram"
         , className =? "telegram-desktop"
         , className =? "Gajim"
         , title     =? "Hangouts" -- not yet working
