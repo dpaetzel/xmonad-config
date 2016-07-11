@@ -28,6 +28,17 @@ startupHook' host = case host of
 
         -- inTerminalWithName "Telegram" "telegram-cli"
         -- spawnOnceSleep 10 "cutegram"
+        spawnOnceSleep 3 "trayer\
+                         \ --align right\
+                         \ --margin 430\
+                         \ --expand false\
+                         \ --widthtype pixel\
+                         \ --width 200\
+                         \ --height 24\
+                         \ --transparent true\
+                         \ --alpha 0\
+                         \ --tint 000000"
+        spawnOnceSleep 5 "nm-applet"
 
         defaultStartupHook
 
