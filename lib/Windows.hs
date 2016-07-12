@@ -4,7 +4,6 @@ import XMonad
 import XMonad.Actions.SpawnOn (manageSpawn)
 import XMonad.Hooks.ManageDocks (manageDocks)
 import XMonad.Hooks.ManageHelpers (doCenterFloat, doFullFloat, isFullscreen)
-import XMonad.Util.WindowPropertiesRE ((~?))
 
 
 -- window rules
@@ -49,7 +48,6 @@ manageHook' = manageSpawn
         ]
     , these (doShift "8:chat")
         [ title     =? "ircClient"
-        , title     ~? ".*WhatsApp.*"
         , title     =? "Whatsie"
         , title     =? "Telegram"
         , className =? "Skype"
