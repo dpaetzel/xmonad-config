@@ -9,6 +9,7 @@ import Graphics.X11.ExtraTypes
 import System.Exit (exitSuccess)
 import XMonad
 import XMonad.Actions.CycleWS (toggleOrView, toggleWS)
+import XMonad.Actions.DynamicProjects (renameProjectPrompt, shiftToProjectPrompt, switchProjectPrompt)
 import XMonad.Actions.WindowBringer (gotoMenuArgs)
 import XMonad.Hooks.ManageDocks
 import qualified XMonad.StackSet as W
@@ -103,6 +104,11 @@ keys' host conf = M.fromList $
     -- workspaces
     -- toogle last workspace
     , ((winMask, xK_o                                            ), toggleWS)
+
+    -- projects
+    , ((winMask, xK_w), switchProjectPrompt myXPConfig)
+    , ((winMask .|. shiftMask, xK_w), shiftToProjectPrompt myXPConfig)
+    , ((winMask .|. shiftMask, xK_r), renameProjectPrompt myXPConfig)
 
     -- layouts
     -- Rotate through the available layout algorithms

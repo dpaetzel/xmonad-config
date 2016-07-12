@@ -37,7 +37,7 @@ main = do
     xmonad
         . ewmh
         . withUrgencyHook NoUrgencyHook
-        . dynamicProjects projects myXPConfig
+        . dynamicProjects projects
         $ def
             { terminal           = terminalName
             , focusFollowsMouse  = focusFollowsMouse'
