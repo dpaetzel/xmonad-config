@@ -52,7 +52,7 @@ startupHook' host = case host of
             setWMName "LG3D"
 
             -- look and feel
-            home ".feh-bg" >>= spawnOnce
+            home ".feh-bg" >>= spawn
             setDefaultCursor xC_left_ptr
             spawnOnce "parcellite"
             spawnOnce "xcompmgr"
@@ -63,9 +63,5 @@ startupHook' host = case host of
             spawnOnceSleep 5 "dunst" -- not too early or the keybindings don't work
 
             -- start applications
-            -- withTerminalWithName spawnOnce "twitter" "turses"
-            -- withTerminalWithName spawnOnce "mail" "offlineimap"
-            -- withTerminalWithName spawnOnce "mail" "mutt"
             browser
             editor
-            onceInTerminalWithNameSleep 5 "htop" "htop -u david"
