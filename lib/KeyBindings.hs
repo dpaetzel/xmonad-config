@@ -14,6 +14,7 @@ import XMonad.Hooks.ManageDocks
 import qualified XMonad.StackSet as W
 
 import Programs
+import Workspaces
 
 
 -- modkeys
@@ -140,19 +141,30 @@ keys' host conf = M.fromList $
     ]
     ++
 
-    -- mod-[1..9], Switch to workspace N
-    -- mod-shift-[1..9], Move client to workspace N
-    [ ((winMask .|. m, k), f i)
-    | (i, k) <- zip (XMonad.workspaces conf) ([xK_dead_circumflex] ++ [xK_1 .. xK_9] ++ [xK_0])
-    -- this is the greedy variant
-    , (f, m) <- [(toggleOrView, 0), (windows . W.shift, shiftMask)]]
-    -- , (f, m) <- [(toggleOrDoSkip [] W.view, 0), (windows . W.shift, shiftMask), (toggleOrView, appMask)]]
-    ++
+    -- -- mod-[1..9], Switch to workspace N
+    -- -- mod-shift-[1..9], Move client to workspace N
+    -- [ ((winMask .|. m, k), f i)
+    -- | (i, k) <- zip (XMonad.workspaces conf) ([xK_dead_circumflex] ++ [xK_1 .. xK_9] ++ [xK_0])
+    -- -- this is the greedy variant
+    -- , (f, m) <- [(toggleOrView, 0), (windows . W.shift, shiftMask)]]
+    -- -- , (f, m) <- [(toggleOrDoSkip [] W.view, 0), (windows . W.shift, shiftMask), (toggleOrView, appMask)]]
+    -- ++
 
     [ ((winMask .|. shiftMask, xK_s                              ), windows $ W.shift "browser")
     , ((winMask .|. shiftMask, xK_n                              ), windows $ W.shift "editor")
     , ((winMask .|. shiftMask, xK_t                              ), windows $ W.shift "terminal")
     ]
+    ++
+
+    [ ((winMask .|. mod, key), toWorkspace fun)
+    | (key, toWorkspace) <-
+      [ (xK_x, flip ($) "trash")
+      , (xK_z, flip ($) "chat")]
+      ++
+      zip (xK_dead_circumflex : [xK_1..xK_9] ++ [xK_0]) (map (flip ($)) generalPurposeWS)
+    , (fun, mod) <-
+      [ (toggleOrView, 0)
+      , (windows . W.shift, shiftMask)]]
     ++
 
     -- mod-{c,e,ä}, Switch to physical/Xinerama screens 1, 2, or 3

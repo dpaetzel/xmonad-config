@@ -15,35 +15,42 @@ import XMonad.Layout.ThreeColumns
 
 -- workspaces
 workspaces' :: [String]
-workspaces' =
-    [ "news"
+workspaces' = generalPurposeWS ++ specialWS
+
+
+generalPurposeWS =
+    [ "̂"
     , "1"
     , "2"
     , "3"
     , "4"
     , "5"
     , "6"
-    , "7:media"
-    , "8:chat"
-    , "9:top"
-    , "0:trash"
-    , "browser"
+    , "7"
+    , "8"
+    , "9"
+    , "0"
+    ]
+
+
+specialWS =
+    [ "browser"
+    , "chat"
+    , "editor"
     , "terminal"
-    , "editor"]
+    , "trash"
+    ]
 
 
 -- workspace layouts
 layoutHook' =
     avoidStruts  $
     smartBorders $
-    onWorkspace "news"        newsLayout $
-    onWorkspace "8:chat"      chatLayout $
-    onWorkspace "0:trash"     dishLayout $
+    onWorkspace "chat"      chatLayout $
+    onWorkspace "trash"     dishLayout $
     fullLayout ||| vertical halfs ||| horizontal halfs ||| centered
 
     where
-        -- layout on the news workspace
-        newsLayout = rename "News" . Mirror . reflectHoriz . vertical $ 1/7
         -- layout on the chat workspace
         chatLayout = rename "Chat" . withIM (1/8) (And (ClassName "Skype") (Not $ Role "ConversationsWindow")) $ vertical halfs
         -- layout on the trash workspace
