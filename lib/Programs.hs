@@ -135,12 +135,15 @@ addNote withDate = mkXPrompt Note myXPConfig complFun appendToIn
         if withDate
         then appendFile file ("* [" ++ date ++ "] " ++ note ++ "\n")
         else appendFile file ("* " ++ note ++ "\n")
-    myXPConfig = def {
-        bgColor = "#000000",
-        fgColor = "#ffffff",
-        font = "xft: Inconsolata-14:normal",
-        promptBorderWidth = 0
-    }
+
+
+myXPConfig :: XPConfig
+myXPConfig = def {
+    bgColor = "#000000",
+    fgColor = "#ffffff",
+    font = "xft: Inconsolata-14:normal",
+    promptBorderWidth = 0
+}
 
 
 -- my own scratchpad action (I like toggling workspace more than bringing

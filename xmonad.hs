@@ -3,6 +3,7 @@ import Data.Monoid
 import System.Posix.Unistd (getSystemID, nodeName)
 
 import XMonad
+import XMonad.Actions.DynamicProjects (dynamicProjects)
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP)
 import XMonad.Hooks.EwmhDesktops (ewmh, fullscreenEventHook)
 import XMonad.Hooks.FadeInactive (fadeInactiveLogHook)
@@ -12,6 +13,7 @@ import XMonad.Util.Run (spawnPipe)
 import BorderColors
 import KeyBindings
 import Programs
+import Projects
 import StartUp
 import Windows
 import Workspaces
@@ -35,6 +37,7 @@ main = do
     xmonad
         . ewmh
         . withUrgencyHook NoUrgencyHook
+        . dynamicProjects projects myXPConfig
         $ def
             { terminal           = terminalName
             , focusFollowsMouse  = focusFollowsMouse'
