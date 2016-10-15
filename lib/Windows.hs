@@ -33,20 +33,11 @@ manageHook' = manageSpawn
     , these doCenterFloat
         [ stringProperty "WM_WINDOW_ROLE" =? "gimp-toolbox-color-dialog"
         ]
-    , these (doShift "news")
-        [ title =? "mail"
-        , title =? "twitter"
-        , title =? "Thunderbird"
-        ]
     , these (doShift "browser")
         [ className =? "chromium"
         , className =? "chromium-browser"
         ]
-    , these (doShift "7:media")
-        [ className =? "Spotify"
-        , title     =? "youtube-viewer"
-        ]
-    , these (doShift "8:chat")
+    , these (doShift "chat")
         [ title     =? "ircClient"
         , title     =? "Whatsie"
         , title     =? "Telegram"
@@ -55,10 +46,6 @@ manageHook' = manageSpawn
         , className =? "telegram-desktop"
         , className =? "Gajim"
         , title     =? "Hangouts" -- not yet working
-        ]
-    , these (doShift "9:top")
-        [ title =? "htop"
-        , title =? "powertop"
         ]
     , these (doShift "editor")
         [ className =? "Emacs"
