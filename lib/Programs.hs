@@ -58,7 +58,9 @@ projectPath = io $ fmap (++ "/Projects") getHomeDirectory
 
 -- {{{ quick access
 dmenu :: X ()
-dmenu = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= io . executable >>= spawnHere
+-- currently not working properly when using the Exec strings from the .desktop files -.-
+-- dmenu = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= io . executable >>= spawnHere
+dmenu = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
     where
     programNames :: IO [String]
     programNames = fmap (map removeSuffix . onlyDesktopFiles . lines) $ lsApplicationsPath
