@@ -1,3 +1,0 @@
-[submodule "lib/Util"]
-	path = lib/Util
-	url = git@github.com:davho/hutl
