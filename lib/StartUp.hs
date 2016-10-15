@@ -52,7 +52,7 @@ startupHook' host = case host of
             setWMName "LG3D"
 
             -- look and feel
-            home ".feh-bg" >>= spawn
+            fmap ("feh --bg-scale " ++) (home "Pictures/wallpapers/current") >>= spawnOnce
             setDefaultCursor xC_left_ptr
             spawnOnce "parcellite"
             spawnOnce "xcompmgr"
