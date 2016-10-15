@@ -29,8 +29,6 @@ keys' host conf = M.fromList $
 
     -- main programs
     [ ((winMask, xK_b                                            ), runTerminal)
-    , ((winMask, xK_s                                            ), toggleBrowser)
-    , ((winMask, xK_n                                            ), toggleEditor)
     , ((winMask, xK_t                                            ), toggleScratchpad)
     , ((appMask, xK_o                                            ), documentViewer)
     , ((appMask, xK_minus                                        ), dmenuProjectOrg)
@@ -159,7 +157,9 @@ keys' host conf = M.fromList $
     [ ((winMask .|. mod, key), toWorkspace fun)
     | (key, toWorkspace) <-
       [ (xK_x, flip ($) "trash")
-      , (xK_z, flip ($) "chat")]
+      , (xK_z, flip ($) "chat")
+      , (xK_s, flip ($) "browser")
+      , (xK_n, flip ($) "editor")]
       ++
       zip (xK_dead_circumflex : [xK_1..xK_9] ++ [xK_0]) (map (flip ($)) generalPurposeWS)
     , (fun, mod) <-
