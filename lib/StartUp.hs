@@ -16,7 +16,6 @@ startupHook' host = case host of
     "anaxagoras" -> do
 
         spawn "/usr/local/bin/resetmsmice"
-        spawnOnceSleep 10 "telegram-desktop"
         spawnOnceSleep 10 "skype"
         spawnOnceSleep 10 "whatsie"
 
@@ -25,8 +24,6 @@ startupHook' host = case host of
     -- heraklit specific
     "heraklit" -> do
 
-        -- inTerminalWithName "Telegram" "telegram-cli"
-        -- spawnOnceSleep 10 "cutegram"
         spawnOnceSleep 3 "trayer\
                          \ --align right\
                          \ --margin 430\
@@ -38,6 +35,8 @@ startupHook' host = case host of
                          \ --alpha 0\
                          \ --tint 000000"
         spawnOnceSleep 5 "nm-applet"
+        -- start telegram
+        spawnOnceSleep 10 "chromium --profile-directory='Profile 4' --app-id=clhhggbfdinjmjhajaheehoeibfljjno"
 
         defaultStartupHook
 
@@ -61,6 +60,8 @@ startupHook' host = case host of
             spawnOnce "xset -b"
             spawnOnceSleep 2 "conky"
             spawnOnceSleep 5 "dunst" -- not too early or the keybindings don't work
+            spawnOnceSleep 7 "chromium"
+            -- home "Bin/launchers/chromium-wrapper" >>= spawnOnceSleep 7
 
             -- start applications
             browser
