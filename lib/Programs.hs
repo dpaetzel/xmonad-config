@@ -17,6 +17,9 @@ import qualified XMonad.StackSet as W
 import qualified XMonad.Util.Dmenu as D
 
 
+import Applications as Apps
+
+
 -- {{{ general definitions and helper functions
 terminalName :: String
 -- terminalName = "urxvt -uc"
@@ -58,9 +61,14 @@ projectPath = io $ fmap (++ "/Projects") getHomeDirectory
 
 -- {{{ quick access
 dmenu :: X ()
+dmenu = do
+  selection <- D.menuArgs "dmenu" dmenuArgs Apps.names
+  maybe (return ()) spawnHere $ Apps.command selection
+
+dmenuDesktopEntries :: X ()
 -- currently not working properly when using the Exec strings from the .desktop files -.-
 -- dmenu = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= io . executable >>= spawnHere
-dmenu = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
+dmenuDesktopEntries = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
     where
     programNames :: IO [String]
     programNames = fmap (map removeSuffix . onlyDesktopFiles . lines) $ lsApplicationsPath
@@ -405,7 +413,7 @@ outDown = home "Bin/change-volume -3%" >>= spawn
 
 
 outToggle :: X ()
-outToggle = home "Bin/change-volume.sh %" >>= spawn
+outToggle = home "Bin/change-volume %" >>= spawn
 
 
 outReset :: X ()
