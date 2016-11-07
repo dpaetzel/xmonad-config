@@ -30,10 +30,8 @@ keys' host conf = M.fromList $
     -- main programs
     [ ((winMask, xK_b                                            ), runTerminal)
     , ((winMask, xK_t                                            ), toggleScratchpad)
-    , ((appMask, xK_o                                            ), documentViewer)
     , ((appMask, xK_minus                                        ), dmenuProjectOrg)
     , ((appMask, xK_e                                            ), fileManager)
-    , ((appMask, xK_y                                            ), youtubeViewer)
     , ((appMask, xK_u                                            ), gtd)
     , ((winMask .|. appMask, xK_Return                           ), gtdIn)
     , ((appMask, xK_Return                                       ), addNote True)
