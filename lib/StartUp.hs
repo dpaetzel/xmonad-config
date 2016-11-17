@@ -24,17 +24,17 @@ startupHook' host = case host of
     -- heraklit specific
     "heraklit" -> do
 
-        spawnOnceSleep 3 "trayer\
-                         \ --align right\
-                         \ --margin 430\
-                         \ --expand false\
-                         \ --widthtype pixel\
-                         \ --width 200\
-                         \ --height 24\
-                         \ --transparent true\
-                         \ --alpha 0\
-                         \ --tint 000000"
-        spawnOnceSleep 5 "nm-applet"
+        -- spawnOnceSleep 3 "trayer\
+        --                  \ --align center\
+        --                  \ --margin 430\
+        --                  \ --expand false\
+        --                  \ --widthtype pixel\
+        --                  \ --width 200\
+        --                  \ --height 24\
+        --                  \ --transparent true\
+        --                  \ --alpha 0\
+        --                  \ --tint 000000"
+        -- spawnOnceSleep 5 "nm-applet"
         -- start telegram
         spawnOnceSleep 10 "chromium --profile-directory='Profile 4' --app-id=clhhggbfdinjmjhajaheehoeibfljjno"
 
