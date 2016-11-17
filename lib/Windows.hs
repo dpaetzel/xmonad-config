@@ -1,9 +1,13 @@
 module Windows where
 
+
 import XMonad
 import XMonad.Actions.SpawnOn (manageSpawn)
 import XMonad.Hooks.ManageDocks (manageDocks)
 import XMonad.Hooks.ManageHelpers (doCenterFloat, doFullFloat, isFullscreen)
+
+
+import Applications (signalAppID, telegramAppID)
 
 
 -- window rules
@@ -27,7 +31,7 @@ manageHook' = manageSpawn
         , className =? "Nm-openconnect-auth-dialog"
         , title     =? "Wireshark"
         -- TODO check whether these are needed/have any merit
-        , stringProperty "WM_WINDOW_ROLE" =? "app"
+        -- , stringProperty "WM_WINDOW_ROLE" =? "app"
         -- , stringProperty "_NET_WM_WINDOW_TYPE" =? "_NET_WM_WINDOW_TYPE_DIALOG"
         ]
     , these doCenterFloat
@@ -45,7 +49,9 @@ manageHook' = manageSpawn
         , className =? "Pidgin"
         , className =? "telegram-desktop"
         , className =? "Gajim"
-        , title     =? "Hangouts" -- not yet working
+        -- , title     =? "Hangouts" -- not yet working
+        -- , className =? ("crx_" ++ telegramAppID) -- not yet working
+        -- , className =? ("crx_" ++ signalAppID) -- not yet working
         ]
     , these (doShift "editor")
         [ className =? "Emacs"

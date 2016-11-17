@@ -4,15 +4,20 @@ data Application = Application { name :: String
                                , cmd :: String
                                }
 
--- applications :: String ->  [Application]
--- applications host = defaultApplications ++ case host of
---   "heraklit" ->
---     [ Application "Telegram" "chromium --profile-directory='Profile 4' --app-id=clhhggbfdinjmjhajaheehoeibfljjno"
---     ]
 
---   where defaultApplications =
---           [ Application "Chromium" "chromium"
---           ]
+-- we'll see how stable chrome app-ids are…
+signalAppID :: String
+signalAppID = "bikioccmkafdpakkkcpdbppfkghcmihk"
+
+
+telegramAppID :: String
+telegramAppID = "clhhggbfdinjmjhajaheehoeibfljjno"
+
+
+chromiumAppCommand :: String -> String
+chromiumAppCommand = ("chromium --profile-directory='Profile 4' --app-id=" ++)
+
+
 applications :: [Application]
 applications =
   [ Application "Anki" "anki"
@@ -20,9 +25,8 @@ applications =
   , Application "Emacs" "emacsclient -c -a emacs"
   , Application "Gimp" "gimp"
   , Application "LibreOffice" "libreoffice"
-  -- we'll see how stable chrome app-ids are…
-  , Application "Signal" "chromium --profile-directory='Profile 4' --app-id=bikioccmkafdpakkkcpdbppfkghcmihk"
-  , Application "Telegram" "chromium --profile-directory='Profile 4' --app-id=clhhggbfdinjmjhajaheehoeibfljjno"
+  , Application "Signal" $ chromiumAppCommand signalAppID
+  , Application "Telegram" $ chromiumAppCommand telegramAppID
   , Application "VLC" "vlc"
   ]
 
