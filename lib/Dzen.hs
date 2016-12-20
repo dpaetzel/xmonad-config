@@ -7,7 +7,7 @@ import XMonad.Util.WorkspaceCompare (mkWsSort, getXineramaPhysicalWsCompare)
 
 
 dzenCommand :: String
-dzenCommand = "killall dzen2; dzen2 -p -xs 2 -ta r -tw 1920 -fn Inconsolata-14:normal -fg '#ffffff' -bg '#000000' -e 'onStart=lower'"
+dzenCommand = "killall dzen2; dzen2 -p -xs 2 -ta r -tw 1920 -fn Inconsolata-11:normal -fg '#ffffff' -bg '#000000' -e 'onStart=lower'"
 
 
 dzenPP' handle = def
@@ -19,7 +19,7 @@ dzenPP' handle = def
     , ppUrgent          = dzenColor "#ef2929" "" -- tango lightred
     , ppSep             = "  |  "
     , ppWsSep           = "  "
-    , ppTitle           = shorten 50
+    , ppTitle           = shorten 100
     , ppLayout          = dzenColor "white" "" . icon
     , ppOrder           = reverse
     , ppSort            = mkWsSort getXineramaPhysicalWsCompare
