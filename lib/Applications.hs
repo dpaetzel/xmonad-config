@@ -6,6 +6,10 @@ data Application = Application { name :: String
 
 
 -- we'll see how stable chrome app-ids are…
+calendarAppID :: String
+calendarAppID = "ejjicmeblgpmajnghnpcppodonldlgfn"
+
+
 signalAppID :: String
 signalAppID = "bikioccmkafdpakkkcpdbppfkghcmihk"
 
@@ -21,6 +25,8 @@ chromiumAppCommand = ("chromium --profile-directory='Profile 4' --app-id=" ++)
 applications :: [Application]
 applications =
   [ Application "Anki" "anki"
+  , Application "ARandR" "arandr"
+  , Application "Calendar" $ chromiumAppCommand calendarAppID
   , Application "Chromium" "chromium"
   , Application "Emacs" "emacsclient -c -a emacs"
   , Application "Gimp" "gimp"
