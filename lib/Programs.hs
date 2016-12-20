@@ -405,19 +405,19 @@ inToggle = spawn "amixer sset 'Capture' toggle"
 
 
 outUp :: X ()
-outUp = home "Bin/change-volume +3%" >>= spawn
+outUp = home "Bin/volume +3%" >>= spawn
 
 
 outDown :: X ()
-outDown = home "Bin/change-volume -3%" >>= spawn
+outDown = home "Bin/volume -3%" >>= spawn
 
 
 outToggle :: X ()
-outToggle = home "Bin/change-volume %" >>= spawn
+outToggle = home "Bin/volume %" >>= spawn
 
 
 outReset :: X ()
-outReset = home "Bin/change-volume 30%" >>= spawn
+outReset = home "Bin/volume 30%" >>= spawn
 
 
 pavuControl :: X ()
