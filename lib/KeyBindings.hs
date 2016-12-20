@@ -8,7 +8,7 @@ import qualified Data.Map as M
 import Graphics.X11.ExtraTypes
 import System.Exit (exitSuccess)
 import XMonad
-import XMonad.Actions.CycleWS (toggleOrView, toggleWS)
+import XMonad.Actions.CycleWS (swapNextScreen, toggleOrDoSkip, toggleWS)
 import XMonad.Actions.WindowBringer (gotoMenuArgs)
 import XMonad.Hooks.ManageDocks
 import qualified XMonad.StackSet as W
@@ -73,7 +73,7 @@ keys' host conf = M.fromList $
     , ((0, xK_KP_4                                               ), spotifyCtl "previous")
 
     -- other
-    , ((winMask, xK_r                                            ), sendMessage ToggleStruts)
+    , ((winMask, xK_d                                            ), sendMessage ToggleStruts)
 
     -- windows
     -- Close focused window
@@ -92,8 +92,6 @@ keys' host conf = M.fromList $
     , ((winMask .|. shiftMask, xK_m                              ), windows W.swapMaster)
     -- Push window back into tiling
     , ((winMask, xK_i                                            ), withFocused $ windows . W.sink)
-    -- Toggle Window Borders
-    -- , ((winMask, xK_d                                            ), withFocused toggleBorder)
     -- window finder
     , ((winMask, xK_g                                            ), gotoMenuArgs dmenuArgs)
 
@@ -119,7 +117,7 @@ keys' host conf = M.fromList $
     -- go to the next "xinerama" screen
     -- , ((winMask, xK_r                                            ), nextScreen)
     -- swap screens
-    -- , ((winMask, xK_s                                            ), swapPrevScreen)
+    , ((winMask, xK_r                                            ), swapNextScreen)
 
     -- xmonad
     -- Quit xmonad
@@ -161,7 +159,8 @@ keys' host conf = M.fromList $
       ++
       zip (xK_dead_circumflex : [xK_1..xK_9] ++ [xK_0]) (map (flip ($)) generalPurposeWS)
     , (fun, mod) <-
-      [ (toggleOrView, 0)
+      -- [ (toggleOrView, 0) -- too greedy
+      [ (toggleOrDoSkip [] W.view, 0)
       , (windows . W.shift, shiftMask)]]
     ++
 
