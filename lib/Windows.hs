@@ -7,7 +7,7 @@ import XMonad.Hooks.ManageDocks (manageDocks)
 import XMonad.Hooks.ManageHelpers (doCenterFloat, doFullFloat, isFullscreen)
 
 
-import Applications (signalAppID, telegramAppID)
+import Applications (signalAppID)
 
 
 -- window rules

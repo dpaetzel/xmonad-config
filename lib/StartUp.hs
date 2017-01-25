@@ -22,7 +22,7 @@ startupHook' host = case host of
         defaultStartupHook
 
     -- heraklit specific
-    "heraklit" -> do
+    "heraklit" ->
 
         -- spawnOnceSleep 3 "trayer\
         --                  \ --align center\
@@ -35,9 +35,6 @@ startupHook' host = case host of
         --                  \ --alpha 0\
         --                  \ --tint 000000"
         -- spawnOnceSleep 5 "nm-applet"
-        -- start telegram
-        spawnOnceSleep 10 "chromium --profile-directory='Profile 4' --app-id=clhhggbfdinjmjhajaheehoeibfljjno"
-
         defaultStartupHook
 
     -- default
@@ -60,9 +57,7 @@ startupHook' host = case host of
             spawnOnce "xset -b"
             spawnOnceSleep 2 "conky"
             spawnOnceSleep 5 "dunst" -- not too early or the keybindings don't work
-            spawnOnceSleep 7 "chromium"
-            -- home "Bin/launchers/chromium-wrapper" >>= spawnOnceSleep 7
 
             -- start applications
-            browser
-            editor
+            spawnOnceSleep 7 "emacsclient -c -a emacs"
+            spawnOnceSleep 7 "chromium"

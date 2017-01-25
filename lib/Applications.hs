@@ -32,7 +32,7 @@ applications =
   , Application "Gimp" "gimp"
   , Application "LibreOffice" "libreoffice"
   , Application "Signal" $ chromiumAppCommand signalAppID
-  , Application "Telegram" $ chromiumAppCommand telegramAppID
+  , Application "Telegram" "telegram-desktop"
   , Application "VLC" "vlc"
   ]
 
@@ -40,6 +40,6 @@ names :: [String]
 names = map name $ applications
 
 command :: String -> Maybe String
-command name' = case filter (\app -> name app == name') $ applications of
+command name' = case filter (\app -> name app == name') applications of
   app : _ -> Just $ cmd app
   [] -> Nothing
