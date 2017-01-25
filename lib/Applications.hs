@@ -30,6 +30,7 @@ applications =
   , Application "Chromium" "chromium"
   , Application "Emacs" "emacsclient -c -a emacs"
   , Application "Gimp" "gimp"
+  , Application "MediathekView" "mediathekview"
   , Application "LibreOffice" "libreoffice"
   , Application "Signal" $ chromiumAppCommand signalAppID
   , Application "Telegram" "telegram-desktop"

@@ -161,8 +161,8 @@ toggleScratchpad = do
     let currentWSTag = W.tag . W.workspace $ W.current stackSet
     if currentWSTag == "terminal"
     then toggleWS
-    else (windows $ W.greedyView "terminal") >> (startIfNecessary)
-    -- else (windows $ W.view "terminal") >> (startIfNecessary)
+    -- else (windows $ W.greedyView "terminal") >> (startIfNecessary)
+    else (windows $ W.view "terminal") >> (startIfNecessary)
 
         where
         startIfNecessary :: X ()
@@ -180,8 +180,8 @@ toggleEditor = do
     let currentWSTag = W.tag . W.workspace $ W.current stackSet
     if currentWSTag == "editor"
     then toggleWS
-    else (windows $ W.greedyView "editor") >> (startIfNecessary)
-    -- else (windows $ W.view "editor") >> (startIfNecessary)
+    -- else (windows $ W.greedyView "editor") >> (startIfNecessary)
+    else (windows $ W.view "editor") >> (startIfNecessary)
 
         where
         startIfNecessary :: X ()
@@ -199,8 +199,8 @@ toggleBrowser = do
     let currentWSTag = W.tag . W.workspace $ W.current stackSet
     if currentWSTag == "browser"
     then toggleWS
-    else (windows $ W.greedyView "browser") >> (startIfNecessary)
-    -- else (windows $ W.view "editor") >> (startIfNecessary)
+    -- else (windows $ W.greedyView "browser") >> (startIfNecessary)
+    else (windows $ W.view "browser") >> (startIfNecessary)
 
         where
         startIfNecessary :: X ()
