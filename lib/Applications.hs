@@ -35,6 +35,7 @@ applications =
   , Application "Signal" $ chromiumAppCommand signalAppID
   , Application "Telegram" "telegram-desktop"
   , Application "VLC" "vlc"
+  , Application "Zathura" "zathura"
   ]
 
 names :: [String]
