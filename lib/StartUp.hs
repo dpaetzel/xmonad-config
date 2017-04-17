@@ -51,7 +51,8 @@ startupHook' host = case host of
             fmap ("feh --bg-scale " ++) (home "Pictures/wallpapers/current") >>= spawnOnce
             setDefaultCursor xC_left_ptr
             spawnOnce "parcellite"
-            spawnOnce "xcompmgr"
+            -- spawnOnce "xcompmgr -F"
+            spawnOnce "compton"
             spawnOnce "unclutter -idle 5 -root"
             spawnOnce "redshift -l 48.3:10.9 -t 5500:2800"
             spawnOnce "xset -b"
