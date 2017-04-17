@@ -33,6 +33,7 @@ applications =
   , Application "MediathekView" "mediathekview"
   , Application "LibreOffice" "libreoffice"
   , Application "Signal" $ chromiumAppCommand signalAppID
+  , Application "Spacemacs" "emacsclient -c -a emacs"
   , Application "Telegram" "telegram-desktop"
   , Application "VLC" "vlc"
   , Application "Zathura" "zathura"
