@@ -72,6 +72,9 @@ keys' host conf = M.fromList $
     , ((0, xK_KP_6                                               ), spotifyCtl "next")
     , ((0, xK_KP_4                                               ), spotifyCtl "previous")
 
+    -- xdotool type
+    , ((appMask, xK_t                                            ), home "Bin/shrug" >>= spawn)
+
     -- other
     , ((winMask, xK_d                                            ), sendMessage ToggleStruts)
 
