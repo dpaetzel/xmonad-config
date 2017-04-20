@@ -6,6 +6,7 @@ import XMonad
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP)
 import XMonad.Hooks.EwmhDesktops (ewmh, fullscreenEventHook)
 import XMonad.Hooks.FadeInactive (fadeInactiveLogHook)
+import XMonad.Hooks.ManageDocks (docksEventHook)
 import XMonad.Hooks.UrgencyHook
 import XMonad.Util.Run (spawnPipe)
 
@@ -22,7 +23,7 @@ import Dzen
 focusFollowsMouse' = False
 
 -- event handling
-eventHook' = mempty <+> fullscreenEventHook
+eventHook' = mempty <+> docksEventHook <+> fullscreenEventHook
 
 -- status bars and logging
 logHook' handle = fadeInactiveLogHook fadeAmount >> dynamicLogWithPP (dzenPP' handle)

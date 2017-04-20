@@ -20,7 +20,8 @@ manageHook' = manageSpawn
         , anyQuery "desktop"
         , anyQuery "notify-osd"
         , anyQuery "trayer"
-        , anyQuery "stalonetray"]
+        , anyQuery "stalonetray"
+        ]
     , these doFloat
         [ title     =? "Firefox Preferences"
         , title     =? "Tab Mix Plus Options"
@@ -30,6 +31,7 @@ manageHook' = manageSpawn
         , title     =? "Volume Control"
         , className =? "Nm-openconnect-auth-dialog"
         , title     =? "Wireshark"
+        , title     =? "Wayfinder"
         -- TODO check whether these are needed/have any merit
         -- , stringProperty "WM_WINDOW_ROLE" =? "app"
         -- , stringProperty "_NET_WM_WINDOW_TYPE" =? "_NET_WM_WINDOW_TYPE_DIALOG"

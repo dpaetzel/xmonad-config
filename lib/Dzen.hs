@@ -7,7 +7,7 @@ import XMonad.Util.WorkspaceCompare (mkWsSort, getXineramaPhysicalWsCompare)
 
 
 dzenCommand :: String
-dzenCommand = "killall dzen2; dzen2 -p -xs 2 -ta r -tw 1920 -fn Inconsolata-11:normal -fg '#ffffff' -bg '#000000' -e 'onStart=lower'"
+dzenCommand = "killall dzen2; dzen2 -dock -p -xs 2 -ta r -tw 1920 -fn Inconsolata-11:normal -fg '#ffffff' -bg '#000000' -e 'onStart=lower'"
 
 
 dzenPP' handle = def
