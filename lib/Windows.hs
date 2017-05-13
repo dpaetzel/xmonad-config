@@ -31,13 +31,13 @@ manageHook' = manageSpawn
         , title     =? "Volume Control"
         , className =? "Nm-openconnect-auth-dialog"
         , title     =? "Wireshark"
-        , title     =? "Wayfinder"
         -- TODO check whether these are needed/have any merit
         -- , stringProperty "WM_WINDOW_ROLE" =? "app"
         -- , stringProperty "_NET_WM_WINDOW_TYPE" =? "_NET_WM_WINDOW_TYPE_DIALOG"
         ]
     , these doCenterFloat
         [ stringProperty "WM_WINDOW_ROLE" =? "gimp-toolbox-color-dialog"
+        , title =? "Wayfinder"
         ]
     , these (doShift "browser")
         [ className =? "chromium"

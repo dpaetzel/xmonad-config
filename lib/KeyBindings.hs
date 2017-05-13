@@ -38,6 +38,7 @@ keys' host conf = M.fromList $
     , ((appMask .|. shiftMask, xK_Return                         ), addNote False)
 
     -- util
+    , ((appMask, xK_v                                            ), spawn "copyq toggle")
     , ((appMask, xK_space                                        ), dmenu)
     , ((appMask .|. shiftMask, xK_space                          ), dmenuAll)
     , ((appMask, xK_Delete                                       ), ejectTray)

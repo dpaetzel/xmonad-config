@@ -50,7 +50,7 @@ startupHook' host = case host of
             -- look and feel
             fmap ("feh --bg-scale " ++) (home "Pictures/wallpapers/current") >>= spawnOnce
             setDefaultCursor xC_left_ptr
-            spawnOnce "parcellite"
+            spawnOnce "copyq"
             -- spawnOnce "xcompmgr -F"
             spawnOnce "compton"
             spawnOnce "unclutter -idle 5 -root"
