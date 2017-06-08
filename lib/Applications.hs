@@ -26,6 +26,7 @@ applications :: [Application]
 applications =
   [ Application "Anki" "anki"
   , Application "ARandR" "arandr"
+  , Application "Audacity" "audacity"
   , Application "Calendar" $ chromiumAppCommand calendarAppID
   , Application "Chromium" "chromium"
   , Application "Emacs" "emacsclient -c -a emacs"

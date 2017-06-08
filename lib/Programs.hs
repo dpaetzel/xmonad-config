@@ -1,6 +1,6 @@
 module Programs where
 
-import Data.List (sort)
+import Data.List (intercalate, sort)
 import Data.List.Split (splitOn)
 import Data.Time (getCurrentTime, utctDay)
 import System.Directory (getHomeDirectory)
@@ -372,6 +372,10 @@ insertTray = spawn "eject -t"
 
 lockScreen :: X ()
 lockScreen = spawn "slock"
+
+
+passmenu :: X ()
+passmenu = spawn $ "passmenu " ++ "'" ++ intercalate "' '" dmenuArgs ++ "'"
 
 
 powerTop :: X ()

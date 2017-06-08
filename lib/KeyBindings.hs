@@ -38,7 +38,7 @@ keys' host conf = M.fromList $
     , ((appMask .|. shiftMask, xK_Return                         ), addNote False)
 
     -- util
-    , ((appMask, xK_v                                            ), spawn "copyq toggle")
+    -- , ((appMask, xK_v                                            ), spawn "copyq toggle")
     , ((appMask, xK_space                                        ), dmenu)
     , ((appMask .|. shiftMask, xK_space                          ), dmenuAll)
     , ((appMask, xK_Delete                                       ), ejectTray)
@@ -49,6 +49,8 @@ keys' host conf = M.fromList $
     , ((0, xK_Print                                              ), scrotFull)
     , ((appMask, xK_n                                            ), showNeo)
     , ((appMask, xK_k                                            ), xKill)
+
+    , ((appMask, xK_p                                            ), passmenu)
 
     -- sound
     , ((appMask, xK_Home                                         ), inToggle)
