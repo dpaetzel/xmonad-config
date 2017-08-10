@@ -38,6 +38,7 @@ manageHook' = manageSpawn
     , these doCenterFloat
         [ stringProperty "WM_WINDOW_ROLE" =? "gimp-toolbox-color-dialog"
         , title =? "Wayfinder"
+        , title =? "Reachability"
         ]
     , these (doShift "browser")
         [ className =? "chromium"
