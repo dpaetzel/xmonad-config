@@ -29,6 +29,7 @@ applications =
   , Application "Audacity" "audacity"
   , Application "Calendar" $ chromiumAppCommand calendarAppID
   , Application "Chromium" "chromium"
+  , Application "Chrome" "google-chrome-stable"
   , Application "Emacs" "emacsclient -c -a emacs"
   , Application "Gimp" "gimp"
   , Application "MediathekView" "mediathekview"
