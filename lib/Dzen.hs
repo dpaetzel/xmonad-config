@@ -6,8 +6,9 @@ import XMonad.Util.Run (hPutStrLn)
 import XMonad.Util.WorkspaceCompare (mkWsSort, getXineramaPhysicalWsCompare)
 
 
-dzenCommand :: String
-dzenCommand = "killall dzen2; dzen2 -dock -p -xs 2 -ta r -tw 1920 -fn Inconsolata-11:normal -fg '#ffffff' -bg '#000000' -e 'onStart=lower'"
+dzenCommand :: String -> String
+dzenCommand "heraklit" = "killall dzen2; dzen2 -dock -p -xs 2 -ta r -tw 1920 -fn Inconsolata-11:normal -fg '#ffffff' -bg '#000000' -e 'onStart=lower'"
+dzenCommand "anaxagoras" = "killall dzen2; dzen2 -dock -p -xs 1 -ta r -tw 1920 -fn Inconsolata-14:normal -fg '#ffffff' -bg '#000000' -e 'onStart=lower'"
 
 
 dzenPP' handle = def

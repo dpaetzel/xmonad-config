@@ -32,7 +32,7 @@ logHook' handle = fadeInactiveLogHook fadeAmount >> dynamicLogWithPP (dzenPP' ha
 
 main = do
     host <- fmap nodeName getSystemID
-    dzenHandle <- spawnPipe dzenCommand
+    dzenHandle <- spawnPipe (dzenCommand host)
     xmonad
         . ewmh
         . withUrgencyHook NoUrgencyHook
