@@ -52,9 +52,7 @@ startupHook' host = case host of
             spawn "setroot --solid-color '#000000'"
 
             setDefaultCursor xC_left_ptr
-            -- spawnOnce "autocutsel -s PRIMARY -f"
-            spawnOnce "autocutsel -f"
-            -- spawnOnce "xcompmgr -F"
+            spawnOnce "autocutsel -s PRIMARY -f"
             spawnOnce "compton"
             spawnOnce "unclutter -idle 5 -root"
             spawnOnce "xset -b"
