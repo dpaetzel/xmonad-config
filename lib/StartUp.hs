@@ -57,7 +57,6 @@ startupHook' host = case host of
             -- spawnOnce "xcompmgr -F"
             spawnOnce "compton"
             spawnOnce "unclutter -idle 5 -root"
-            spawnOnce "redshift -l 48.3:10.9 -t 5500:2800"
             spawnOnce "xset -b"
             spawnOnceSleep 2 "conky"
             spawnOnceSleep 5 "dunst" -- not too early or the keybindings don't work
