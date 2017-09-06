@@ -19,7 +19,7 @@ telegramAppID = "clhhggbfdinjmjhajaheehoeibfljjno"
 
 
 chromiumAppCommand :: String -> String
-chromiumAppCommand = ("chromium --profile-directory='Profile 4' --app-id=" ++)
+chromiumAppCommand = ("chromium --app-id=" ++)
 
 
 applications :: [Application]
