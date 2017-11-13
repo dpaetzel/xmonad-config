@@ -24,7 +24,7 @@ chromiumAppCommand = ("chromium --app-id=" ++)
 
 applications :: [Application]
 applications =
-  [ Application "Anki" "anki"
+  [ Application "Anki" "anki -b $HOME/.Anki"
   , Application "ARandR" "arandr"
   , Application "Audacity" "audacity"
   , Application "Calendar" $ chromiumAppCommand calendarAppID
