@@ -15,10 +15,6 @@ startupHook' host = case host of
     -- anaxagoras specific
     "anaxagoras" -> do
 
-        spawn "/usr/local/bin/resetmsmice"
-        spawnOnceSleep 10 "skype"
-        spawnOnceSleep 10 "whatsie"
-
         defaultStartupHook
 
     -- heraklit specific
