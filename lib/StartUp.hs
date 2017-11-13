@@ -52,12 +52,15 @@ startupHook' host = case host of
             spawn "setroot --solid-color '#000000'"
 
             setDefaultCursor xC_left_ptr
-            spawnOnce "autocutsel -s PRIMARY -f"
             spawnOnce "compton"
             spawnOnce "unclutter -idle 5 -root"
             spawnOnce "xset -b"
             spawnOnceSleep 2 "conky"
-            spawnOnceSleep 5 "dunst" -- not too early or the keybindings don't work
+            -- not too early or the keybindings don't work
+            spawnOnceSleep 5 "dunst"
+            -- need to start both so PRIMARY and CLIPBOARD are sync'ed, too (via the cutbuffer)
+            spawnOnceSleep 10 "autocutsel -s PRIMARY -f"
+            spawnOnceSleep 10 "autocutsel -s CLIPBOARD -f"
 
             -- start applications
             spawnOnceSleep 7 "emacsclient -c -a emacs"
