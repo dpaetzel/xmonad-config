@@ -32,13 +32,22 @@ applications =
   , Application "Chrome" "google-chrome-stable"
   , Application "Emacs" "emacsclient -c -a emacs"
   , Application "Gimp" "gimp"
+  , Application "GVim" "gvim"
   , Application "MediathekView" "mediathekview"
   , Application "LibreOffice" "libreoffice"
   , Application "Signal" $ chromiumAppCommand signalAppID
   , Application "Spacemacs" "emacsclient -c -a emacs"
+  , Application "Spotify" "spotify"
   , Application "Telegram" "telegram-desktop"
+  , Application "Thunderbird" "thunderbird"
+  , Application "Vim" "gvim"
   , Application "VLC" "vlc"
+  , Application "Windows" "VirtualBox --startvm 'Windows 10'"
   , Application "Zathura" "zathura"
+
+  , Application "E-Mail" "thunderbird"
+  , Application "Browser" "chromium"
+  , Application "Editor" "gvim"
   ]
 
 names :: [String]
