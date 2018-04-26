@@ -55,7 +55,7 @@ home path = io $ fmap (++ "/" ++ path) getHomeDirectory
 
 
 projectPath :: X String
-projectPath = io $ fmap (++ "/Projects") getHomeDirectory
+projectPath = io $ fmap (++ "/Projekte") getHomeDirectory
 -- }}}
 
 
@@ -106,22 +106,18 @@ dmenuAll = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
             path = fmap (splitOn ":") $ getEnv "PATH"
 
 
--- TODO repair this
+-- TODO repair fuzzy matching (if enabled, nothing gets ever selected)
 -- dmenuProjectOrg = projectNames >>= D.menuArgs "dmenu" dmenuArgsWithFuzzy >>= openInEditor
 dmenuProjectOrg = projectNames >>= D.menuArgs "dmenu" dmenuArgs >>= openInEditor
     where
     projectNames :: X [String]
-    projectNames = fmap (map deOrg . onlyOrg . lines) $ lsProjectPath
+    projectNames = lines <$> lsProjectPath
     lsProjectPath :: X String
     lsProjectPath = do
         p <- projectPath
         runProcessWithInput "ls" [p] []
-    onlyOrg :: [String] -> [String]
-    onlyOrg = filter (=~ ".*\\.org$")
-    deOrg :: String -> String
-    deOrg = reverse . drop 4 . reverse
     toOrgFile :: String -> X String
-    toOrgFile name = fmap (++ "/\"" ++ name ++ ".org\"") projectPath
+    toOrgFile name = fmap (++ "/\"" ++ name ++ "/" ++ name ++ ".org\"") projectPath
     openInEditor :: String -> X ()
     openInEditor "" = return ()
     openInEditor name = editorWith =<< toOrgFile name
