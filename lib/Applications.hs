@@ -11,14 +11,6 @@ calendarAppID :: String
 calendarAppID = "ejjicmeblgpmajnghnpcppodonldlgfn"
 
 
-signalAppID :: String
-signalAppID = "bikioccmkafdpakkkcpdbppfkghcmihk"
-
-
-telegramAppID :: String
-telegramAppID = "clhhggbfdinjmjhajaheehoeibfljjno"
-
-
 chromiumAppCommand :: String -> String
 chromiumAppCommand = ("chromium --app-id=" ++)
 

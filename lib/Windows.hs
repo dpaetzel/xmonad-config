@@ -7,9 +7,6 @@ import XMonad.Hooks.ManageDocks (manageDocks)
 import XMonad.Hooks.ManageHelpers (doCenterFloat, doFullFloat, isFullscreen)
 
 
-import Applications (signalAppID)
-
-
 -- window rules
 manageHook' :: ManageHook
 manageHook' = manageSpawn
@@ -52,9 +49,6 @@ manageHook' = manageSpawn
         , className =? "Pidgin"
         , className =? "telegram-desktop"
         , className =? "Gajim"
-        -- , title     =? "Hangouts" -- not yet working
-        -- , className =? ("crx_" ++ telegramAppID) -- not yet working
-        -- , className =? ("crx_" ++ signalAppID) -- not yet working
         ]
     , these (doShift "editor")
         [ className =? "Emacs"
