@@ -63,7 +63,7 @@ projectPath = io $ fmap (++ "/Projects") getHomeDirectory
 dmenu :: X ()
 dmenu = do
   selection <- D.menuArgs "dmenu" dmenuArgs Apps.names
-  maybe (return ()) spawnHere $ Apps.command selection
+  sequence_ . fmap spawnHere $ Apps.commands selection
 
 dmenuDesktopEntries :: X ()
 -- currently not working properly when using the Exec strings from the .desktop files -.-
