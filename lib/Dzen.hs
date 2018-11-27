@@ -1,9 +1,8 @@
 module Dzen where
 
 import XMonad.Hooks.DynamicLog
--- import XMonad.Util.Loggers
 import XMonad.Util.Run (hPutStrLn)
-import XMonad.Util.WorkspaceCompare (mkWsSort, getXineramaPhysicalWsCompare)
+import XMonad.Util.WorkspaceCompare (mkWsSort, getSortByIndex)
 
 
 dzenCommand :: String -> String
@@ -24,7 +23,7 @@ dzenPP' handle = def
     , ppTitle           = shorten 100
     , ppLayout          = dzenColor "white" "" . icon
     , ppOrder           = reverse
-    , ppSort            = mkWsSort getXineramaPhysicalWsCompare
+    , ppSort            = getSortByIndex
     }
 
     where
