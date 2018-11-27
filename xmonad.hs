@@ -28,7 +28,7 @@ eventHook' = mempty <+> docksEventHook <+> fullscreenEventHook
 -- status bars and logging
 logHook' handle = fadeInactiveLogHook fadeAmount >> dynamicLogWithPP (dzenPP' handle)
     where
-        fadeAmount = 0.7
+        fadeAmount = 0.8
 
 main = do
     host <- fmap nodeName getSystemID
@@ -43,6 +43,7 @@ main = do
             , workspaces         = workspaces'
             , normalBorderColor  = normalBorderColor'
             , focusedBorderColor = focusedBorderColor'
+            , borderWidth        = 2
             , keys               = keys' host
             , mouseBindings      = mouseBindings'
             , handleEventHook    = eventHook'
