@@ -1,48 +1,57 @@
 module Applications where
 
 
+import XMonad
+import XMonad.Actions.SpawnOn (spawnHere)
+
+
+import Terminal
+
+
 data Application = Application { name :: String
-                               , cmds :: [String]
+                               , progs :: [X ()]
                                }
 
 
 -- we'll see how stable chrome app-ids are…
-calendarAppID :: String
-calendarAppID = "ejjicmeblgpmajnghnpcppodonldlgfn"
-
-
 chromiumAppCommand :: String -> String
 chromiumAppCommand = ("chromium --app-id=" ++)
 
 
 applications :: [Application]
 applications =
-  [ Application "Anki"          ["anki -b $HOME/.Anki"]
-  , Application "ARandR"        ["arandr"]
-  , Application "Audacity"      ["audacity"]
-  , Application "Calendar"      [chromiumAppCommand calendarAppID]
-  , Application "Chromium"      ["chromium"]
-  , Application "Chrome"        ["google-chrome-stable"]
-  , Application "Emacs"         ["emacsclient -c -a emacs"]
-  , Application "Gimp"          ["gimp"]
-  , Application "GVim"          ["gvim"]
-  , Application "MediathekView" ["mediathekview"]
-  , Application "LibreOffice"   ["libreoffice"]
-  , Application "Signal"        ["signal-desktop"]
-  , Application "Spacemacs"     ["emacsclient -c -a emacs"]
-  , Application "Spotify"       ["spotify"]
-  , Application "Telegram"      ["telegram-desktop"]
-  , Application "Thunderbird"   ["thunderbird"]
-  , Application "Vim"           ["gvim"]
-  , Application "VirtualBox"    ["VirtualBox"]
-  , Application "VLC"           ["vlc"]
-  , Application "Windows"       ["VirtualBox --startvm 'Windows 10'"]
-  , Application "Zathura"       ["zathura"]
+  [ Application "Anki"          [spawnHere "anki -b $HOME/.Anki"]
+  , Application "ARandR"        [spawnHere "arandr"]
+  , Application "Audacity"      [spawnHere "audacity"]
+  , Application "Chromium"      [spawnHere "chromium"]
+  , Application "Chrome"        [spawnHere "google-chrome-stable"]
+  , Application "Emacs"         [spawnHere "emacsclient -c -a emacs"]
+  , Application "Firefox"       [spawnHere "firefox"]
+  , Application "Gimp"          [spawnHere "gimp"]
+  , Application "GVim"          [spawnHere "gvim"]
+  , Application "MediathekView" [spawnHere "mediathekview"]
+  , Application "NetLogo"       [spawnHere "netlogo"]
+  , Application "LibreOffice"   [spawnHere "libreoffice"]
+  , Application "Signal"        [spawnHere "signal-desktop"]
+  , Application "Spacemacs"     [spawnHere "emacsclient -c -a emacs"]
+  , Application "Spotify"       [spawnHere "spotify"]
+  , Application "Telegram"      [spawnHere "telegram-desktop"]
+  , Application "Thunderbird"   [spawnHere "thunderbird"]
+  , Application "Vim"           [spawnHere "gvim"]
+  , Application "VirtualBox"    [spawnHere "VirtualBox"]
+  , Application "VLC"           [spawnHere "vlc"]
+  , Application "Windows"       [spawnHere "VirtualBox --startvm 'Windows 10'"]
+  , Application "Zathura"       [spawnHere "zathura"]
 
-  , Application "E-Mail"        ["thunderbird"]
-  , Application "Browser"       ["chromium"]
-  , Application "Editor"        ["gvim"]
-  , Application "Chat"          ["signal-desktop", "telegram-desktop"]
+  , Application "E-Mail"        [spawnHere "thunderbird"]
+  , Application "Browser"       [spawnHere "firefox"]
+  , Application "Editor"        [spawnHere "gvim"]
+  , Application "Chat"
+    [ spawnHere "signal-desktop"
+    , spawnHere "telegram-desktop"
+    , inTerminalWithName "RSS" "newsboat"
+    , inTerminalWithName "E-Mail" "neomutt"
+    ]
   ]
 
 
@@ -50,6 +59,6 @@ names :: [String]
 names = map name applications
 
 
-commands :: String -> [String]
-commands name' =
-  concatMap cmds . filter (\app -> name app == name') $ applications
+programs :: String -> [X ()]
+programs name' =
+  concatMap progs . filter (\app -> name app == name') $ applications

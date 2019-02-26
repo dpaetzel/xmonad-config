@@ -5,7 +5,6 @@ import Data.List.Split (splitOn)
 import Data.Time (getCurrentTime, utctDay)
 import System.Directory (getHomeDirectory)
 import System.Environment (getEnv)
-import Text.Printf (printf)
 import Text.Regex.Posix ((=~))
 import XMonad
 import XMonad.Actions.CycleWS (toggleWS)
@@ -18,14 +17,10 @@ import qualified XMonad.Util.Dmenu as D
 
 
 import Applications as Apps
+import Terminal
 
 
 -- {{{ general definitions and helper functions
-terminalName :: String
--- terminalName = "urxvt -uc"
-terminalName = "lilyterm"
-
-
 dmenuArgs :: [String]
 dmenuArgs =
   -- number of lines
@@ -63,39 +58,11 @@ projectPath = io $ fmap (++ "/Projekte") getHomeDirectory
 dmenu :: X ()
 dmenu = do
   selection <- D.menuArgs "dmenu" dmenuArgs Apps.names
-  sequence_ . fmap spawnHere $ Apps.commands selection
-
-dmenuDesktopEntries :: X ()
--- currently not working properly when using the Exec strings from the .desktop files -.-
--- dmenu = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= io . executable >>= spawnHere
-dmenuDesktopEntries = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
-    where
-    programNames :: IO [String]
-    programNames = fmap (map removeSuffix . onlyDesktopFiles . lines) $ lsApplicationsPath
-        where
-        lsApplicationsPath :: IO String
-        lsApplicationsPath = runProcessWithInput "ls" [applicationsPath] []
-        onlyDesktopFiles :: [String] -> [String]
-        onlyDesktopFiles = filter (=~ ".*\\.desktop")
-        removeSuffix :: String -> String
-        removeSuffix = reverse . drop 8 . reverse
-
-    executable :: String -> IO String
-    executable programName = do
-        (_, _, _, catch) <- match
-        return $ head catch
-            where
-            match :: IO (String, String, String, [String])
-            match = fmap (command . execLine . lines) $ readFile (applicationsPath ++ programName ++ ".desktop")
-            execLine :: [String] -> String
-            execLine = head . filter (=~ "^Exec=.*$")
-            command :: String -> (String, String, String, [String])
-            command = (=~ "Exec=([^%]*)( |$)")
-
+  sequence_ $ Apps.programs selection
 
 dmenuAll :: X ()
 dmenuAll = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
-    where
+  where
     programNames :: IO [String]
     programNames = fmap (sort . lines) $ args >>= flip (runProcessWithInput "stest") []
         where
@@ -227,11 +194,6 @@ closeAll = do
 --     if currentWSTag == wsName
 --     then toggleWS
 --     else windows $ W.greedyView wsName
-
-
--- spawnOnce but sleep t seconds beforehand
-spawnOnceSleep :: Double -> String -> X ()
-spawnOnceSleep t = spawnOnce . printf "sh -c 'sleep %f; exec %s'" (t :: Double)
 -- }}}
 
 
@@ -264,46 +226,6 @@ suspend = do
 -- TODO remove '~'
 shutdownSound :: X ()
 shutdownSound = spawn "mplayer ~/.sound/borealis/Exit1_1.wav"
--- }}}
-
-
--- {{{ terminal
-runTerminal :: X ()
-runTerminal = spawn terminalName
-
-
-runTerminalWithName :: String -> X ()
-runTerminalWithName windowName =
-    spawn $ unwords
-        -- TODO generalize (see 14 lines below!)
-        [ terminalName
-        -- , "-name", windowName
-        -- , "-title", windowName
-        , "--title", windowName
-        ]
-
-
-inTerminalWithName :: String -> String -> X ()
-inTerminalWithName = withTerminalWithName spawn
-
-
-withTerminalWithName :: (String -> X ()) -> String -> String -> X ()
-withTerminalWithName action windowName command =
-    action $ unwords
-        [ terminalName
-        -- , "-name", windowName
-        -- , "-title", windowName
-        , "--title", windowName
-        , "-e", command
-        ]
-
-
-onceInTerminalWithName :: String -> String -> X ()
-onceInTerminalWithName = withTerminalWithName spawnOnce
-
-
-onceInTerminalWithNameSleep :: Double -> String -> String -> X ()
-onceInTerminalWithNameSleep t = withTerminalWithName (spawnOnceSleep t)
 -- }}}
 
 

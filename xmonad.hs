@@ -14,6 +14,7 @@ import BorderColors
 import KeyBindings
 import Programs
 import StartUp
+import Terminal
 import Windows
 import Workspaces
 import Dzen
