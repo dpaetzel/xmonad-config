@@ -338,19 +338,19 @@ inToggle = spawn "amixer sset 'Capture' toggle"
 
 
 outUp :: X ()
-outUp = home "Bin/volume +3%" >>= spawn
+outUp = spawn "pactl set-sink-volume \"alsa_output.pci-0000_00_1f.3.analog-stereo\" +3%"
 
 
 outDown :: X ()
-outDown = home "Bin/volume -3%" >>= spawn
+outDown = spawn "pactl set-sink-volume \"alsa_output.pci-0000_00_1f.3.analog-stereo\" -3%"
 
 
 outToggle :: X ()
-outToggle = home "Bin/volume %" >>= spawn
+outToggle = spawn "amixer -q set Master toggle"
 
 
 outReset :: X ()
-outReset = home "Bin/volume 30%" >>= spawn
+outReset = spawn "pactl set-sink-volume \"alsa_output.pci-0000_00_1f.3.analog-stereo\" 30%"
 
 
 pavuControl :: X ()
