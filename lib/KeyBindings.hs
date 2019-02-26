@@ -51,7 +51,7 @@ keys' host conf = M.fromList $
     , ((0, xK_Print                                              ), scrotFull)
     , ((appMask, xK_n                                            ), showNeo)
     , ((appMask, xK_k                                            ), xKill)
-
+    , ((appMask, xK_b                                            ), dmenuBluetooth)
     , ((appMask, xK_p                                            ), passmenu)
 
     -- sound
@@ -95,9 +95,9 @@ keys' host conf = M.fromList $
     -- Swap the focused window with the previous window
     , ((winMask .|. shiftMask, xK_k                              ), windows W.swapUp)
     -- Move focus to the master window
-    , ((winMask, xK_m                                            ), windows W.focusMaster)
+    , ((winMask, xK_w                                            ), windows W.focusMaster)
     -- Swap the focused window and the master window
-    , ((winMask .|. shiftMask, xK_m                              ), windows W.swapMaster)
+    , ((winMask .|. shiftMask, xK_w                              ), windows W.swapMaster)
     -- Push window back into tiling
     , ((winMask, xK_i                                            ), withFocused $ windows . W.sink)
     -- window finder
