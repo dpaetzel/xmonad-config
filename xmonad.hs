@@ -11,13 +11,13 @@ import XMonad.Hooks.UrgencyHook
 import XMonad.Util.Run (spawnPipe)
 
 import BorderColors
+import Dzen
 import KeyBindings
 import Programs
 import StartUp
 import Terminal
 import Windows
 import Workspaces
-import Dzen
 
 
 -- focus follows the mouse pointer?

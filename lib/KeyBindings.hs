@@ -4,6 +4,7 @@ module KeyBindings
     , mouseBindings')
     where
 
+
 import qualified Data.Map as M
 import Graphics.X11.ExtraTypes
 import System.Exit (exitSuccess)
@@ -12,6 +13,7 @@ import XMonad.Actions.CycleWS (swapNextScreen, toggleOrDoSkip, toggleWS)
 import XMonad.Actions.WindowBringer (gotoMenuArgs)
 import XMonad.Hooks.ManageDocks
 import qualified XMonad.StackSet as W
+
 
 import Programs
 import Terminal

@@ -76,7 +76,7 @@ dmenuAll = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
 -- TODO repair fuzzy matching (if enabled, nothing gets ever selected)
 -- dmenuProjectOrg = projectNames >>= D.menuArgs "dmenu" dmenuArgsWithFuzzy >>= openInEditor
 dmenuProjectOrg = projectNames >>= D.menuArgs "dmenu" dmenuArgs >>= openInEditor
-    where
+  where
     projectNames :: X [String]
     projectNames = lines <$> lsProjectPath
     lsProjectPath :: X String
