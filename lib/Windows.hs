@@ -38,10 +38,6 @@ manageHook' = manageSpawn
         , title =? "Wayfinder"
         , title =? "Reachability"
         ]
-    , these (doShift "browser")
-        [ className =? "chromium"
-        , className =? "chromium-browser"
-        ]
     , these (doShift "chat")
         [ title     =? "ircClient"
         , title     =? "Whatsie"
@@ -61,4 +57,4 @@ manageHook' = manageSpawn
 
     where
         anyQuery x = fmap or . mapM (=? x) $ [resource, className, title]
-        these doAction = map (flip (-->) doAction)
+        these doAction = map (--> doAction)
