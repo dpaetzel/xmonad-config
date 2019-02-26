@@ -311,12 +311,16 @@ putAwayMouse :: X ()
 putAwayMouse = spawn "xdotool mousemove 0 1280"
 
 
+scrotName :: String
+scrotName = "\"$(date +'%F %R Screenshot $wx$h.png')\""
+
+
 scrotWin :: X ()
-scrotWin = spawn "sleep 0.2; scrot -s -e \'gimp $f\'"
+scrotWin = spawn $ "sleep 0.2; scrot -s -e 'gimp \"$f\"' " ++ scrotName
 
 
 scrotFull :: X ()
-scrotFull = spawn "scrot"
+scrotFull = spawn $ "scrot " ++ scrotName
 
 
 showNeo :: X ()
