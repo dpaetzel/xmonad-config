@@ -210,7 +210,6 @@ shutdown :: X ()
 shutdown = do
     outReset
     closeAll
-    shutdownSound
     spawn "sleep 9 && systemctl poweroff"
 
 
@@ -219,7 +218,6 @@ reboot :: X ()
 reboot = do
     outReset
     closeAll
-    shutdownSound
     spawn "sleep 9 && systemctl reboot"
 
 
@@ -228,11 +226,6 @@ suspend :: X ()
 suspend = do
     lockScreen
     spawn "sleep 3 && systemctl suspend"
-
-
--- TODO remove '~'
-shutdownSound :: X ()
-shutdownSound = spawn "mplayer ~/.sound/borealis/Exit1_1.wav"
 -- }}}
 
 
