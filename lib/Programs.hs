@@ -18,6 +18,7 @@ import qualified XMonad.Util.Dmenu as D
 
 import Applications as Apps
 import Terminal
+import Path
 
 
 -- {{{ general definitions and helper functions
@@ -38,19 +39,6 @@ dmenuArgs =
 
 dmenuArgsWithFuzzy :: [String]
 dmenuArgsWithFuzzy = "-z" : dmenuArgs
-
-
-applicationsPath :: String
--- applicationsPath = "/usr/share/applications/"
-applicationsPath = "/nix/var/nix/profiles/system/sw/share/applications"
-
-
-home :: FilePath -> X FilePath
-home path = io $ fmap (++ "/" ++ path) getHomeDirectory
-
-
-projectPath :: X String
-projectPath = io $ fmap (++ "/Projekte") getHomeDirectory
 -- }}}
 
 
@@ -142,44 +130,6 @@ toggleScratchpad = do
             if numberOfWindows == 0
             then runTerminalWithName "terminal"
             else return ()
-
-
-toggleEditor :: X ()
-toggleEditor = do
-    stackSet <- fmap windowset get
-    let currentWSTag = W.tag . W.workspace $ W.current stackSet
-    if currentWSTag == "editor"
-    then toggleWS
-    -- else (windows $ W.greedyView "editor") >> (startIfNecessary)
-    else (windows $ W.view "editor") >> (startIfNecessary)
-
-        where
-        startIfNecessary :: X ()
-        startIfNecessary = do
-            stackSet <- fmap windowset get
-            let numberOfWindows = length $ W.index stackSet
-            if numberOfWindows == 0
-            then editor
-            else return ()
-
-
-toggleBrowser :: X ()
-toggleBrowser = do
-    stackSet <- fmap windowset get
-    let currentWSTag = W.tag . W.workspace $ W.current stackSet
-    if currentWSTag == "browser"
-    then toggleWS
-    -- else (windows $ W.greedyView "browser") >> (startIfNecessary)
-    else (windows $ W.view "browser") >> (startIfNecessary)
-
-        where
-        startIfNecessary :: X ()
-        startIfNecessary = do
-            stackSet <- fmap windowset get
-            let numberOfWindows = length $ W.index stackSet
-            if numberOfWindows == 0
-            then browser
-            else return ()
 -- }}}
 
 
@@ -230,12 +180,8 @@ suspend = do
 
 
 -- {{{ applications
-editor :: X ()
-editor = spawn "emacsclient -c -a emacs"
-
-
 editorWith :: String -> X ()
-editorWith file = spawn $ "emacsclient -a emacs " ++ file
+editorWith file = ((++ file) <$> home "Bin/v") >>= spawn
 
 
 browser :: X ()
@@ -259,7 +205,7 @@ ircClient = inTerminalWithName "ircClient" "weechat"
 
 
 spotifyCtl :: String -> X ()
-spotifyCtl cmd = (fmap (++ " " ++ cmd) $ home "Bin/spotifyctl") >>= spawn
+spotifyCtl cmd = ((++ " " ++ cmd) <$> home "Bin/spotifyctl") >>= spawn
 
 
 youtubeViewer :: X ()

@@ -16,6 +16,7 @@ import qualified XMonad.StackSet as W
 
 
 import Programs
+import Path
 import Terminal
 import Workspaces
 

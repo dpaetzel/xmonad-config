@@ -5,6 +5,7 @@ import XMonad
 import XMonad.Actions.SpawnOn (spawnHere)
 
 
+import Path
 import Terminal
 
 
@@ -25,7 +26,7 @@ applications =
   , Application "Audacity"      [spawnHere "audacity"]
   , Application "Chromium"      [spawnHere "chromium"]
   , Application "Chrome"        [spawnHere "google-chrome-stable"]
-  , Application "Emacs"         [spawnHere "emacsclient -c -a emacs"]
+  , Application "Emacs"         [home "Bin/v" >>= spawnHere]
   , Application "Firefox"       [spawnHere "firefox"]
   , Application "Gimp"          [spawnHere "gimp"]
   , Application "GVim"          [spawnHere "gvim"]
