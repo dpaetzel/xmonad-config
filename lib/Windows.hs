@@ -47,9 +47,6 @@ manageHook' = manageSpawn
         , className =? "telegram-desktop"
         , className =? "Gajim"
         ]
-    , these (doShift "editor")
-        [ className =? "Emacs"
-        ]
     , [isFullscreen --> doFullFloat]
     ])
     <+> manageDocks
