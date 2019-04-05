@@ -14,11 +14,6 @@ data Application = Application { name :: String
                                }
 
 
--- we'll see how stable chrome app-ids are…
-chromiumAppCommand :: String -> String
-chromiumAppCommand = ("chromium --app-id=" ++)
-
-
 applications :: [Application]
 applications =
   [ Application "Anki"          [spawnHere "anki -b $HOME/.Anki"]
@@ -26,7 +21,7 @@ applications =
   , Application "Audacity"      [spawnHere "audacity"]
   , Application "Chromium"      [spawnHere "chromium"]
   , Application "Chrome"        [spawnHere "google-chrome-stable"]
-  , Application "Emacs"         [home "Bin/v" >>= spawnHere]
+  , Application "Emacs"         [editor]
   , Application "Firefox"       [spawnHere "firefox"]
   , Application "Gimp"          [spawnHere "gimp"]
   , Application "GVim"          [spawnHere "gvim"]
@@ -34,7 +29,7 @@ applications =
   , Application "NetLogo"       [spawnHere "netlogo"]
   , Application "LibreOffice"   [spawnHere "libreoffice"]
   , Application "Signal"        [spawnHere "signal-desktop"]
-  , Application "Spacemacs"     [spawnHere "emacsclient -c -a emacs"]
+  , Application "Spacemacs"     [editor]
   , Application "Spotify"       [spawnHere "spotify"]
   , Application "Telegram"      [spawnHere "telegram-desktop"]
   , Application "Thunderbird"   [spawnHere "thunderbird"]
@@ -46,7 +41,7 @@ applications =
 
   , Application "E-Mail"        [spawnHere "thunderbird"]
   , Application "Browser"       [spawnHere "firefox"]
-  , Application "Editor"        [spawnHere "gvim"]
+  , Application "Editor"        [editor]
   , Application "Chat"
     [ spawnHere "signal-desktop"
     , spawnHere "telegram-desktop"
@@ -54,6 +49,8 @@ applications =
     , inTerminalWithName "E-Mail" "neomutt"
     ]
   ]
+  where
+    editor = (++ " -c") <$> home "Bin/v" >>= spawnHere
 
 
 names :: [String]

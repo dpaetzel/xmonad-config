@@ -58,7 +58,7 @@ dmenuAll = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
         args = fmap ("-flx" :) path
             where
             path :: IO [String]
-            path = fmap (splitOn ":") $ getEnv "PATH"
+            path = splitOn ":" <$> getEnv "PATH"
 
 
 -- TODO repair fuzzy matching (if enabled, nothing gets ever selected)
@@ -181,7 +181,7 @@ suspend = do
 
 -- {{{ applications
 editorWith :: String -> X ()
-editorWith file = ((++ file) <$> home "Bin/v") >>= spawn
+editorWith file = ((++ " " ++ file) <$> home "Bin/v") >>= spawn
 
 
 browser :: X ()

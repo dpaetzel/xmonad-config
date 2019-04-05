@@ -7,11 +7,9 @@ import XMonad.Hooks.ManageDocks (manageDocks)
 import XMonad.Hooks.ManageHelpers (doCenterFloat, doFullFloat, isFullscreen)
 
 
--- window rules
 manageHook' :: ManageHook
 manageHook' = manageSpawn
     <+> (composeAll . concat $
-    -- TODO all ignores still needed?
     [ these doIgnore
         [ anyQuery "desktop_window"
         , anyQuery "desktop"
@@ -29,9 +27,6 @@ manageHook' = manageSpawn
         , className =? "Nm-openconnect-auth-dialog"
         , title     =? "Wireshark"
         , className =? "Ibus-ui-gtk3"
-        -- TODO check whether these are needed/have any merit
-        -- , stringProperty "WM_WINDOW_ROLE" =? "app"
-        -- , stringProperty "_NET_WM_WINDOW_TYPE" =? "_NET_WM_WINDOW_TYPE_DIALOG"
         ]
     , these doCenterFloat
         [ stringProperty "WM_WINDOW_ROLE" =? "gimp-toolbox-color-dialog"
