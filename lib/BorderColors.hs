@@ -7,7 +7,7 @@ normalBorderColor' = "#000000"
 
 
 -- border colors for focused windows
---   - #729fcf is tango blue
---   - #555753 is tango lightblack
+-- - #729fcf is tango blue
+-- - #555753 is tango lightblack
 focusedBorderColor' :: String
 focusedBorderColor' = "#555753"

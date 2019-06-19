@@ -20,16 +20,14 @@ import Windows
 import Workspaces
 
 
--- focus follows the mouse pointer?
-focusFollowsMouse' = False
-
--- event handling
 eventHook' = mempty <+> docksEventHook <+> fullscreenEventHook
+
 
 -- status bars and logging
 logHook' handle = fadeInactiveLogHook fadeAmount >> dynamicLogWithPP (dzenPP' handle)
     where
         fadeAmount = 0.8
+
 
 main = do
     host <- fmap nodeName getSystemID
@@ -39,7 +37,7 @@ main = do
         . withUrgencyHook NoUrgencyHook
         $ def
             { terminal           = terminalName
-            , focusFollowsMouse  = focusFollowsMouse'
+            , focusFollowsMouse  = False
             , modMask            = winMask
             , workspaces         = workspaces'
             , normalBorderColor  = normalBorderColor'

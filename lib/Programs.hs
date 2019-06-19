@@ -1,5 +1,7 @@
 module Programs where
 
+
+import Control.Monad (when)
 import Data.List (intercalate, sort)
 import Data.List.Split (splitOn)
 import Data.Time (getCurrentTime, utctDay)
@@ -21,7 +23,9 @@ import Terminal
 import Path
 
 
--- {{{ general definitions and helper functions
+-- * General definitions and helper functions
+
+
 dmenuArgs :: [String]
 dmenuArgs =
   -- number of lines
@@ -39,10 +43,11 @@ dmenuArgs =
 
 dmenuArgsWithFuzzy :: [String]
 dmenuArgsWithFuzzy = "-z" : dmenuArgs
--- }}}
 
 
--- {{{ quick access
+-- * Quick access
+
+
 dmenu :: X ()
 dmenu = do
   selection <- D.menuArgs "dmenu" dmenuArgs Apps.names
@@ -52,27 +57,28 @@ dmenuAll :: X ()
 dmenuAll = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
   where
     programNames :: IO [String]
-    programNames = fmap (sort . lines) $ args >>= flip (runProcessWithInput "stest") []
+    programNames =
+      fmap (sort . lines) $ args >>= flip (runProcessWithInput "stest") []
         where
-        args :: IO [String]
-        args = fmap ("-flx" :) path
+          args :: IO [String]
+          args = fmap ("-flx" :) path
             where
-            path :: IO [String]
-            path = splitOn ":" <$> getEnv "PATH"
+              path :: IO [String]
+              path = splitOn ":" <$> getEnv "PATH"
 
 
--- TODO repair fuzzy matching (if enabled, nothing gets ever selected)
--- dmenuProjectOrg = projectNames >>= D.menuArgs "dmenu" dmenuArgsWithFuzzy >>= openInEditor
+dmenuProjectOrg :: X ()
 dmenuProjectOrg = projectNames >>= D.menuArgs "dmenu" dmenuArgs >>= openInEditor
   where
     projectNames :: X [String]
     projectNames = lines <$> lsProjectPath
     lsProjectPath :: X String
     lsProjectPath = do
-        p <- projectPath
-        runProcessWithInput "ls" [p] []
+      p <- projectPath
+      runProcessWithInput "ls" [p] []
     toOrgFile :: String -> X String
-    toOrgFile name = fmap (++ "/\"" ++ name ++ "/" ++ name ++ ".org\"") projectPath
+    toOrgFile name =
+      fmap (++ "/\"" ++ name ++ "/" ++ name ++ ".org\"") projectPath
     openInEditor :: String -> X ()
     openInEditor "" = return ()
     openInEditor name = editorWith =<< toOrgFile name
@@ -81,89 +87,102 @@ dmenuProjectOrg = projectNames >>= D.menuArgs "dmenu" dmenuArgs >>= openInEditor
 dmenuBluetooth :: X ()
 dmenuBluetooth = D.menuArgs "dmenu" dmenuArgs ["daheim", "Arbeit"] >>= connect
   where
-    connect "daheim" = spawn "bluetoothctl disconnect ; bluetoothctl connect 00:12:D0:03:5E:E7"
-    connect "Arbeit" = spawn "bluetoothctl disconnect ; bluetoothctl connect 00:19:5D:35:2C:4F"
+    connect "daheim" =
+      spawn "bluetoothctl disconnect ; bluetoothctl connect 00:12:D0:03:5E:E7"
+    connect "Arbeit" =
+      spawn "bluetoothctl disconnect ; bluetoothctl connect 00:19:5D:35:2C:4F"
 
 
 data Note = Note
 instance XPrompt Note where
-    showXPrompt Note = "In.org < "
+  showXPrompt Note = "In.org < "
 
 
 addNote :: Bool -> X ()
 addNote withDate = mkXPrompt Note myXPConfig complFun appendToIn
-    where
+  where
     complFun :: String -> IO [String]
     complFun = return . const []
     appendToIn :: String -> X ()
     appendToIn "" = return ()
     appendToIn note = io $ do
-        date <- fmap (show . utctDay) getCurrentTime
-        file <- fmap (++ "/In.org") getHomeDirectory
-        if withDate
-        then appendFile file ("* [" ++ date ++ "] " ++ note ++ "\n")
-        else appendFile file ("* " ++ note ++ "\n")
+      date <- fmap (show . utctDay) getCurrentTime
+      file <- fmap (++ "/In.org") getHomeDirectory
+      if withDate
+      then appendFile file ("* [" ++ date ++ "] " ++ note ++ "\n")
+      else appendFile file ("* " ++ note ++ "\n")
     myXPConfig = def {
-        bgColor = "#000000",
-        fgColor = "#ffffff",
-        font = "xft: Inconsolata-14:normal",
-        promptBorderWidth = 0
+      bgColor = "#000000",
+      fgColor = "#ffffff",
+      font = "xft: Inconsolata-14:normal",
+      promptBorderWidth = 0
     }
 
 
--- my own scratchpad action (I like toggling workspace more than bringing
--- window): Toggle terminal workspace and start terminal if not yet existing.
+{-|
+My own scratchpad action: Toggle my terminal workspace and start a terminal if
+there is no window there.
+
+I like toggling workspace more than bringing a window to me.
+-}
 toggleScratchpad :: X ()
 toggleScratchpad = do
-    stackSet <- fmap windowset get
-    let currentWSTag = W.tag . W.workspace $ W.current stackSet
-    if currentWSTag == "terminal"
-    then toggleWS
-    -- else (windows $ W.greedyView "terminal") >> (startIfNecessary)
-    else (windows $ W.view "terminal") >> (startIfNecessary)
-
-        where
-        startIfNecessary :: X ()
-        startIfNecessary = do
-            stackSet <- fmap windowset get
-            let numberOfWindows = length $ W.index stackSet
-            if numberOfWindows == 0
-            then runTerminalWithName "terminal"
-            else return ()
--- }}}
+  stackSet <- fmap windowset get
+  let currentWSTag = W.tag . W.workspace $ W.current stackSet
+  if currentWSTag == "terminal"
+  then toggleWS
+  else windows (W.view "terminal") >> startIfNecessary
+    where
+      startIfNecessary :: X ()
+      startIfNecessary = do
+        stackSet <- fmap windowset get
+        let numberOfWindows = length $ W.index stackSet
+        when (numberOfWindows == 0) $
+          runTerminalWithName "terminal"
 
 
--- {{{ xmonad utility functions
--- toggle a workspace (if not there, go there; if there, go to the last one)
--- close all windows on all workspaces
+-- * Utility functions for XMonad manipulation
+
+
+{-|
+close all windows on all workspaces.
+-}
 closeAll :: X ()
 closeAll = do
-    stackset <- fmap windowset get
-    let allWindows = W.allWindows stackset
-    mapM_ killWindow allWindows
+  stackset <- fmap windowset get
+  let allWindows = W.allWindows stackset
+  mapM_ killWindow allWindows
 
 
--- toggle between two workspaces
+-- {-|
+-- Toggles a workspace (if not there, go there; if there, go to the previous
+-- one).
+-- -}
 -- toggle :: String -> X ()
 -- toggle wsName = do
---     stackSet <- fmap windowset get
---     let currentWSTag = W.tag . W.workspace $ W.current stackSet
---     if currentWSTag == wsName
---     then toggleWS
---     else windows $ W.greedyView wsName
--- }}}
+--   stackSet <- fmap windowset get
+--   let currentWSTag = W.tag . W.workspace $ W.current stackSet
+--   if currentWSTag == wsName
+--   then toggleWS
+--   else windows $ W.greedyView wsName
 
 
--- {{{ power management
--- poweroff the computer, close windows gracefully before
+-- * Power management
+
+
+{-|
+Closes all windows gracefully and powers off the system.
+-}
 shutdown :: X ()
 shutdown = do
-    outReset
-    closeAll
-    spawn "sleep 9 && systemctl poweroff"
+  outReset
+  closeAll
+  spawn "sleep 9 && systemctl poweroff"
 
 
--- reboot the computer, close windows gracefully before
+{-|
+Closes all windows gracefully and reboots the system.
+-}
 reboot :: X ()
 reboot = do
     outReset
@@ -171,15 +190,18 @@ reboot = do
     spawn "sleep 9 && systemctl reboot"
 
 
--- lock screen and suspend the computer
+{-|
+Locks the screen and suspends the computer
+-}
 suspend :: X ()
 suspend = do
     lockScreen
     spawn "sleep 3 && systemctl suspend"
--- }}}
 
 
--- {{{ applications
+-- * Applications
+
+
 editorWith :: String -> X ()
 editorWith file = ((++ " " ++ file) <$> home "Bin/v") >>= spawn
 
@@ -212,20 +234,17 @@ youtubeViewer :: X ()
 youtubeViewer = inTerminalWithName "youtube-viewer" "youtube-viewer"
 
 
-jiu :: X ()
-jiu = home "Documents/jiu/jiu.org" >>= editorWith
-
-
 gtd :: X ()
 gtd = home "TODO.org" >>= editorWith
 
 
 gtdIn :: X ()
 gtdIn = home "In.org" >>= editorWith
--- }}}
 
 
--- {{{ utilities
+-- * Utility programs
+
+
 ejectTray :: X ()
 ejectTray = spawn "eject"
 
@@ -268,10 +287,11 @@ showNeo = spawn "feh ~/.neo.png"
 
 xKill :: X ()
 xKill = spawn "xkill"
--- }}}
 
 
--- {{{ sound
+-- * Sound management
+
+
 inToggle :: X ()
 inToggle = spawn "amixer sset 'Capture' toggle"
 
@@ -298,17 +318,14 @@ pavuControl = spawnHere "pavucontrol"
 
 equalizer :: X ()
 equalizer = spawnHere "pulseaudio-equalizer-gtk"
--- }}}
 
 
--- {{{ screen brightness
+-- * Screen brightness management
+
+
 lightUp :: X ()
 lightUp = spawn "light -A 10"
 
 
 lightDown :: X ()
 lightDown = spawn "light -U 10"
--- }}}
-
-
--- vim: foldmethod=marker:

@@ -19,8 +19,8 @@ applications =
   [ Application "Anki"          [spawnHere "anki -b $HOME/.Anki"]
   , Application "ARandR"        [spawnHere "arandr"]
   , Application "Audacity"      [spawnHere "audacity"]
-  , Application "Chromium"      [spawnHere "chromium"]
   , Application "Chrome"        [spawnHere "google-chrome-stable"]
+  , Application "Chromium"      [spawnHere "chromium"]
   , Application "Emacs"         [editor]
   , Application "Firefox"       [spawnHere "firefox"]
   , Application "Gimp"          [spawnHere "gimp"]
@@ -39,13 +39,12 @@ applications =
   , Application "Windows"       [spawnHere "VirtualBox --startvm 'Windows 10'"]
   , Application "Zathura"       [spawnHere "zathura"]
 
-  , Application "E-Mail"        [spawnHere "thunderbird"]
+  , Application "E-Mail"        [inTerminalWithName "E-Mail" "neomutt"]
   , Application "Browser"       [spawnHere "firefox"]
   , Application "Editor"        [editor]
   , Application "Chat"
     [ spawnHere "signal-desktop"
     , spawnHere "telegram-desktop"
-    , inTerminalWithName "RSS" "newsboat"
     , inTerminalWithName "E-Mail" "neomutt"
     ]
   ]

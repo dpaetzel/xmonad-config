@@ -6,7 +6,6 @@ import XMonad
 
 
 applicationsPath :: String
--- applicationsPath = "/usr/share/applications/"
 applicationsPath = "/nix/var/nix/profiles/system/sw/share/applications"
 
 
