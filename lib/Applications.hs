@@ -36,7 +36,7 @@ applications =
   , Application "Vim"           [spawnHere "gvim"]
   , Application "VirtualBox"    [spawnHere "VirtualBox"]
   , Application "VLC"           [spawnHere "vlc"]
-  , Application "Windows"       [spawnHere "VirtualBox --startvm 'Windows 10'"]
+  , Application "Windows"       [spawnHere "VirtualBoxVM --startvm 'Windows 10'"]
   , Application "Zathura"       [spawnHere "zathura"]
 
   , Application "E-Mail"        [inTerminalWithName "E-Mail" "neomutt"]
