@@ -46,7 +46,7 @@ keys' host conf = M.fromList $
   , ((appMask, xK_l                                            ), lockScreen)
   , ((winMask, xK_a                                            ), putAwayMouse)
   , ((appMask, xK_Print                                        ), scrotWin)
-  , ((0, xK_Print                                              ), scrotFull)
+  , ((appMask .|. shiftMask, xK_Print                          ), scrotFull)
   , ((appMask, xK_n                                            ), showNeo)
   , ((appMask, xK_b                                            ), dmenuBluetooth)
   , ((appMask, xK_p                                            ), passmenu)
