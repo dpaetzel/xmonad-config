@@ -251,7 +251,7 @@ insertTray = spawn "eject -t"
 
 
 lockScreen :: X ()
-lockScreen = spawn "slimlock"
+lockScreen = spawn "slock"
 
 
 passmenu :: X ()
