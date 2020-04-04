@@ -5,6 +5,7 @@ import XMonad
 import XMonad.Actions.SpawnOn (spawnHere)
 
 
+import Editor
 import Path
 import Terminal
 
@@ -21,15 +22,14 @@ applications =
   , Application "Audacity"      [spawnHere "audacity"]
   , Application "Chrome"        [spawnHere "google-chrome-stable"]
   , Application "Chromium"      [spawnHere "chromium"]
-  , Application "Emacs"         [editor]
   , Application "Firefox"       [spawnHere "firefox"]
+  , Application "Emacs"         [editor']
   , Application "Gimp"          [spawnHere "gimp"]
   , Application "GVim"          [spawnHere "gvim"]
   , Application "MediathekView" [spawnHere "mediathekview"]
   , Application "NetLogo"       [spawnHere "netlogo"]
   , Application "LibreOffice"   [spawnHere "libreoffice"]
   , Application "Signal"        [spawnHere "signal-desktop"]
-  , Application "Spacemacs"     [editor]
   , Application "Spotify"       [spawnHere "spotify"]
   , Application "Telegram"      [spawnHere "telegram-desktop"]
   , Application "Thunderbird"   [spawnHere "thunderbird"]
@@ -41,15 +41,13 @@ applications =
 
   , Application "E-Mail"        [inTerminalWithName "E-Mail" "neomutt"]
   , Application "Browser"       [spawnHere "firefox"]
-  , Application "Editor"        [editor]
+  , Application "Editor"        [editor']
   , Application "Chat"
     [ spawnHere "signal-desktop"
     , spawnHere "telegram-desktop"
     , inTerminalWithName "E-Mail" "neomutt"
     ]
   ]
-  where
-    editor = (++ " -c") <$> home "Bin/v" >>= spawnHere
 
 
 names :: [String]

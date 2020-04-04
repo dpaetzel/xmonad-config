@@ -19,8 +19,9 @@ import qualified XMonad.Util.Dmenu as D
 
 
 import Applications as Apps
-import Terminal
+import Editor
 import Path
+import Terminal
 
 
 -- * General definitions and helper functions
@@ -200,10 +201,6 @@ suspend = do
 
 
 -- * Applications
-
-
-editorWith :: String -> X ()
-editorWith file = ((++ " " ++ file) <$> home "Bin/v") >>= spawn
 
 
 browser :: X ()
