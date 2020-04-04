@@ -33,7 +33,6 @@ keys' host conf = M.fromList $
 
   -- main programs
   [ ((winMask, xK_b                                            ), runTerminal)
-  , ((winMask, xK_t                                            ), toggleScratchpad)
   , ((appMask, xK_minus                                        ), dmenuProjectOrg)
   , ((appMask, xK_e                                            ), fileManager)
   , ((appMask, xK_u                                            ), gtd)
@@ -138,6 +137,7 @@ keys' host conf = M.fromList $
     [ (xK_x, flip ($) "trash")
     , (xK_z, flip ($) "chat")
     , (xK_s, flip ($) "browser")
+    , (xK_t, flip ($) "terminal")
     , (xK_n, flip ($) "editor")]
     ++
     zip
@@ -148,6 +148,10 @@ keys' host conf = M.fromList $
     [ (toggleOrDoSkip [] W.view, 0)
     , (windows . W.shift, shiftMask)]
   ]
+  ++
+
+  -- not nice but this way both shifting windows to and toggling the scratchpad works
+  [ ((winMask, xK_t), toggleScratchpad) ]
   ++
 
   -- mod-{c,e,ä}, Switch to physical/Xinerama screens 1, 2, or 3
