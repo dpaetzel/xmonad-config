@@ -39,7 +39,7 @@ dzenCommand "sokrates" =
   " -xs 2" ++
   " -ta r" ++
   " -tw 2560" ++
-  " -fn Inconsolata-11:normal" ++
+  " -fn Inconsolata\\ for\\ Powerline-11:normal" ++
   " -fg '#ffffff'" ++
   " -bg '#000000'" ++
   " -e 'onStart=lower'"

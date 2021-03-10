@@ -39,7 +39,7 @@ dmenuArgs =
   , "-nf", "#729fcf"
   , "-sb", "#000000"
   , "-sf", "#ffffff"
-  , "-fn", "Inconsolata-14:normal"]
+  , "-fn", "Inconsolata\\ for\\ Powerline-14:normal"]
 
 
 dmenuArgsWithFuzzy :: [String]
