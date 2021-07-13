@@ -203,32 +203,12 @@ suspend = do
 -- * Applications
 
 
-browser :: X ()
-browser = spawn "chromium"
-
-
-documentViewer :: X ()
-documentViewer = spawn "zathura"
-
-
-musicPlayer :: X ()
-musicPlayer = spawn "spotify"
-
-
 fileManager :: X ()
 fileManager = spawn "thunar"
 
 
-ircClient :: X ()
-ircClient = inTerminalWithName "ircClient" "weechat"
-
-
 spotifyCtl :: String -> X ()
 spotifyCtl cmd = ((++ " " ++ cmd) <$> home "Bin/spotifyctl") >>= spawn
-
-
-youtubeViewer :: X ()
-youtubeViewer = inTerminalWithName "youtube-viewer" "youtube-viewer"
 
 
 gtd :: X ()
@@ -242,14 +222,6 @@ gtdIn = home "In.org" >>= editorWith
 -- * Utility programs
 
 
-ejectTray :: X ()
-ejectTray = spawn "eject"
-
-
-insertTray :: X ()
-insertTray = spawn "eject -t"
-
-
 lockScreen :: X ()
 lockScreen = spawn "slock"
 
@@ -257,10 +229,6 @@ lockScreen = spawn "slock"
 passmenu :: X ()
 passmenu =
   home ("Bin/passmenu --type " ++ "'" ++ intercalate "' '" dmenuArgs ++ "'") >>= spawn
-
-
-powerTop :: X ()
-powerTop = inTerminalWithName "powertop" "sudo powertop"
 
 
 putAwayMouse :: X ()
@@ -281,10 +249,6 @@ scrotFull = spawn $ "scrot " ++ scrotName
 
 showNeo :: X ()
 showNeo = spawn "feh ~/.neo.png"
-
-
-xKill :: X ()
-xKill = spawn "xkill"
 
 
 -- * Sound management
@@ -312,10 +276,6 @@ outReset = spawn "pactl set-sink-volume \"alsa_output.pci-0000_00_1f.3.analog-st
 
 pavuControl :: X ()
 pavuControl = spawnHere "pavucontrol"
-
-
-equalizer :: X ()
-equalizer = spawnHere "pulseaudio-equalizer-gtk"
 
 
 -- * Screen brightness management
