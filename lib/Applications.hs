@@ -22,8 +22,8 @@ applications =
   , Application "Audacity"      [spawnHere "audacity"]
   , Application "Chrome"        [spawnHere "google-chrome-stable"]
   , Application "Chromium"      [spawnHere "chromium"]
-  , Application "Firefox"       [spawnHere "firefox"]
   , Application "Emacs"         [editor']
+  , Application "Firefox"       [spawnHere "firefox --setDefaultBrowser"]
   , Application "Gimp"          [spawnHere "gimp"]
   , Application "GVim"          [spawnHere "gvim"]
   , Application "MediathekView" [spawnHere "mediathekview"]
@@ -38,9 +38,10 @@ applications =
   , Application "VLC"           [spawnHere "vlc"]
   , Application "Windows"       [spawnHere "VirtualBoxVM --startvm 'Windows 10'"]
   , Application "Zathura"       [spawnHere "zathura"]
+  , Application "Zoom"          [spawnHere "zoom-us"]
 
   , Application "E-Mail"        [inTerminalWithName "E-Mail" "neomutt"]
-  , Application "Browser"       [spawnHere "firefox"]
+  , Application "Browser"       [spawnHere "firefox --setDefaultBrowser"]
   , Application "Editor"        [editor']
   , Application "Chat"
     [ spawnHere "signal-desktop"
