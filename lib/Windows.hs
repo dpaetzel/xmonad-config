@@ -52,4 +52,9 @@ manageHook' =
 --         [ title =? "zoom_linux_float_video_window" -?> doCenterFloat
 --         ]
 --     )
+--
+-- TODO Adding this keybinding should work as well but it does not either
+-- (lilyterm is always spawned).
+-- ((winMask .|. shiftMask, xK_r),
+--   raiseMaybe (spawn "lilyterm") (title =? "zoom_linux_float_video_window"))
 

@@ -84,7 +84,6 @@ keys' host conf =
       ((winMask, xK_i), withFocused $ windows . W.sink),
       -- window finder
       ((winMask, xK_g), gotoMenuArgs dmenuArgs),
-      ((winMask .|. shiftMask, xK_r), raiseMaybe (spawn "lilyterm") (title =? "zoom_linux_float_video_window")),
       -- layouts
       -- Rotate through the available layout algorithms
       ((winMask, xK_p), sendMessage NextLayout),
