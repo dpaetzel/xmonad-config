@@ -1,7 +1,13 @@
+import BorderColors
 import Data.Monoid
-
+import Dzen
+import KeyBindings
+import Programs
+import StartUp
 import System.Posix.Unistd (getSystemID, nodeName)
-
+import Terminal
+import Windows
+import Workspaces
 import XMonad
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP)
 import XMonad.Hooks.EwmhDesktops (ewmh, fullscreenEventHook)
@@ -10,44 +16,32 @@ import XMonad.Hooks.ManageDocks (docksEventHook)
 import XMonad.Hooks.UrgencyHook
 import XMonad.Util.Run (spawnPipe)
 
-import BorderColors
-import Dzen
-import KeyBindings
-import Programs
-import StartUp
-import Terminal
-import Windows
-import Workspaces
-
-
 eventHook' = mempty <+> docksEventHook <+> fullscreenEventHook
-
 
 -- status bars and logging
 logHook' handle = fadeInactiveLogHook fadeAmount >> dynamicLogWithPP (dzenPP' handle)
-    where
-        fadeAmount = 0.8
-
+  where
+    fadeAmount = 0.8
 
 main = do
-    host <- fmap nodeName getSystemID
-    dzenHandle <- spawnPipe (dzenCommand host)
-    xmonad
-        . ewmh
-        . withUrgencyHook NoUrgencyHook
-        $ def
-            { terminal           = terminalName
-            , focusFollowsMouse  = False
-            , modMask            = winMask
-            , workspaces         = workspaces'
-            , normalBorderColor  = normalBorderColor'
-            , focusedBorderColor = focusedBorderColor'
-            , borderWidth        = 2
-            , keys               = keys' host
-            , mouseBindings      = mouseBindings'
-            , handleEventHook    = eventHook'
-            , logHook            = logHook' dzenHandle
-            , startupHook        = startupHook' host
-            , manageHook         = manageHook'
-            , layoutHook         = layoutHook'
-            }
+  host <- fmap nodeName getSystemID
+  dzenHandle <- spawnPipe (dzenCommand host)
+  xmonad
+    . ewmh
+    . withUrgencyHook NoUrgencyHook
+    $ def
+      { terminal = terminalName,
+        focusFollowsMouse = False,
+        modMask = winMask,
+        workspaces = workspaces',
+        normalBorderColor = normalBorderColor',
+        focusedBorderColor = focusedBorderColor',
+        borderWidth = 2,
+        keys = keys' host,
+        mouseBindings = mouseBindings',
+        handleEventHook = eventHook',
+        logHook = logHook' dzenHandle,
+        startupHook = startupHook' host,
+        manageHook = manageHook',
+        layoutHook = layoutHook'
+      }
