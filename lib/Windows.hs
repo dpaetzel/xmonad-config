@@ -1,52 +1,55 @@
 module Windows where
 
-
 import XMonad
 import XMonad.Actions.SpawnOn (manageSpawn)
+import XMonad.Hooks.DynamicProperty
 import XMonad.Hooks.ManageDocks (manageDocks)
-import XMonad.Hooks.ManageHelpers (doCenterFloat, doFullFloat, isFullscreen)
-
+import XMonad.Hooks.ManageHelpers
+  ( (-?>),
+    composeOne,
+    doCenterFloat,
+    doFullFloat,
+    isDialog,
+    isFullscreen,
+  )
 
 manageHook' :: ManageHook
-manageHook' = manageSpawn
-    <+> (composeAll . concat $
-    [ these doIgnore
-        [ anyQuery "desktop_window"
-        , anyQuery "desktop"
-        , anyQuery "notify-osd"
-        , anyQuery "trayer"
-        , anyQuery "stalonetray"
-        ]
-    , these doFloat
-        [ title     =? "Firefox Preferences"
-        , title     =? "Tab Mix Plus Options"
-        , title     =? "FoxyProxy Standard"
-        , className =? "scalafx.application.AppHelper"
-        , className =? "sun-awt-X11-XDialogPeer"
-        , title     =? "Volume Control"
-        , className =? "Nm-openconnect-auth-dialog"
-        , title     =? "Wireshark"
-        , className =? "Ibus-ui-gtk3"
-        ]
-    , these doCenterFloat
-        [ stringProperty "WM_WINDOW_ROLE" =? "gimp-toolbox-color-dialog"
-        , title =? "Wayfinder"
-        , title =? "Reachability"
-        ]
-    , these (doShift "chat")
-        [ title     =? "ircClient"
-        , title     =? "Whatsie"
-        , title     =? "Telegram"
-        , className =? "Skype"
-        , className =? "Pidgin"
-        , className =? "telegram-desktop"
-        , className =? "Gajim"
-        ]
-    , [isFullscreen --> doFullFloat]
-    ])
+manageHook' =
+  -- Required for `spawnOn`.
+  manageSpawn
+    -- Required for `ToggleStruts` and `avoidStruts`.
     <+> manageDocks
-    <+> manageHook def
+    -- Use `composeOne` instead of `composeAll` in order to only use the first
+    -- match, that is the first returning a `Just` (and not merge all of the
+    -- matching rules). https://bbs.archlinux.org/viewtopic.php?id=98695
+    <+> composeOne
+          [ isDialog -?> doFloat,
+            -- TODO This should work but it does not.
+            -- title =? "zoom_linux_float_video_window" -?> doCenterFloat,
+            -- TODO Not sure whether I still want/need this
+            -- isFullscreen -?> doFullFloat
+            title =? "Firefox Preferences" -?> doFloat,
+            title =? "Tab Mix Plus Options" -?> doFloat,
+            title =? "FoxyProxy Standard" -?> doFloat,
+            className =? "scalafx.application.AppHelper" -?> doFloat,
+            className =? "sun-awt-X11-XDialogPeer" -?> doFloat,
+            title =? "Volume Control" -?> doCenterFloat,
+            className =? "Nm-openconnect-auth-dialog" -?> doFloat,
+            title =? "Wireshark" -?> doFloat,
+            className =? "Ibus-ui-gtk3" -?> doFloat,
+            title =? "as_toolbar" -?> doFloat,
+            stringProperty "WM_WINDOW_ROLE" =? "gimp-toolbox-color-dialog" -?> doCenterFloat,
+            title =? "ObstacleTower" -?> doCenterFloat,
+            title =? "2048" -?> doCenterFloat,
+            title =? "Wayfinder" -?> doCenterFloat,
+            title =? "Reachability" -?> doCenterFloat
+          ]
+-- TODO If above Zoom rule does not work due to the window changing its title,
+-- then this should work but it does not.
+-- dynWindowEvents =
+--   dynamicTitle
+--     ( composeOne
+--         [ title =? "zoom_linux_float_video_window" -?> doCenterFloat
+--         ]
+--     )
 
-    where
-        anyQuery x = fmap or . mapM (=? x) $ [resource, className, title]
-        these doAction = map (--> doAction)
