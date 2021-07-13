@@ -263,7 +263,7 @@ powerTop = inTerminalWithName "powertop" "sudo powertop"
 
 
 putAwayMouse :: X ()
-putAwayMouse = spawn "xdotool mousemove 0 1280"
+putAwayMouse = spawn "xdotool mousemove --polar 135 10000"
 
 
 scrotName :: String
