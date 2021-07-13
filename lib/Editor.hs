@@ -46,11 +46,11 @@ editorCommand' = (++ " -c") <$> home "Bin/v"
 Like 'editor' but enforces creating a new editor window.
 -}
 editor' :: X ()
-editor' = editorCommand >>= spawnHere
+editor' = editorCommand' >>= spawnHere
 
 
 {-|
 Like 'editorWith' but enforces creating a new editor window.
 -}
 editorWith' :: String -> X ()
-editorWith' file = ((++ " " ++ file) <$> editorCommand) >>= spawn
+editorWith' file = ((++ " " ++ file) <$> editorCommand') >>= spawn
