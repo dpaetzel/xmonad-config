@@ -255,7 +255,8 @@ lockScreen = spawn "slock"
 
 
 passmenu :: X ()
-passmenu = spawn $ "passmenu " ++ "'" ++ intercalate "' '" dmenuArgs ++ "'"
+passmenu =
+  home ("Bin/passmenu --type " ++ "'" ++ intercalate "' '" dmenuArgs ++ "'") >>= spawn
 
 
 powerTop :: X ()
