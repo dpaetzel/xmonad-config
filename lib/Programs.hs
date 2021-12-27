@@ -86,12 +86,8 @@ dmenuProjectOrg = projectNames >>= D.menuArgs "dmenu" dmenuArgs >>= openInEditor
 
 
 dmenuBluetooth :: X ()
-dmenuBluetooth = D.menuArgs "dmenu" dmenuArgs ["daheim", "Arbeit"] >>= connect
-  where
-    connect "daheim" =
-      spawn "bluetoothctl disconnect ; bluetoothctl connect 00:12:D0:03:5E:E7"
-    connect "Arbeit" =
-      spawn "bluetoothctl disconnect ; bluetoothctl connect 00:19:5D:35:2C:4F"
+dmenuBluetooth =
+  home ("Bin/btmenu " ++ "'" ++ intercalate "' '" dmenuArgs ++ "'") >>= spawn
 
 
 data Note = Note
