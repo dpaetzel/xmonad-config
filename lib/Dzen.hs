@@ -6,6 +6,9 @@ import XMonad.Util.Run (hPutStrLn)
 import XMonad.Util.WorkspaceCompare (mkWsSort, getSortByIndex)
 
 
+font = "'FiraCode Nerd Font-11:style=Retina'"
+
+
 dzenCommand :: String -> String
 dzenCommand "anaxagoras" =
   "killall dzen2;" ++
@@ -15,7 +18,7 @@ dzenCommand "anaxagoras" =
   " -xs 1" ++
   " -ta r" ++
   " -tw 1920" ++
-  " -fn Inconsolata-14:normal" ++
+  " -fn " ++ font ++
   " -fg '#ffffff'" ++
   " -bg '#000000'" ++
   " -e 'onStart=lower'"
@@ -27,7 +30,7 @@ dzenCommand "heraklit" =
   " -xs 2" ++
   " -ta r" ++
   " -tw 1920" ++
-  " -fn Inconsolata-11:normal" ++
+  " -fn " ++ font ++
   " -fg '#ffffff'" ++
   " -bg '#000000'" ++
   " -e 'onStart=lower'"
@@ -39,7 +42,7 @@ dzenCommand "sokrates" =
   " -xs 2" ++
   " -ta r" ++
   " -tw 2560" ++
-  " -fn Inconsolata\\ for\\ Powerline-11:normal" ++
+  " -fn " ++ font ++
   " -fg '#ffffff'" ++
   " -bg '#000000'" ++
   " -e 'onStart=lower'"
@@ -52,7 +55,7 @@ dzenPP' handle = def
   , ppHidden          = dzenColor "#555753" "" -- tango lightblack
   , ppHiddenNoWindows = const ""
   , ppUrgent          = dzenColor "#ef2929" "" -- tango lightred
-  , ppSep             = "  |  "
+  , ppSep             = "    "
   , ppWsSep           = "  "
   , ppTitle           = shorten 100
   , ppLayout          = dzenColor "white" "" . icon
