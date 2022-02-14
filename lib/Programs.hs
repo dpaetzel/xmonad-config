@@ -227,6 +227,11 @@ passmenu =
   home ("Bin/passmenu --type " ++ "'" ++ intercalate "' '" dmenuArgs ++ "'") >>= spawn
 
 
+passmenuClip :: X ()
+passmenuClip =
+  home ("Bin/passmenu " ++ "'" ++ intercalate "' '" dmenuArgs ++ "'") >>= spawn
+
+
 putAwayMouse :: X ()
 putAwayMouse = spawn "xdotool mousemove --polar 135 10000"
 

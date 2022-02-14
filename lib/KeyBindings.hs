@@ -50,6 +50,7 @@ keys' host conf =
       ((appMask, xK_n), showNeo),
       ((appMask, xK_b), dmenuBluetooth),
       ((appMask, xK_p), passmenu),
+      ((appMask .|. shiftMask, xK_p), passmenuClip),
       -- sound
       ((0, xF86XK_AudioRaiseVolume), outUp),
       ((0, xF86XK_AudioLowerVolume), outDown),
