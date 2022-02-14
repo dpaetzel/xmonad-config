@@ -7,7 +7,7 @@ import XMonad.Util.SpawnOnce (spawnOnce)
 
 
 terminalName :: String
-terminalName = "lilyterm"
+terminalName = "kitty"
 
 
 runTerminal :: X ()
@@ -33,10 +33,8 @@ withTerminalWithName :: (String -> X ()) -> String -> String -> X ()
 withTerminalWithName action windowName command =
     action $ unwords
         [ terminalName
-        -- , "-name", windowName
-        -- , "-title", windowName
         , "--title", windowName
-        , "-e", command
+        , command
         ]
 
 
