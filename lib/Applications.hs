@@ -32,6 +32,7 @@ applications =
   , Application "Signal"        [spawnHere "signal-desktop"]
   , Application "Spotify"       [spawnHere "spotify"]
   , Application "Telegram"      [spawnHere "telegram-desktop"]
+  , Application "Threema"       [spawnHere "threema"]
   , Application "Thunderbird"   [spawnHere "thunderbird"]
   , Application "Vim"           [spawnHere "gvim"]
   , Application "VirtualBox"    [spawnHere "VirtualBox"]
@@ -45,6 +46,7 @@ applications =
   , Application "Editor"        [editor']
   , Application "Chat"
     [ spawnHere "signal-desktop"
+    , spawnHere "threema"
     , spawnHere "telegram-desktop"
     , inTerminalWithName "E-Mail" "neomutt"
     ]
