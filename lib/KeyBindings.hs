@@ -134,7 +134,8 @@ keys' host conf =
       -- mod-shift-[1..9,x,z,s,n], Move client to workspace N
       [ ((winMask .|. mod, key), toWorkspace fun)
         | (key, toWorkspace) <-
-            [ (xK_x, flip ($) "trash"),
+            -- m for Müll
+            [ (xK_m, flip ($) "trash"),
               (xK_z, flip ($) "chat"),
               (xK_s, flip ($) "browser"),
               (xK_t, flip ($) "terminal"),
@@ -164,15 +165,15 @@ keys' host conf =
 mouseBindings' _ =
   M.fromList
     -- mod-button1, Set the window to floating mode and move by dragging
-    [ ( (winMask, button1),
+    [ ( (winMask .|. appMask, button1),
         \w ->
           focus w >> mouseMoveWindow w
             >> windows W.shiftMaster
       ),
       -- mod-button2, Raise the window to the top of the stack
-      ((winMask, button2), \w -> focus w >> windows W.shiftMaster),
+      -- ((winMask, button2), \w -> focus w >> windows W.shiftMaster),
       -- mod-button3, Set the window to floating mode and resize by dragging
-      ( (winMask, button3),
+      ( (winMask .|. appMask, button3),
         \w ->
           focus w >> mouseResizeWindow w
             >> windows W.shiftMaster
