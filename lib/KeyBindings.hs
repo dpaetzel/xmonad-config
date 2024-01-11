@@ -122,9 +122,9 @@ keys' host conf =
       -- Suspend computer
       ((winMask, xK_Delete), suspend),
       -- Shutdown computer
-      ((winMask .|. shiftMask, xK_Delete), shutdown),
+      ((appMask .|. winMask .|. shiftMask, xK_Delete), shutdown),
       -- Reboot computer
-      ((winMask .|. shiftMask, xK_Insert), reboot),
+      ((appMask .|. winMask .|. shiftMask, xK_Insert), reboot),
       -- workspaces
       -- toogle last workspace
       ((winMask, xK_o), toggleWS)
