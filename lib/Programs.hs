@@ -82,7 +82,7 @@ dmenuProjectOrg = projectNames >>= D.menuArgs "dmenu" dmenuArgs >>= openInEditor
       runProcessWithInput "ls" [p] []
     toOrgFile :: String -> X String
     toOrgFile name =
-      fmap (++ "/\"" ++ name ++ "/" ++ name ++ ".org\"") projectPath
+      fmap (++ "/\"" ++ name ++ "/" ++ "TODO.org\"") projectPath
     openInEditor :: String -> X ()
     openInEditor "" = return ()
     openInEditor name = editorWith =<< toOrgFile name
