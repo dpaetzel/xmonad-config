@@ -12,6 +12,7 @@ import XMonad
 import XMonad.Actions.CycleWS (toggleWS)
 import XMonad.Actions.SpawnOn (spawnHere)
 import XMonad.Prompt
+import XMonad.Util.Ungrab (unGrab)
 import XMonad.Util.Run (runProcessWithInput)
 import XMonad.Util.SpawnOnce (spawnOnce)
 import qualified XMonad.StackSet as W
@@ -51,8 +52,10 @@ dmenuArgsWithFuzzy = "-z" : dmenuArgs
 
 dmenu :: X ()
 dmenu = do
+  unGrab
   selection <- D.menuArgs "dmenu" dmenuArgs Apps.names
   sequence_ $ Apps.programs selection
+
 
 dmenuAll :: X ()
 dmenuAll = io programNames >>= D.menuArgs "dmenu" dmenuArgs >>= spawnHere
