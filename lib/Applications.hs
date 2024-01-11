@@ -37,6 +37,7 @@ applications =
   , Application "Vim"           [spawnHere "gvim"]
   , Application "VirtualBox"    [spawnHere "VirtualBox"]
   , Application "VLC"           [spawnHere "vlc"]
+  , Application "WhatsApp"      [spawnHere "firefox --new-window https://web.whatsapp.com/"]
   , Application "Windows"       [spawnHere "VirtualBoxVM --startvm 'Windows 10'"]
   , Application "Zathura"       [spawnHere "zathura"]
   , Application "Zoom"          [spawnHere "zoom-us"]
@@ -46,8 +47,6 @@ applications =
   , Application "Editor"        [editor']
   , Application "Chat"
     [ spawnHere "signal-desktop"
-    , spawnHere "threema"
-    , spawnHere "telegram-desktop"
     , inTerminalWithName "E-Mail" "neomutt"
     ]
   ]
