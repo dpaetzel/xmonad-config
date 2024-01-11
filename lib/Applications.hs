@@ -23,7 +23,7 @@ applications =
   , Application "Chrome"        [spawnHere "google-chrome-stable"]
   , Application "Chromium"      [spawnHere "chromium"]
   , Application "Emacs"         [editor']
-  , Application "Firefox"       [spawnHere "firefox --setDefaultBrowser"]
+  , Application "Firefox"       [spawnHere "firefox --setDefaultBrowser --new-window"]
   , Application "Gimp"          [spawnHere "gimp"]
   , Application "GVim"          [spawnHere "gvim"]
   , Application "MediathekView" [spawnHere "mediathekview"]
