@@ -14,11 +14,13 @@ import Terminal
 import Workspaces
 import XMonad
 import XMonad.Actions.CycleWS (swapNextScreen, toggleOrDoSkip, toggleWS)
+import XMonad.Actions.DynamicWorkspaces
 import XMonad.Actions.WindowBringer (gotoMenuArgs)
 import XMonad.Actions.WindowGo (raise, raiseMaybe)
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.SubLayouts
 import XMonad.Layout.WindowNavigation
+import XMonad.Prompt
 import qualified XMonad.StackSet as W
 
 winMask :: KeyMask
@@ -26,6 +28,13 @@ winMask = mod1Mask
 
 appMask :: KeyMask
 appMask = mod4Mask
+
+myXPConfig = def {
+    bgColor = "#000000",
+    fgColor = "#ffffff",
+    font = "xft: Inconsolata-14:normal",
+    promptBorderWidth = 0
+}
 
 keys' host conf =
   M.fromList
@@ -38,7 +47,7 @@ keys' host conf =
       ((winMask .|. appMask, xK_Return), gtdIn),
       -- TODO Currently broken, X session ends if I do this
       -- , ((appMask, xK_Return                                       ), addNote True)
-      -- , ((appMask .|. shiftMask, xK_Return                         ), addNote False)
+      ((appMask, xK_Return), addNote False),
 
       -- util
       ((appMask, xK_space), dmenu),
@@ -80,9 +89,9 @@ keys' host conf =
       -- Swap the focused window with the previous window
       ((winMask .|. shiftMask, xK_k), windows W.swapUp),
       -- Move focus to the master window
-      ((winMask, xK_w), windows W.focusMaster),
+      ((winMask, xK_c), windows W.focusMaster),
       -- Swap the focused window and the master window
-      ((winMask .|. shiftMask, xK_w), windows W.swapMaster),
+      ((winMask .|. shiftMask, xK_c), windows W.swapMaster),
       -- Push window back into tiling
       ((winMask, xK_i), withFocused $ windows . W.sink),
       -- window finder
@@ -126,6 +135,9 @@ keys' host conf =
       -- Reboot computer
       ((appMask .|. winMask .|. shiftMask, xK_Insert), reboot),
       -- workspaces
+      ((winMask, xK_w), selectWorkspace myXPConfig),
+      ((winMask .|. shiftMask, xK_w), withWorkspace myXPConfig (windows . W.shift)),
+      ((appMask .|. winMask .|. shiftMask, xK_w), removeWorkspace),
       -- toogle last workspace
       ((winMask, xK_o), toggleWS)
     ]
@@ -153,13 +165,16 @@ keys' host conf =
       ++
       -- not nice but this way both shifting windows to and toggling the scratchpad works
       [((winMask, xK_t), toggleScratchpad)]
-      ++
-      -- mod-{c,e,ä}, Switch to physical/Xinerama screens 1, 2, or 3
-      -- mod-shift-{c,e,ä}, Move client to screen 1, 2, or 3
-      [ ((m .|. winMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_c, xK_e, xK_adiaeresis] [0 ..],
-          (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
-      ]
+      -- David[2024-02-20]: I'm not using multiple phyical screens for quite
+      -- some time. If I do I can still send windows to the workspace shown on
+      -- the respective screen.
+      -- ++
+      -- -- mod-{c,e,ä}, Switch to physical/Xinerama screens 1, 2, or 3
+      -- -- mod-shift-{c,e,ä}, Move client to screen 1, 2, or 3
+      -- [ ((m .|. winMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
+      --   | (key, sc) <- zip [xK_c, xK_e, xK_adiaeresis] [0 ..],
+      --     (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
+      -- ]
 
 -- mouse bindings
 mouseBindings' _ =
