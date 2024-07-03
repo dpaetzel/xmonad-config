@@ -60,6 +60,7 @@ keys' host conf =
       ((appMask, xK_b), dmenuBluetooth),
       ((appMask, xK_p), passmenu),
       ((appMask .|. shiftMask, xK_p), passmenuClip),
+      ((appMask, xK_v), clipmenu),
       ((winMask, xK_ssharp), spawn "dunstctl close"),
       ((winMask .|. shiftMask, xK_ssharp), spawn "dunstctl history-pop"),
       -- sound
