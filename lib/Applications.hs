@@ -5,7 +5,6 @@ import XMonad
 import XMonad.Actions.SpawnOn (spawnHere)
 
 
-import Editor
 import Path
 import Terminal
 
@@ -22,7 +21,7 @@ applications =
   , Application "Audacity"      [spawnHere "audacity"]
   , Application "Chrome"        [spawnHere "google-chrome-stable"]
   , Application "Chromium"      [spawnHere "chromium"]
-  , Application "Emacs"         [editor']
+  , Application "Emacs"         [spawnHere "editor"]
   , Application "Firefox"       [spawnHere "firefox --setDefaultBrowser --new-window"]
   , Application "Gimp"          [spawnHere "gimp"]
   , Application "GVim"          [spawnHere "gvim"]
@@ -44,7 +43,7 @@ applications =
 
   , Application "E-Mail"        [inTerminalWithName "E-Mail" "neomutt"]
   , Application "Browser"       [spawnHere "firefox --setDefaultBrowser"]
-  , Application "Editor"        [editor']
+  , Application "Editor"        [spawnHere "editor"]
   , Application "Chat"
     [ spawnHere "signal-desktop"
     , inTerminalWithName "E-Mail" "neomutt"
