@@ -15,8 +15,10 @@ import Workspaces
 import XMonad
 import XMonad.Actions.CycleWS (swapNextScreen, toggleOrDoSkip, toggleWS)
 import XMonad.Actions.DynamicWorkspaces
+import XMonad.Actions.Submap (subName, visualSubmap)
 import XMonad.Actions.WindowBringer (gotoMenuArgs)
 import XMonad.Actions.WindowGo (raise, raiseMaybe)
+import XMonad.Actions.PhysicalScreens
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.SubLayouts
 import XMonad.Layout.WindowNavigation
@@ -49,6 +51,16 @@ namedKeys host conf =
     -- util
     ((appMask, xK_space), addName "Dmenu: Apps" dmenu),
     ((appMask .|. shiftMask, xK_space), addName "Dmenu: All" dmenuAll),
+    -- TODO Use Submaps to solve All™ my keybinding problems
+    ((winMask, xK_adiaeresis), addName "Screen" $ visualSubmap def . M.fromList $
+      [ ((0, xK_l), subName "Go to left screen" $ viewScreen def (P 0)),
+        ((0, xK_r), subName "Go to right screen" $ viewScreen def (P 1)),
+        ((shiftMask, xK_l), subName "Send to left screen" $ sendToScreen def (P 0)),
+        ((shiftMask, xK_r), subName "Send to right screen" $ sendToScreen def (P 1)),
+        ((0, xK_s), subName "Swap screens" swapNextScreen)
+        ((0, xK_l), subName "Lock screen" lockscreen)
+      ]
+    )
   ]
   ^++^
 
@@ -124,8 +136,6 @@ namedKeys host conf =
       -- ((winMask .|. controlMask, xK_period), onGroup W.focusUp'),
       -- ((winMask .|. controlMask, xK_comma), onGroup W.focusDown'),
       -- screens
-      -- swap screens
-      ((winMask, xK_r), swapNextScreen),
       -- xmonad
       -- Quit xmonad
       ((winMask .|. shiftMask, xK_F12), closeAll >> io exitSuccess),
