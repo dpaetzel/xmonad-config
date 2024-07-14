@@ -14,4 +14,4 @@ home path = io $ fmap (++ "/" ++ path) getHomeDirectory
 
 
 projectPath :: X String
-projectPath = io $ fmap (++ "/Projekte") getHomeDirectory
+projectPath = io $ fmap (++ "/1Projekte") getHomeDirectory
