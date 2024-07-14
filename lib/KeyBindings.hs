@@ -57,8 +57,8 @@ namedKeys host conf =
         ((0, xK_r), subName "Go to right screen" $ viewScreen def (P 1)),
         ((shiftMask, xK_l), subName "Send to left screen" $ sendToScreen def (P 0)),
         ((shiftMask, xK_r), subName "Send to right screen" $ sendToScreen def (P 1)),
-        ((0, xK_s), subName "Swap screens" swapNextScreen)
-        ((0, xK_l), subName "Lock screen" lockscreen)
+        ((0, xK_s), subName "Swap screens" swapNextScreen),
+        ((0, xK_l), subName "Lock screen" lockScreen)
       ]
     )
   ]
