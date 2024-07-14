@@ -2,7 +2,7 @@ module Windows where
 
 import XMonad
 import XMonad.Actions.SpawnOn (manageSpawn)
-import XMonad.Hooks.DynamicProperty
+import XMonad.Hooks.OnPropertyChange
 import XMonad.Hooks.ManageDocks (manageDocks)
 import XMonad.Hooks.ManageHelpers
   ( (-?>),
