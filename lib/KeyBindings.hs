@@ -77,8 +77,8 @@ namedKeys host conf =
       ((0, xF86XK_AudioPlay), spotifyCtl "playpause"),
       ((0, xF86XK_AudioNext), spotifyCtl "next"),
       ((0, xF86XK_AudioPrev), spotifyCtl "previous"),
-      -- xdotool type
-      ((appMask, xK_t), home "Bin/shrug" >>= spawn),
+      -- xdotool type and keyboard
+      ((appMask, xK_t), spawn "shrug"),
       -- windows
       -- Close focused window
       ((winMask .|. shiftMask, xK_q), kill),
