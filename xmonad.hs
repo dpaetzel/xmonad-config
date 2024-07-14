@@ -14,6 +14,7 @@ import XMonad.Hooks.EwmhDesktops (ewmh, fullscreenEventHook)
 import XMonad.Hooks.FadeInactive (fadeInactiveLogHook)
 import XMonad.Hooks.ManageDocks (docksEventHook)
 import XMonad.Hooks.UrgencyHook
+import XMonad.Util.NamedActions as NA (addDescrKeys')
 import XMonad.Util.Run (spawnPipe)
 
 eventHook' = mempty <+> docksEventHook <+> fullscreenEventHook
@@ -29,6 +30,7 @@ main = do
   xmonad
     . ewmh
     . withUrgencyHook NoUrgencyHook
+    . NA.addDescrKeys' ((winMask, xK_udiaeresis), xMessage) (namedKeys host)
     $ def
       { terminal = terminalName,
         focusFollowsMouse = False,
@@ -37,7 +39,6 @@ main = do
         normalBorderColor = normalBorderColor',
         focusedBorderColor = focusedBorderColor',
         borderWidth = 2,
-        keys = keys' host,
         mouseBindings = mouseBindings',
         handleEventHook = eventHook',
         logHook = logHook' dzenHandle,

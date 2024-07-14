@@ -1,6 +1,6 @@
 module KeyBindings
   ( winMask,
-    keys',
+    namedKeys,
     mouseBindings',
   )
 where
@@ -21,6 +21,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Layout.SubLayouts
 import XMonad.Layout.WindowNavigation
 import XMonad.Prompt
+import XMonad.Util.NamedActions as NA
 import qualified XMonad.StackSet as W
 
 winMask :: KeyMask
@@ -36,23 +37,23 @@ myXPConfig = def {
     promptBorderWidth = 0
 }
 
-keys' host conf =
-  M.fromList
-    $
-    -- main programs
-    [ ((winMask, xK_b), runTerminal),
-      ((appMask, xK_minus), dmenuProjectOrg),
-      ((appMask, xK_e), fileManager),
-      ((appMask, xK_u), gtd),
-      ((winMask .|. appMask, xK_Return), gtdIn),
-      -- TODO Currently broken, X session ends if I do this
-      -- , ((appMask, xK_Return                                       ), addNote True)
-      ((appMask, xK_Return), addNote False),
 
+namedKeys host conf =
+  -- main programs
+  [ ((winMask, xK_b), addName "Terminal" runTerminal),
+    ((appMask, xK_minus), addName "Open project in Emacs" dmenuProjectOrg),
+    ((appMask, xK_e), addName "File manager" fileManager),
+    ((appMask, xK_u), addName "Open TODO.org" gtd),
+    ((appMask .|. shiftMask, xK_Return), addName "Open In.org" gtdIn),
+    ((appMask, xK_Return), addName "Record note" $ addNote False),
+    -- util
+    ((appMask, xK_space), addName "Dmenu: Apps" dmenu),
+    ((appMask .|. shiftMask, xK_space), addName "Dmenu: All" dmenuAll),
+  ]
+  ^++^
+
+    [
       -- util
-      ((appMask, xK_space), dmenu),
-      ((appMask .|. shiftMask, xK_space), dmenuAll),
-      ((appMask, xK_l), lockScreen),
       ((winMask, xK_a), putAwayMouse),
       ((appMask, xK_Print), scrotWinClip),
       ((appMask .|. shiftMask, xK_Print), scrotWin),
@@ -142,7 +143,7 @@ keys' host conf =
       -- toogle last workspace
       ((winMask, xK_o), toggleWS)
     ]
-      ++
+      ^++^
       -- mod-[1..9,x,z,s,n], Switch to workspace N
       -- mod-shift-[1..9,x,z,s,n], Move client to workspace N
       [ ((winMask .|. mod, key), toWorkspace fun)
@@ -163,7 +164,7 @@ keys' host conf =
               (windows . W.shift, shiftMask)
             ]
       ]
-      ++
+      ^++^
       -- not nice but this way both shifting windows to and toggling the scratchpad works
       [((winMask, xK_t), toggleScratchpad)]
       -- David[2024-02-20]: I'm not using multiple phyical screens for quite
