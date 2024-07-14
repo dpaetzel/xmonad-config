@@ -25,6 +25,7 @@ applications =
   , Application "Firefox"       [spawnHere "firefox --setDefaultBrowser --new-window"]
   , Application "Gimp"          [spawnHere "gimp"]
   , Application "GVim"          [spawnHere "gvim"]
+  , Application "Inkscape"      [spawnHere "inkscape"]
   , Application "MediathekView" [spawnHere "mediathekview"]
   , Application "NetLogo"       [spawnHere "netlogo"]
   , Application "LibreOffice"   [spawnHere "libreoffice"]
