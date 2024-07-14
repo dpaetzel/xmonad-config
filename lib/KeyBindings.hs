@@ -79,6 +79,8 @@ namedKeys host conf =
       ((0, xF86XK_AudioPrev), spotifyCtl "previous"),
       -- xdotool type and keyboard
       ((appMask, xK_t), spawn "shrug"),
+      -- m is the only key that is the same on both `de` and `de neo`.
+      ((winMask .|. appMask, xK_m), home "Bin/detoggle" >>= spawn),
       -- windows
       -- Close focused window
       ((winMask .|. shiftMask, xK_q), kill),
