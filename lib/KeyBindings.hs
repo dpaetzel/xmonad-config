@@ -179,16 +179,6 @@ namedKeys host conf =
       ^++^
       -- not nice but this way both shifting windows to and toggling the scratchpad works
       [((winMask, xK_t), toggleScratchpad)]
-      -- David[2024-02-20]: I'm not using multiple phyical screens for quite
-      -- some time. If I do I can still send windows to the workspace shown on
-      -- the respective screen.
-      -- ++
-      -- -- mod-{c,e,ä}, Switch to physical/Xinerama screens 1, 2, or 3
-      -- -- mod-shift-{c,e,ä}, Move client to screen 1, 2, or 3
-      -- [ ((m .|. winMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-      --   | (key, sc) <- zip [xK_c, xK_e, xK_adiaeresis] [0 ..],
-      --     (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
-      -- ]
 
 -- mouse bindings
 mouseBindings' _ =
