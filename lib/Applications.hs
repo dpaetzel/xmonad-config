@@ -2,7 +2,9 @@ module Applications where
 
 
 import XMonad
+import XMonad.Actions.DynamicWorkspaces
 import XMonad.Actions.SpawnOn (spawnHere)
+import XMonad.Actions.WindowGo (runOrRaise)
 
 
 import Path
@@ -30,7 +32,8 @@ applications =
   , Application "NetLogo"       [spawnHere "netlogo"]
   , Application "LibreOffice"   [spawnHere "libreoffice"]
   , Application "Signal"        [spawnHere "signal-desktop"]
-  , Application "Spotify"       [spawnHere "spotify"]
+  , Application "Spotify"       [addHiddenWorkspace "spotify" >>
+                                 runOrRaise "spotify" (className =? "Spotify")]
   , Application "Telegram"      [spawnHere "telegram-desktop"]
   , Application "Threema"       [spawnHere "threema"]
   , Application "Thunderbird"   [spawnHere "thunderbird"]

@@ -42,7 +42,8 @@ manageHook' =
             title =? "ObstacleTower" -?> doCenterFloat,
             title =? "2048" -?> doCenterFloat,
             title =? "Wayfinder" -?> doCenterFloat,
-            title =? "Reachability" -?> doCenterFloat
+            title =? "Reachability" -?> doCenterFloat,
+            className =? "Spotify" -?> doShift "spotify"
           ]
 -- TODO If above Zoom rule does not work due to the window changing its title,
 -- then this should work but it does not.
