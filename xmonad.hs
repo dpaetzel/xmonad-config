@@ -14,7 +14,7 @@ import XMonad.Hooks.EwmhDesktops (ewmh, fullscreenEventHook)
 import XMonad.Hooks.FadeInactive (fadeInactiveLogHook)
 import XMonad.Hooks.ManageDocks (docksEventHook)
 import XMonad.Hooks.UrgencyHook
-import XMonad.Util.NamedActions as NA (addDescrKeys')
+import XMonad.Util.NamedActions as NA (addDescrKeys', xMessage)
 import XMonad.Util.Run (spawnPipe)
 
 eventHook' = mempty <+> docksEventHook <+> fullscreenEventHook
