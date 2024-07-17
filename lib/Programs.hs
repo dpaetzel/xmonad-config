@@ -88,8 +88,7 @@ dmenuProjectOrg = projectNames >>= D.menuArgs "dmenu" dmenuArgs >>= openInEditor
 
 
 dmenuBluetooth :: X ()
-dmenuBluetooth =
-  home ("Bin/btmenu " ++ "'" ++ intercalate "' '" dmenuArgs ++ "'") >>= spawn
+dmenuBluetooth = spawn $ "btmenu '" ++ intercalate "' '" dmenuArgs ++ "'"
 
 
 data Note = Note
