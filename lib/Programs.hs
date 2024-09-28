@@ -205,7 +205,7 @@ fileManager = spawn "thunar"
 
 
 spotifyCtl :: String -> X ()
-spotifyCtl cmd = ((++ " " ++ cmd) <$> home "Bin/spotifyctl") >>= spawn
+spotifyCtl cmd = ((++ " " ++ cmd) <$> home "5Code/utility/spotifyctl") >>= spawn
 
 
 gtd :: X ()
@@ -225,12 +225,12 @@ lockScreen = spawn "slock"
 
 passmenu :: X ()
 passmenu =
-  home ("Bin/passmenu --type " ++ "'" ++ intercalate "' '" dmenuArgs ++ "'") >>= spawn
+  home ("5Code/utility/passmenu --type " ++ "'" ++ intercalate "' '" dmenuArgs ++ "'") >>= spawn
 
 
 passmenuClip :: X ()
 passmenuClip =
-  home ("Bin/passmenu " ++ "'" ++ intercalate "' '" dmenuArgs ++ "'") >>= spawn
+  home ("5Code/utility/passmenu " ++ "'" ++ intercalate "' '" dmenuArgs ++ "'") >>= spawn
 
 
 clipmenu :: X ()
