@@ -67,8 +67,8 @@ namedKeys host conf =
     [
       -- util
       ((winMask, xK_a), putAwayMouse),
-      ((appMask, xK_Print), scrotWinClip),
-      ((appMask .|. shiftMask, xK_Print), scrotWin),
+      ((appMask, xK_Print), home "5Code/utility/shot clip --disable-picom" >>= spawn),
+      ((appMask .|. shiftMask, xK_Print), home "5Code/utility/shot open --disable-picom" >>= spawn),
       ((appMask, xK_n), showNeo),
       ((appMask, xK_b), dmenuBluetooth),
       ((appMask, xK_p), passmenu),

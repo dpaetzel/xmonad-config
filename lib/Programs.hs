@@ -242,23 +242,6 @@ putAwayMouse :: X ()
 putAwayMouse = spawn "xdotool mousemove --polar 135 10000"
 
 
-scrotName :: String
-scrotName = "\"$(date +'%F %R Screenshot $wx$h.png')\""
-
-
-scrotWin :: X ()
-scrotWin = spawn $ "sleep 0.2; scrot --freeze --select --line mode=classic,style=dash,width=3,color=red --exec 'gimp \"$f\"' " ++ scrotName
-
-scrotWinClip :: X ()
-scrotWinClip = spawn $ "sleep 0.2; " ++
-  "scrot --freeze --select --line mode=classic,style=dash,width=3,color=red - " ++
-  "| xclip -selection clipboard -t image/png"
-
-
-scrotFull :: X ()
-scrotFull = spawn $ "scrot " ++ scrotName
-
-
 showNeo :: X ()
 showNeo = spawn "feh ~/.neo.png"
 
