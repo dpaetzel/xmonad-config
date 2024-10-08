@@ -17,7 +17,7 @@ dzenCommand "anaxagoras" =
   " -p" ++
   " -xs 1" ++
   " -ta r" ++
-  " -tw 1920" ++
+  " -tw 2560" ++
   " -fn " ++ font ++
   " -fg '#ffffff'" ++
   " -bg '#000000'" ++
