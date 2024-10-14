@@ -1,6 +1,5 @@
 import BorderColors
 import Data.Monoid
-import Dzen
 import KeyBindings
 import Programs
 import StartUp
@@ -20,13 +19,12 @@ import XMonad.Util.Run (spawnPipe)
 eventHook' = mempty <+> docksEventHook <+> fullscreenEventHook
 
 -- status bars and logging
-logHook' handle = fadeInactiveLogHook fadeAmount >> dynamicLogWithPP (dzenPP' handle)
+logHook' = fadeInactiveLogHook fadeAmount
   where
     fadeAmount = 0.8
 
 main = do
   host <- fmap nodeName getSystemID
-  dzenHandle <- spawnPipe (dzenCommand host)
   xmonad
     . ewmh
     . withUrgencyHook NoUrgencyHook
@@ -41,7 +39,7 @@ main = do
         borderWidth = 2,
         mouseBindings = mouseBindings',
         handleEventHook = eventHook',
-        logHook = logHook' dzenHandle,
+        logHook = logHook',
         startupHook = startupHook' host,
         manageHook = manageHook',
         layoutHook = layoutHook'
