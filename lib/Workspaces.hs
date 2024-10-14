@@ -19,8 +19,7 @@ workspaces' = generalPurposeWS ++ specialWS
 
 
 generalPurposeWS =
-    [ "̂"
-    , "1"
+    [ "1"
     , "2"
     , "3"
     , "4"
