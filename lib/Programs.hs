@@ -223,6 +223,11 @@ lockScreen :: X ()
 lockScreen = spawn "slock"
 
 
+litmenu :: X ()
+litmenu =
+  home ("5Code/utility/litmenu " ++ "'" ++ intercalate "' '" dmenuArgs ++ "'") >>= spawn
+
+
 passmenu :: X ()
 passmenu =
   home ("5Code/utility/passmenu --type " ++ "'" ++ intercalate "' '" dmenuArgs ++ "'") >>= spawn

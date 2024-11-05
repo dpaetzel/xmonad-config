@@ -51,6 +51,7 @@ namedKeys host conf =
     -- util
     ((appMask, xK_space), addName "Dmenu: Apps" dmenu),
     ((appMask .|. shiftMask, xK_space), addName "Dmenu: All" dmenuAll),
+    ((appMask, xK_i), addName "Dmenu: Literatur" litmenu),
     -- TODO Use Submaps to solve All™ my keybinding problems
     ((winMask, xK_adiaeresis), addName "Screen" $ visualSubmap def . M.fromList $
       [ ((0, xK_l), subName "Go to left screen" $ viewScreen def (P 0)),
