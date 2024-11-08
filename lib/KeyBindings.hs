@@ -47,7 +47,7 @@ namedKeys host conf =
     ((appMask, xK_e), addName "File manager" fileManager),
     ((appMask, xK_u), addName "Open TODO.org" gtd),
     ((appMask .|. shiftMask, xK_Return), addName "Open In.org" gtdIn),
-    ((appMask, xK_Return), addName "Record note" $ addNote False),
+    ((appMask, xK_Return), addName "Record note" $ addNote True),
     -- util
     ((appMask, xK_space), addName "Dmenu: Apps" dmenu),
     ((appMask .|. shiftMask, xK_space), addName "Dmenu: All" dmenuAll),

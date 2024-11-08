@@ -91,30 +91,10 @@ dmenuBluetooth :: X ()
 dmenuBluetooth = spawn $ "btmenu '" ++ intercalate "' '" dmenuArgs ++ "'"
 
 
-data Note = Note
-instance XPrompt Note where
-  showXPrompt Note = "In.org < "
-
-
 addNote :: Bool -> X ()
-addNote withDate = mkXPrompt Note myXPConfig complFun appendToIn
-  where
-    complFun :: String -> IO [String]
-    complFun = return . const []
-    appendToIn :: String -> X ()
-    appendToIn "" = return ()
-    appendToIn note = io $ do
-      date <- fmap (show . utctDay) getCurrentTime
-      file <- fmap (++ "/In.org") getHomeDirectory
-      if withDate
-      then appendFile file ("* [" ++ date ++ "] " ++ note ++ "\n")
-      else appendFile file ("* " ++ note ++ "\n")
-    myXPConfig = def {
-      bgColor = "#000000",
-      fgColor = "#ffffff",
-      font = "xft: Inconsolata-14:normal",
-      promptBorderWidth = 0
-    }
+addNote withDate = if withDate
+  then home "5Code/utility/capture" >>= spawn . (++ " --with-date")
+  else home "5Code/utility/capture" >>= spawn
 
 
 {-|
