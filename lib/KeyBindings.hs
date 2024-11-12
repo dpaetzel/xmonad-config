@@ -45,8 +45,7 @@ namedKeys host conf =
   [ ((winMask, xK_b), addName "Terminal" runTerminal),
     ((appMask, xK_minus), addName "Open project in Emacs" dmenuProjectOrg),
     ((appMask, xK_e), addName "File manager" fileManager),
-    ((appMask, xK_u), addName "Open TODO.org" gtd),
-    ((appMask .|. shiftMask, xK_Return), addName "Open In.org" gtdIn),
+    ((appMask .|. shiftMask, xK_Return), addName "Open Inbox.md" openInbox),
     ((appMask, xK_Return), addName "Record note" $ addNote True),
     -- util
     ((appMask, xK_space), addName "Dmenu: Apps" dmenu),

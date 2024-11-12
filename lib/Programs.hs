@@ -188,12 +188,8 @@ spotifyCtl :: String -> X ()
 spotifyCtl cmd = ((++ " " ++ cmd) <$> home "5Code/utility/spotifyctl") >>= spawn
 
 
-gtd :: X ()
-gtd = home "TODO.org" >>= (\path -> spawnHere ("editor " ++ path))
-
-
-gtdIn :: X ()
-gtdIn = home "In.org" >>= (\path -> spawnHere ("editor " ++ path))
+openInbox :: X ()
+openInbox = home "Inbox.md" >>= (\path -> spawnHere ("editor " ++ path))
 
 
 -- * Utility programs
