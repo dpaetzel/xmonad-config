@@ -169,7 +169,7 @@ namedKeys host conf =
               (xK_n, flip ($) "editor")
             ]
               ++ zip
-                   (xK_dead_circumflex : [xK_1 .. xK_9] ++ [xK_0])
+                   ([xK_1 .. xK_9] ++ [xK_0])
                    (map (flip ($)) generalPurposeWS),
           (fun, mod) <-
             -- [ (toggleOrView, 0) -- too greedy
