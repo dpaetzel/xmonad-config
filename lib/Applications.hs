@@ -28,9 +28,10 @@ applications =
   , Application "Gimp"          [spawnHere "gimp"]
   , Application "GVim"          [spawnHere "gvim"]
   , Application "Inkscape"      [spawnHere "inkscape"]
+  , Application "LibreOffice"   [spawnHere "libreoffice"]
   , Application "MediathekView" [spawnHere "mediathekview"]
   , Application "NetLogo"       [spawnHere "netlogo"]
-  , Application "LibreOffice"   [spawnHere "libreoffice"]
+  , Application "Obsidian"      [spawnHere "obsidian"]
   , Application "Signal"        [spawnHere "signal-desktop"]
   , Application "Spotify"       [addHiddenWorkspace "spotify" >>
                                  runOrRaise "spotify" (className =? "Spotify")]
@@ -45,7 +46,6 @@ applications =
   , Application "Zathura"       [spawnHere "zathura"]
   , Application "Zoom"          [spawnHere "zoom-us"]
 
-  , Application "E-Mail"        [inTerminalWithName "E-Mail" "neomutt"]
   , Application "Browser"       [spawnHere "firefox --setDefaultBrowser"]
   , Application "Editor"        [spawnHere "editor"]
   , Application "Chat"
