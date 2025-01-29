@@ -41,6 +41,7 @@ manageHook' =
             stringProperty "WM_WINDOW_ROLE" =? "gimp-toolbox-color-dialog" -?> doCenterFloat,
             title =? "ObstacleTower" -?> doCenterFloat,
             title =? "2048" -?> doCenterFloat,
+            title =? "Smile" -?> doCenterFloat,
             title =? "Wayfinder" -?> doCenterFloat,
             title =? "Reachability" -?> doCenterFloat,
             className =? "Spotify" -?> doShift "spotify"
