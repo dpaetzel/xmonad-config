@@ -43,7 +43,7 @@ myXPConfig = def {
 namedKeys host conf =
   -- main programs
   [ ((winMask, xK_b), addName "Terminal" runTerminal),
-    ((appMask, xK_minus), addName "Open project in Emacs" dmenuProjectOrg),
+    -- ((appMask, xK_minus), addName "Open project in Emacs" dmenuProjectOrg),
     ((appMask, xK_e), addName "File manager" fileManager),
     ((appMask .|. shiftMask, xK_Return), addName "Open Inbox.md" openInbox),
     ((appMask, xK_Return), addName "Record note" $ addNote True),
@@ -60,7 +60,8 @@ namedKeys host conf =
         ((0, xK_s), subName "Swap screens" swapNextScreen)
       ]
     ),
-    ((appMask, xK_l), addName "Lock screen" lockScreen)
+    ((appMask, xK_l), addName "Lock screen" lockScreen),
+    ((winMask .|. appMask, xK_v), addName "Paste LaTeX as text" (home "5Code/utility/paste-latex-as-text" >>= spawn))
   ]
   ^++^
 
@@ -92,6 +93,7 @@ namedKeys host conf =
       -- xdotool type and keyboard
       ((appMask, xK_t), spawn "shrug"),
       ((appMask, xK_s), spawn "smile"),
+      -- ((appMask, xK_s), spawn "emote"),
       -- m is the only key that is the same on both `de` and `de neo`.
       ((winMask .|. appMask, xK_m), home "5Code/utility/detoggle" >>= spawn),
       -- windows
