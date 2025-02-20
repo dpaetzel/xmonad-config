@@ -36,6 +36,7 @@ specialWS =
     [ "browser"
     , "chat"
     , "editor"
+    , "obsidian"
     , "terminal"
     , "trash"
     ]

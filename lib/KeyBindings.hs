@@ -166,7 +166,8 @@ namedKeys host conf =
               (xK_z, flip ($) "chat"),
               (xK_s, flip ($) "browser"),
               (xK_t, flip ($) "terminal"),
-              (xK_n, flip ($) "editor")
+              (xK_n, flip ($) "editor"),
+              (xK_e, flip ($) "obsidian")
             ]
               ++ zip
                    ([xK_1 .. xK_9] ++ [xK_0])
